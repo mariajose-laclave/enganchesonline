@@ -1,10 +1,10 @@
 <?php
 return [
     'backend' => [
-        'frontName' => 'admin_1qufsv'
+        'frontName' => 'admin_1bd2t9'
     ],
     'crypt' => [
-        'key' => 'baff9d2d6f2884f7e8287298f5dcbbf2'
+        'key' => 'b47c5c683055ce25b9b787bdffb223e5'
     ],
     'db' => [
         'table_prefix' => '',
@@ -27,24 +27,24 @@ return [
         ]
     ],
     'x-frame-options' => 'SAMEORIGIN',
-    'MAGE_MODE' => 'developer',
+    'MAGE_MODE' => 'default',
     'session' => [
         'save' => 'files'
     ],
     'cache' => [
         'frontend' => [
             'default' => [
-                'id_prefix' => '1e8_'
+                'id_prefix' => '7eb_'
             ],
             'page_cache' => [
-                'id_prefix' => '1e8_'
+                'id_prefix' => '7eb_'
             ]
         ]
     ],
     'lock' => [
         'provider' => 'db',
         'config' => [
-            'prefix' => ''
+            'prefix' => null
         ]
     ],
     'cache_types' => [
@@ -64,10 +64,7 @@ return [
         'translate' => 1,
         'vertex' => 1
     ],
-    'downloadable_domains' => [
-        'localhost'
-    ],
     'install' => [
-        'date' => 'Wed, 10 Mar 2021 19:43:46 +0000'
+        'date' => 'Thu, 11 Mar 2021 11:35:10 +0000'
     ]
 ];

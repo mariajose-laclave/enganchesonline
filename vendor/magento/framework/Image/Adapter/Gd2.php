@@ -87,7 +87,7 @@ class Gd2 extends \Magento\Framework\Image\Adapter\AbstractAdapter
     {
         $allowed_schemes = ['ftp', 'ftps', 'http', 'https'];
         $url = parse_url($filename);
-        if ($url && isset($url['scheme']) && !in_array($url['scheme'], $allowed_schemes) && !file_exists($filename)) {
+        if ($url && isset($url['scheme']) && !in_array($url['scheme'], $allowed_schemes)) {
             return false;
         }
 
