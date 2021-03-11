@@ -17,32 +17,6 @@ class Interceptor extends \Magento\Catalog\Model\Product\Attribute\Repository im
     /**
      * {@inheritdoc}
      */
-    public function get($attributeCode)
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'get');
-        if (!$pluginInfo) {
-            return parent::get($attributeCode);
-        } else {
-            return $this->___callPlugins('get', func_get_args(), $pluginInfo);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getList');
-        if (!$pluginInfo) {
-            return parent::getList($searchCriteria);
-        } else {
-            return $this->___callPlugins('getList', func_get_args(), $pluginInfo);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function save(\Magento\Catalog\Api\Data\ProductAttributeInterface $attribute)
     {
         $pluginInfo = $this->pluginList->getNext($this->subjectType, 'save');
@@ -50,32 +24,6 @@ class Interceptor extends \Magento\Catalog\Model\Product\Attribute\Repository im
             return parent::save($attribute);
         } else {
             return $this->___callPlugins('save', func_get_args(), $pluginInfo);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function delete(\Magento\Catalog\Api\Data\ProductAttributeInterface $attribute)
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'delete');
-        if (!$pluginInfo) {
-            return parent::delete($attribute);
-        } else {
-            return $this->___callPlugins('delete', func_get_args(), $pluginInfo);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteById($attributeCode)
-    {
-        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'deleteById');
-        if (!$pluginInfo) {
-            return parent::deleteById($attributeCode);
-        } else {
-            return $this->___callPlugins('deleteById', func_get_args(), $pluginInfo);
         }
     }
 
