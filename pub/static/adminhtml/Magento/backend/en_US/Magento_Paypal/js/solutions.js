@@ -1,0 +1,1 @@
+/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-paypal/view/adminhtml/web/js/solutions.js

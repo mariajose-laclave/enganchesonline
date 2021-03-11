@@ -1,0 +1,1 @@
+/var/www/vhosts/guirionline.com/httpdocs/lib/web/mage/ie-class-fixer.js

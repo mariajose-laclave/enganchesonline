@@ -1,0 +1,1 @@
+/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-theme/view/adminhtml/web/js/form.js

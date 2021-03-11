@@ -1,0 +1,1 @@
+/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-page-cache/view/frontend/web/js/page-cache.js

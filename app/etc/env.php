@@ -11,9 +11,9 @@ return [
         'connection' => [
             'default' => [
                 'host' => 'localhost',
-                'dbname' => 'magento',
-                'username' => 'root',
-                'password' => '',
+                'dbname' => 'enganches_',
+                'username' => 'enganches_user',
+                'password' => 'Wje5q?24',
                 'active' => '1',
                 'driver_options' => [
 

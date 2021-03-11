@@ -1,0 +1,1 @@
+/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-admin-analytics/view/adminhtml/web/js/release-notification/modal/component-mixin.js

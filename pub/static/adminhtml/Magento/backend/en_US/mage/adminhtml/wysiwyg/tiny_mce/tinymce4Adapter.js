@@ -1,0 +1,1 @@
+/var/www/vhosts/guirionline.com/httpdocs/lib/web/mage/adminhtml/wysiwyg/tiny_mce/tinymce4Adapter.js
