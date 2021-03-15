@@ -10,10 +10,10 @@ return [
         'table_prefix' => '',
         'connection' => [
             'default' => [
-                'host' => 'localhost',
-                'dbname' => 'enganches_',
-                'username' => 'enganches_user',
-                'password' => 'Wje5q?24',
+                'host' => '178.33.162.91',
+                'dbname' => 'laclave_enganchesonline',
+                'username' => 'laclave',
+                'password' => 'J:%!5*R:jGys',
                 'active' => '1',
                 'driver_options' => [
 
