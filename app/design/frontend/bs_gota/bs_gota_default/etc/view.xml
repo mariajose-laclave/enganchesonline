@@ -69,8 +69,8 @@
                 <height>100</height>
             </image>
             <image id="mini_cart_product_thumbnail" type="thumbnail">
-                <width>202</width>
-                <height>202</height>
+                <width>101</width>
+                <height>101</height>
             </image>
             <image id="new_products_content_widget_grid" type="small_image">
                 <width>800</width>
@@ -239,7 +239,7 @@
         </var>
 
         <var name="magnifier">
-            <var name="fullscreenzoom">20</var>  <!-- Zoom for fullscreen (integer)-->
+            <var name="fullscreenzoom">5</var>  <!-- Zoom for fullscreen (integer)-->
             <var name="top"></var> <!-- Top position of magnifier -->
             <var name="left"></var> <!-- Left position of magnifier -->
             <var name="width"></var> <!-- Width of magnifier block -->
