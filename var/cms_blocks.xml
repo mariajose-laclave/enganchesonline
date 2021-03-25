@@ -1,0 +1,569 @@
+<?xml version="1.0"?>
+<root>
+  <blocks>
+    <item>
+      <title><![CDATA[Footer Static]]></title>
+      <identifier><![CDATA[footer_static]]></identifier>
+      <content><![CDATA[<div class="footer-links-contacts">
+<div class="footer-link-contact">
+<div class="footer-links">
+<h2 class="title">Contact Info</h2>
+<ul>
+<li>Add: 734 Riverwood Drive, Suite 245 Cottonwood Beverly Hill, Melbourne, USA.</li>
+<li>Email: Contact@erentheme.com</li>
+<li>Fax: (+100) 123 456 7890 - (+100) 123 456 7891</li>
+</ul>
+</div>
+<div class="footer-links">
+<h2 class="title">Follow Us On</h2>
+<ul  class="social-link">
+<li><a title="Face-book" href="#"><span class="fa fa-facebook">&nbsp;</span></a></li>
+<li><a title="Twitter" href="#"><span class="fa fa-twitter">&nbsp;</span></a></li>
+<li><a title="Instagram" href="#"><span class="fa fa-instagram">&nbsp;</span></a></li>
+<li><a title="Dribbble" href="#"><span class="fa fa-dribbble">&nbsp;</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="footer-links">
+<h2 class="title">Get Help</h2>
+<ul>
+<li><a href="#">Contact Us</a></li>
+<li><a href="#">Delivery Information</a></li>
+<li><a href="#">Sale Terms &amp; Conditions</a></li>
+<li><a href="#">Privacy Notice</a></li>
+<li><a href="#">Shopping FAQs</a></li>
+<li><a href="#">Returns &amp; Refunds</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h2 class="title">Popular Categories</h2>
+<ul>
+<li><a href="#">Sneaker</a></li>
+<li><a href="#">Clothing &amp; Stools</a></li>
+<li><a href="#">Helmet for Women’s</a></li>
+<li><a href="#">Basketball</a></li>
+<li><a href="#">Mens Running</a></li>
+<li><a href="#">Footwear</a></li>
+<li><a href="#">Outerwears</a></li>
+<li><a href="#">Men’s</a></li>
+<li><a href="#">Kids &amp; Young</a></li>
+</ul>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[ Banner Middle]]></title>
+      <identifier><![CDATA[banner_middle]]></identifier>
+      <content><![CDATA[<div class="banner-middle section-element">
+<div class="container-max">
+<div class="banner-content first col-sm-4"><img src="{{media url="wysiwyg/banner4.jpg"}}" alt=""></div>
+<div class="banner-content second col-sm-2  hidden-xs"><img src="{{media url="wysiwyg/banner5.jpg"}}" alt=""></div>
+<div class="banner-content third col-sm-6"><img src="{{media url="wysiwyg/banner6.jpg"}}" alt=""></div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Custom Link Before]]></title>
+      <identifier><![CDATA[menu_custom_links_before]]></identifier>
+      <content><![CDATA[<ul>
+<li class="ui-menu-item level0 classic "><a class="level-top" href="{{store url=''}}">Home</a></li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Menu link (inclue logo using on demo 1 + 2)]]></title>
+      <identifier><![CDATA[menu_custom_links]]></identifier>
+      <content><![CDATA[<ul>
+<li class="logo">{{block class="Magento\Theme\Block\Html\Header\Logo" name="logo"&gt;}}</li>
+<li class="ui-menu-item level0 classic menu-item-has-children parent parent-right ">
+<div class="open-children-toggle">&nbsp;</div>
+<a class="level-top"> Pages </a>
+<div class="level0 submenu">
+<ul class="subchildmenu ">
+<li class="ui-menu-item level1 "><a href="{{store url='about-us'}}"> About Us </a></li>
+<li class="ui-menu-item level1 "><a href="{{store url='privacy-policy-cookie-restriction-mode'}}"> Privacy Policy </a></li>
+<li class="ui-menu-item level1"><a href="{{store url='contact'}}">Contact Us</a></li>
+</ul>
+</div>
+</li>
+<li class="ui-menu-item level0 classic parent-right "><a class="level-top" href="{{store url='blog'}}">Blog</a></li>
+<li class="ui-menu-item level0 classic parent-right "><a class="level-top" href="{{store url='store-locator'}}">Find Store</a></li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Brand logo]]></title>
+      <identifier><![CDATA[brand-logo]]></identifier>
+      <content><![CDATA[<div class="row">
+{{widget type="Rokanthemes\Brand\Block\Widget\Brandlist" widget_title="Furniture Brands" pretext_html="TG9yZW0gSXBzdW0gaXMgc2ltcGx5IGR1bW15IHRleHQgb2YgdGhlIHByaW50aW5nIGFuZCB0eXBlc2V0dGluZyBpbmR1c3RyeS4gTG9yZW0gSXBzdW0gaGFzIGJlZW4gdGhlIGluZHVzdHJ5J3Mgc3RhbmRhcmQgZHVtbXkgdGV4dCBldmVyIHNpbmNlIHRoZSAxNTAwcywgd2hlbiBhbiB1bmtub3duIHByaW50ZXIgdG9vayBhIGdhbGxleSBvZiB0eXBlIGFuZCBzY3JhbWJsZWQgaXQgdG8gbWFrZSBhIHR5cGUgc3BlY2ltZW4gYm9vay4gSXQgaGFzIHN1cnZpdmVkIG5vdCBvbmx5IGZpdmUgY2VudHVyaWVzLCBidXQgYWxzbyB0aGUgbGVhcCBpbnRvIGVsZWN0cm9uaWMgdHlwZXNldHRpbmcsIHJlbWFpbmluZyBlc3NlbnRpYWxseSB1bmNoYW5nZWQu" show_brand_name="1" brand_groups="1,2,3,4,5,6" number_item="12" default_item="5" destop_item="5" small_destop_item="4" tablet_item="3" mobile_item="1" show_next_back_control="1" show_navigation_control="1" auto_play_control="1"}}
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Contact Us Info]]></title>
+      <identifier><![CDATA[contact-info]]></identifier>
+      <content><![CDATA[<div class="static_content">
+<h2>Our Main Office.</h2>
+<div class="short-des">Gota Store is a premium Templates theme with advanced admin module. It’s extremely customizable<br>easy to use and fully responsive and retina ready. Vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent <br>luptatum zzril delenit augue.</div>
+<p>{{widget type="Magento\Cms\Block\Widget\Block" template="widget/static_block/default.phtml" block_id="55" type_name="CMS Static Block"}}</p>
+</div>
+<p><iframe style="border: 0px; display: block; margin-left: auto; margin-right: auto;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d24201.246844804893!2d-111.94405300000001!3d40.692565!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x90cf6256d98a62eb!2sValley+Fair+Mall!5e0!3m2!1sen!2sus!4v1487152442332" width="100%" height="590" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[About us]]></title>
+      <identifier><![CDATA[about_top]]></identifier>
+      <content><![CDATA[<h3>About us</h3>
+<p class="subtitle">Claritas est etiam processus dynamicus, qui sequitur.</p>
+<div class="content">
+Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Top link]]></title>
+      <identifier><![CDATA[top_link]]></identifier>
+      <content><![CDATA[<ul class="top-link">
+<li><a href="{{store url="customer/account/login/"}}">Login</a></li>
+<li><a href="{{store url="customer/account/logout/"}}">Logout</a></li>
+<li><a href="{{store url="customer/account/"}}">My account</a></li>
+<li><a href="{{store url="wishlist/index/index/"}}">Wishlish</a></li>
+<li><a href="{{store url="checkout/"}}">My Cart</a></li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Social Block]]></title>
+      <identifier><![CDATA[social_block]]></identifier>
+      <content><![CDATA[<h2 class="title">On social networks</h2>
+<ul>
+<li><a href="#">Facebook</a></li>
+<li><a href="#">Twitter</a></li>
+<li><a href="#">LinkedIn</a></li>
+<li><a href="#">Instagram</a></li>
+<li><a href="#">Pinterest</a></li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Explore Our Bestsellers]]></title>
+      <identifier><![CDATA[categorytab1]]></identifier>
+      <content><![CDATA[<div class="category1">{{widget type="Rokanthemes\Categorytab\Block\CateWidget" title="Explore Our Bestsellers" description="Commodo sociosqu venenatis cras dolor sagittis integer luctus sem primis eget maecenas sed urna malesuada." color_box="red-box" identify="categorytab1" category_id="78,79,80,81" show_pager="0" slide_row="1" slide_limit="4" template="categorytab/grid.phtml"}}</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Footer menu]]></title>
+      <identifier><![CDATA[footer_menu]]></identifier>
+      <content><![CDATA[<ul>
+<li><a title="Site Map" href="#" target="_self">Site Map </a></li>
+<li><a title="Search Terms" href="#">Search Terms</a></li>
+<li><a title="Advanced Search" href="#">Advanced Search</a></li>
+<li><a title="contact" href="#">Contact</a></li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Shipping and Support info]]></title>
+      <identifier><![CDATA[shipping_support]]></identifier>
+      <content><![CDATA[<div class="container-min shipping-support">
+<div class="grid-layout three-col">
+<div class="col-content">
+<div class="col-img"><img src="{{media url="wysiwyg/icon_3.png"}}" alt=""></div>
+<div class="col-information">
+<h4>Worldwide Shipping</h4>
+<p>Duis autem vel eum iriure dolor in hendrerit vulputate velit esse molestie consequat.</p>
+</div>
+</div>
+<div class="col-content">
+<div class="col-img"><img src="{{media url="wysiwyg/icon_2.png"}}" alt=""></div>
+<div class="col-information">
+<h4>Online Support 24/7</h4>
+<p>Duis autem vel eum iriure dolor in hendrerit vulputate velit esse molestie consequat.</p>
+</div>
+</div>
+<div class="col-content">
+<div class="col-img"><img src="{{media url="wysiwyg/icon_1.png"}}" alt=""></div>
+<div class="col-information">
+<h4>Money Return Guarantee</h4>
+<p>Duis autem vel eum iriure dolor in hendrerit vulputate velit esse molestie consequat.</p>
+</div>
+</div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[ support contact]]></title>
+      <identifier><![CDATA[ support_contact]]></identifier>
+      <content><![CDATA[<div class="row">
+<div class="col-sm-4 col-content" style="text-align: left;">
+<div class="border-col"><img src="{{media url="wysiwyg/contact_1.png"}}" alt="">
+<h4 style="text-align: left;">Location Store</h4>
+<p style="text-align: left;">1234 Heaven Stress, <br>Beverly Hill, Melbourne, New York, USA.</p>
+</div>
+</div>
+<div class="col-sm-4 col-content" style="text-align: left;">
+<div class="border-col"><img src="{{media url=&quot;wysiwyg/contact_.png&quot;}}" alt="" />
+<h4>Email Support 24/7</h4>
+<p>Email: Contact@erentheme01.com<br>Email: Contact@erentheme02.com</p>
+</div>
+</div>
+<div class="col-sm-4 col-content" style="text-align: left;">
+<div class="border-col"><img src="{{media url="wysiwyg/contact_3.png"}}" alt="">
+<h4 style="text-align: left;">Phone Number</h4>
+<p style="text-align: left;">Phone: (+100) 123 456 7890<br>Fax: (+100) 123 456 7890 / 9876</p>
+</div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[banner blog]]></title>
+      <identifier><![CDATA[banner_blog]]></identifier>
+      <content><![CDATA[<div class="banner_top">
+<h2>blog</h2>
+<p><img src="{{media url=&quot;wysiwyg/bkg_blog.jpg&quot;}}" alt=""></p>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Instagram ]]></title>
+      <identifier><![CDATA[instagram_static]]></identifier>
+      <content><![CDATA[<div class="instagram select-element">
+{{widget type="Rokanthemes\Instagram\Block\Widget\Instagram" title="Share your home with <span>#Gota</span>" description="Follow @Gota Store for inspiration." numberimage="6"}}
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Footer Newsletter]]></title>
+      <identifier><![CDATA[footer_newsletter]]></identifier>
+      <content><![CDATA[{{block class="Magento\Newsletter\Block\Subscribe" template="Magento_Newsletter::subscribe.phtml"}}]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Footer newsletter (demo 2)]]></title>
+      <identifier><![CDATA[footer_newsletter_home2]]></identifier>
+      <content><![CDATA[<div class="newsletter_bottom select-element grid-layout three-col"><img class="hidden-xs" src="{{media url="wysiwyg/banner-footer-home2-1.jpg"}}" alt=""> {{block class="Magento\Newsletter\Block\Subscribe" template="subscribe.phtml"}} <img class="hidden-xs"  src="{{media url="wysiwyg/banner-footer-home2-2.jpg"}}" alt=""></div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Banner top (for home 2)]]></title>
+      <identifier><![CDATA[banner_top_home2]]></identifier>
+      <content><![CDATA[<div class="banner-top grid-layout box hidden-xs banner-top-home"><a href="#"><img src="{{media url="wysiwyg/banner-h2-ud.jpg"}}" alt=""></a><a href="#"><img src="{{media url="wysiwyg/banner-h2-ud1.jpg"}}" alt=""></a>
+<div class="hover-animation-effect small-text">
+<div class="bs-banner"><a href="#"><img src="{{media url="wysiwyg/banner-h2-ud2.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h5 style="color: #fff;">Gota Store</h5>
+<div class="banner-text-middel">
+<div><h2 class="bg-hover-effect" style="display: inline-block;" ><a href="#">baseball</a></h2></div>
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">Sport</a></h2></div>
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">for men’s</a></h2></div>
+</div>
+<h4>Top Big Sale<br><span style="color: #a80e0e;">up to 20%</span> off All products</h4>
+</div>
+</div>
+</div>
+<div class="hover-animation-effect last small-text">
+<div class="bs-banner"><a href="#"><img src="{{media url="wysiwyg/banner-h2-ud3.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h5 style="color: #ef601b;">Gota Store</h5>
+<div class="banner-text-middel">
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">Sneaker</a></h2></div>
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">Sport</a></h2></div>
+<div><h2  class="bg-hover-effect"  style="display: inline-block;"><a href="#">for women’s</a></h2></div>
+</div>
+<h4>Top Big Sale<br><span style="color: #ef601b;">up to 20%</span> off All products</h4>
+</div>
+</div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Top bar Introduce store (on header demo 3)]]></title>
+      <identifier><![CDATA[topbar-introduce-store]]></identifier>
+      <content><![CDATA[<ul>
+<li>Gota Store eCommerce – Always Free Delivery</li>
+<li>Quality Guarantee Of Products</li>
+<li>Fast Returnings Program</li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Hotline Number (on header demo 3)]]></title>
+      <identifier><![CDATA[holine-number]]></identifier>
+      <content><![CDATA[<p><span class="icon-phone-call">&nbsp</span>Hotline: (+800) 123 456 7890</p>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Footer introduce (using on footer demo 3 +4)]]></title>
+      <identifier><![CDATA[footer_introduce]]></identifier>
+      <content><![CDATA[<p><a href="{{store url=''}}"><img src="{{media url="wysiwyg/logo_footer.png"}}" alt=""></a></p>
+<p>Gota Store is a premium theme with advanced admin module. </br>It’s extremely customizable, easy to use and fully responsive and retina ready.</p>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Footer menu middle (using on demo 3 +4)]]></title>
+      <identifier><![CDATA[footer_menu_middle]]></identifier>
+      <content><![CDATA[<h2 class="title">FIND IT FAST</h2>
+<ul>
+<li><a href="#">Sunglasses</a></li>
+<li><a href="#">Clubmaster</a></li>
+<li><a href="#">Light Weight</a></li>
+<li><a href="#">Nightwear</a></li>
+<li><a href="#">Oval</a></li>
+<li><a href="#">Spectacle Frames</a></li>
+<li><a href="#">Rectangle</a></li>
+<li><a href="#">Rounders</a></li>
+<li><a href="#">Sports</a></li>
+<li><a href="#">Vintage</a></li>
+</ul>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Banner top (using on demo 3+4)]]></title>
+      <identifier><![CDATA[banner_top_4]]></identifier>
+      <content><![CDATA[<div class="banner-top">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 hidden-xs">
+<div class="hover-animation-effect  small-text">
+<div class="bs-banner"><a title="Helmet" href="#"><img src="{{media url="wysiwyg/banner-home3-1_1.jpg"}}" alt=""></a>
+<div class="banner-text"><img src="{{media url="wysiwyg/hot-deal.png"}}" alt="">
+<div class="banner-text-middel">
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">Helmet</a></h2></div>
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">Sport</a></h2></div>
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">for men’s</a></h2></div>
+</div>
+<h4>sale<br><span style="color: #ffc000;">20% Off</span>Helmet for Women’s</h4>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-6"><a title="Sport wear" href="#"><img src="{{media url="wysiwyg/banner-home4-2.jpg"}}" alt=""></a></div>
+<div class="col-sm-3 hidden-xs">
+<div class="hover-animation-effect  small-text">
+<div class="bs-banner"><a title="Baseball" href="#"><img src="{{media url="wysiwyg/banner-home3-3.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h5 style="color: #fff;">Gota Store</h5>
+<div class="banner-text-middel">
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">baseball</a></h2></div>
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">Sport</a></h2></div>
+<div><h2 class="bg-hover-effect" style="display: inline-block;"><a href="#">for men’s</a></h2></div>
+</div>
+<h4>Black friday <br><span style="color: #a80e0e;">up to 20% off</span>All products</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Banner middle (using on demo 4)]]></title>
+      <identifier><![CDATA[banner_middle_4]]></identifier>
+      <content><![CDATA[<div class="banner-middle ">
+<div class="container">
+<div class="row">
+<div class="col-sm-6">
+<div class="hover-animation-effect last  small-text">
+<div class="bs-banner"><a href="#"><img src="{{media url="wysiwyg/banner-middle-h4-1.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h5 style="color: #ef601b;">Gota Store</h5>
+<div class="banner-text-middel">
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">Sneaker</a></h2></div>
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">Sport</a></h2></div>
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">for <span style="color: #ef601b;">women’s</span></a></h2></div>
+</div>
+<h4>Top Big Sale<br><span style="color: #ef601b;">up to 20% off</span>All products</h4>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-6">
+<div class="hover-animation-effect last  small-text">
+<div class="bs-banner"><a href="#"><img src="{{media url="wysiwyg/banner-middle-h4-2.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h5 style="color: #ffc400;">Gota Store</h5>
+<div class="banner-text-middel">
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">Sneaker</a></h2></div>
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">Sport</a></h2></div>
+<div><h2 class="bg-hover-effect"  style="display: inline-block;"><a href="#">for <span style="color: #ffc400;">men’s</span></a></h2></div>
+</div>
+<h4>Black friday <br><span style="color: #ffc400;">up to 30% off </span>All products</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Banner top]]></title>
+      <identifier><![CDATA[banner_top]]></identifier>
+      <content><![CDATA[<div class="banner-top-home section-element ">
+<div class="banner-top">
+<div class="row">
+<div class="col-sm-4 col-xs-12 col-banner-top hover-animation-effect">
+<div class="banner-top">
+<div class="bs-banner"><a class="banner-image" href="#"><img src="{{media url="wysiwyg/banner-home1.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h2 class="bg-hover-effect"><a href="#">Sport</a></h2>
+<h2 class="bg-hover-effect"><a href="#">Baseball</a></h2>
+<h4>all products <span style="color: #ffd200;">up to 70% off</span> limited time discount</h4>
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-4 col-xs-12 col-banner-top hidden-xs">
+<div class="banner-top banner-top2">
+<div class="bs-banner"><a href="#"><img src="{{media url="wysiwyg/banner-home2.jpg"}}" alt=""></a></div>
+</div>
+</div>
+<div class="col-sm-4 col-xs-12 col-banner-top  hidden-xs hover-animation-effect">
+<div class="banner-top banner-top3">
+<div class="bs-banner"><a href="#"><img src="{{media url="wysiwyg/banner-home3.jpg"}}" alt=""></a>
+<div class="banner-text">
+<h2 class="bg-hover-effect"><a href="#">Jacket</a></h2>
+<h2 class="bg-hover-effect"><a href="#">For women’s</a></h2>
+<h4>all products <span style="color: #ffd200;">up to 70% off</span> limited time discount</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Bestseller Product Parallax]]></title>
+      <identifier><![CDATA[bestseller_product_parallax]]></identifier>
+      <content><![CDATA[<div class="hover-parallax">
+<h4>Bestseller products</h4>
+<h3>Nike Air Force 1 Sage Low LX</h3>
+<p>Sapien luctus id justo suscipit nonummy eget hymenaeos phasellus felis enim dolor tortor cras <br>nonummy sit amet suspendisse mattis mi vel leo...</p>
+<div id="mover-hover-parallax">
+<div class="hot-deal" data-speed="0.01" data-revert="true"><img src="{{media url="wysiwyg/image_parallax-hotdeal.png"}}" alt=""></div>
+<div class="text-after" data-speed="0.02">
+<h2>Top</h2>
+<h2>limited</h2>
+</div>
+<div class="image-parallax"  data-speed="0.01"><img src="{{media url="wysiwyg/image_parallax.png"}}" alt=""></div>
+</div>
+</div>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Top bar Free Delivery]]></title>
+      <identifier><![CDATA[topbar_free_delivery]]></identifier>
+      <content><![CDATA[<p>FREE DELIVERY TO YOU - Get Free Standard Delivery On All Orders <a href="#">See Details</a></p>]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Category tab]]></title>
+      <identifier><![CDATA[category_tab_2]]></identifier>
+      <content><![CDATA[<div class="category1">{{widget type="Rokanthemes\Categorytab\Block\CateWidget" title="Explore Our Bestsellers" description="Commodo sociosqu venenatis cras dolor sagittis integer luctus sem primis eget maecenas sed urna malesuada." color_box="red-box" identify="categorytab1" category_id="118,79,80,81" show_pager="0" slide_row="1" slide_limit="5" template="categorytab/grid.phtml"}}</div>]]></content>
+      <is_active><![CDATA[0]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+    <item>
+      <title><![CDATA[Banner Storelocator]]></title>
+      <identifier><![CDATA[banner-storelocator]]></identifier>
+      <content><![CDATA[<img src="{{media url=&quot;wysiwyg/Locationstore.jpg&quot;}}" alt="" />]]></content>
+      <is_active><![CDATA[1]]></is_active>
+      <store_id>
+        <id><![CDATA[0]]></id>
+      </store_id>
+    </item>
+  </blocks>
+</root>
