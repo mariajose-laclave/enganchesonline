@@ -1,1 +1,0 @@
-/var/www/vhosts/guirionline.com/httpdocs/lib/web/jquery/fileUploader/jquery.fileupload-process.js

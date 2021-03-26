@@ -1,1 +1,0 @@
-/var/www/vhosts/guirionline.com/httpdocs/lib/web/mage/apply/main.js

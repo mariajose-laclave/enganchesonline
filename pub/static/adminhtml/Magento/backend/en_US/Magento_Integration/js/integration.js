@@ -1,1 +1,0 @@
-/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-integration/view/adminhtml/web/js/integration.js

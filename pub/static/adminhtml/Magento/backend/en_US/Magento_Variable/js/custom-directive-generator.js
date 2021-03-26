@@ -1,1 +1,0 @@
-/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-variable/view/adminhtml/web/js/custom-directive-generator.js

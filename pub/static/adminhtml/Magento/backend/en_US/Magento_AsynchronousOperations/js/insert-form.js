@@ -1,1 +1,0 @@
-/var/www/vhosts/guirionline.com/httpdocs/vendor/magento/module-asynchronous-operations/view/adminhtml/web/js/insert-form.js
