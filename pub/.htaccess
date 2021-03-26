@@ -4,7 +4,6 @@
 
 # Options are default, production, or developer
 #   SetEnv MAGE_MODE default
-Options +FollowSymLinks
 
 ############################################
 ## Uncomment these lines for CGI mode.
@@ -127,7 +126,7 @@ Options +FollowSymLinks
 ############################################
 ## Enable rewrites
 
-
+    Options +FollowSymLinks
     RewriteEngine on
 
 ############################################
