@@ -1,7 +1,8 @@
 <?php
-namespace ImportModule\Import\Controller\Index;
 
-class Test extends \Magento\Framework\App\Action\Action
+namespace Mageplaza\HelloWorld\Controller\Index;
+
+class Display extends \Magento\Framework\App\Action\Action
 {
 	protected $_pageFactory;
 
@@ -10,12 +11,12 @@ class Test extends \Magento\Framework\App\Action\Action
 		\Magento\Framework\View\Result\PageFactory $pageFactory)
 	{
 		$this->_pageFactory = $pageFactory;
+
 		return parent::__construct($context);
 	}
 
 	public function execute()
 	{
-		echo "Hello World";
-		exit;
+		return $this->_pageFactory->create();
 	}
 }

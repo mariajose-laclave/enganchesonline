@@ -1,6 +1,6 @@
 <?php
 \Magento\Framework\Component\ComponentRegistrar::register(
 	\Magento\Framework\Component\ComponentRegistrar::MODULE,
-	'ImportModule_Import',
+	'Mageplaza_HelloWorld',
 	__DIR__
 );
