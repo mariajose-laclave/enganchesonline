@@ -7,6 +7,24 @@ $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category
 $categories->addAttributeToFilter('parent_id', array('eq' => 1));
 $categories->addAttributeToSelect('*');
 ?>
+<script>
+	window.onload = function() {
+		var select = document.getElementById('choose_category');
+		select.addEventListener('change', function(event) {
+			var value = select.value;
+			var s = new XMLHttpRequest();
+			s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/get-data-for-select.php?data_type=model&id_car_brand=${value}`, true);
+			s.onreadystatechange = (event) => {
+				var json_response = JSON.parse(s.response);
+				select.innerHTML = '';
+				for (var i = 0; i < json_response.length; i++) {
+					select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+
+				}
+			}
+		});
+	}
+</script>
 <div class="block block-search">
     <div class="block block-content">
 		<div class="dropdown">
@@ -26,6 +44,8 @@ $categories->addAttributeToSelect('*');
 						}
 						?>
 						</select>
+					<select name="" id="">
+					</select>
 				</div>
 				<div class="field search">
 					<label class="label" for="search" data-role="minisearch-label">
