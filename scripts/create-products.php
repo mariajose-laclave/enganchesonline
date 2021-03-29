@@ -8,7 +8,6 @@ class CreateCategoriesApp extends AbstractApp
 
     public function run()
     {
-        $this->_state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $product = $objectManager->create('\Magento\Catalog\Model\Product');
         $product->setSku('my-sku'); // Set your sku here
