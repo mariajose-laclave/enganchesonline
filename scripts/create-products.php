@@ -109,16 +109,25 @@ class CreateCategoriesApp extends AbstractApp
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
-            $category->setUrl($category->getUrl() + $category->getId());
-            $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            try {
+                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            } catch (Exception $e) {
+                $category->setUrl($category->getUrl() + uniqid());
+                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            }
             $id = $category->getId();
             foreach ($models as $model) {
                 $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
                 $category->setName($model);
                 $category->setParentId($id);
                 $category->setIsActive(true);
-                $category->setUrl($category->getUrl() + $category->getId());
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+                try {
+                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+                } catch (Exception $e) {
+                    $category->setUrl($category->getUrl() + uniqid());
+                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+                }
             }
         }
         /*
