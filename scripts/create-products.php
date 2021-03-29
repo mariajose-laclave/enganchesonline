@@ -1,10 +1,36 @@
 <?php
+use \Magento\Framework\AppInterface as AppInterface;
+use \Magento\Framework\App\Http as Http;
+
+use Magento\Framework\ObjectManager\ConfigLoaderInterface;
+use Magento\Framework\App\Request\Http as RequestHttp;
+use Magento\Framework\App\Response\Http as ResponseHttp;
+use Magento\Framework\Event;
+use Magento\Framework\Filesystem;
+use Magento\Framework\App\AreaList as AreaList;
+use Magento\Framework\App\State as State;
+
 require dirname(__FILE__) . '/../app/bootstrap.php';
 $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
 require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
+
+    public function __construct(
+        \Magento\Framework\ObjectManagerInterface $objectManager,
+        Event\Manager $eventManager,
+        AreaList $areaList,
+        RequestHttp $request,
+        ResponseHttp $response,
+        ConfigLoaderInterface $configLoader,
+        Filesystem $filesystem,
+        \Magento\Framework\Registry $registry
+    )
+    {
+        parent::__construct();
+        $this->_state->setAreaCode(\Magento\Framework\App\Area::AREA_GLOBAL);        
+    }
 
     public function run()
     {
