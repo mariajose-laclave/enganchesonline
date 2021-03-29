@@ -16,6 +16,17 @@ foreach ($categories as $category) {
 	);
 }
 ?>
+<script>
+	var make_data = <?php json_encode($category_values); ?>
+	$(document).ready(() => {
+		$('#autocomplete').autocomplete({
+			lookup: make_data,
+			onSelect: function (suggestion) {
+				alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+			}
+		});
+	})
+</script>
 <div class="block block-search">
     <div class="block block-content">
 		<div class="dropdown">
@@ -76,17 +87,6 @@ foreach ($categories as $category) {
     ], function ($) {
         $("#choose_category").chosen();
     });
-</script>
-<script>
-	var make_data = <?php json_encode($category_values); ?>
-	$(document).ready(() => {
-		$('#autocomplete').autocomplete({
-			lookup: make_data,
-			onSelect: function (suggestion) {
-				alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-			}
-		});
-	})
 </script>
 <?php } ?>
 <script type="text/x-magento-init">
