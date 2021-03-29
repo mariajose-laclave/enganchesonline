@@ -2,9 +2,7 @@
 $helper = $this->helper('Magento\Search\Helper\Data');
 $_helper = $this->helper('catalog/category');
 $_categories = $_helper->getStoreCategories();
-die(
-	var_dump($_categories)
-);
+echo json_encode($_categories);
 ?>
 <div class="block block-search">
     <div class="block block-content">
