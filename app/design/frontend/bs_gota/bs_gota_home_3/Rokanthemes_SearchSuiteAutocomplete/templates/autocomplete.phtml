@@ -1,7 +1,16 @@
 <?php
 $helper = $this->helper('Magento\Search\Helper\Data');
-$categories = $block->getCategories();
-echo json_encode($categories);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// get list of all the categories
+$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+$categories->addAttributeToSelect('*');
+
+foreach ($categories as $category) {
+echo 'Catgeory Id: '.$category->getId();
+echo 'Catgeory Name: '.$category->getName();
+echo 'Catgeory Url: '.$category->getUrl();
+}
 ?>
 <div class="block block-search">
     <div class="block block-content">
