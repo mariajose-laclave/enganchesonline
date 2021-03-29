@@ -13,7 +13,7 @@ class GetDataForSelect extends AbstractApp
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         switch ($_GET['data_type']) {
             case 'models':
-                $this->_getModelsForBrand();
+                echo $this->_getModelsForBrand();
                 break;
             case 'years':
                 $this->_getYearsForModel();
@@ -37,7 +37,7 @@ class GetDataForSelect extends AbstractApp
             );
         }
 
-        die(json_encode($select_data));
+        return json_encode($select_data);
     }
 
     protected function _getYearsForModel()
