@@ -62,7 +62,7 @@ class CreateCategoriesApp extends AbstractApp
         foreach ($this->product_array as $_product) {
             $product = $objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para ".$_product['product']->marca . " " . $_product['product']->model . " " . $_product['product']->year); // Name of Product
+            $product->setName("Enganche para ".$_product['product']->name); // Name of Product
             $product->setAttributeSetId(4); // Attribute set id
             $product->setStatus(1); // Status on product enabled/ disabled 1/0
             // $product->setWeight(10); // weight of product
