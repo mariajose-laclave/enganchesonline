@@ -1,10 +1,8 @@
 <?php
 $helper = $this->helper('Magento\Search\Helper\Data');
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-// get list of all the categories
-$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
-$categories->addAttributeToSelect('*');
+$categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
+$categories = $categoryHelper->getStoreCategories();
 
 foreach ($categories as $category) {
 echo 'Catgeory Id: '.$category->getId();
