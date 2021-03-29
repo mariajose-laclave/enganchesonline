@@ -1,8 +1,5 @@
 <?php
 
-require dirname(__FILE__) . '/../app/bootstrap.php';
-$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
-
 class CreateCategoriesApp extends AbstractApp
 {
 
@@ -13,6 +10,7 @@ class CreateCategoriesApp extends AbstractApp
     )
     {
         $this->_objectManager = $objectManager;
+        $this->run();
     }
 
     public function run()
@@ -39,7 +37,3 @@ class CreateCategoriesApp extends AbstractApp
         
     }
 }
-
-/** @var \Magento\Framework\App\Http $app */
-$app = $bootstrap->createApplication('CreateCategoriesApp');
-$bootstrap->run($app);
