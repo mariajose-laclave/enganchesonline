@@ -11,17 +11,38 @@ class GetDataForSelect extends AbstractApp
     {
         $this->_state->setAreaCode('frontend');
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        echo 'd';
         switch ($_GET['data_type']) {
             case 'models':
-                echo $this->_getModelsForBrand();
+                return $this->_getModelsForBrand();
+                break;
+            case 'versions':
+                return $this->_getVersionsForModel();
                 break;
             case 'years':
-                $this->_getYearsForModel();
-                break;
-            case '':
+                return $this->_getYears();
                 break;
         }
+    }
+
+    protected function _getVersionsForModel()
+    {
+        return json_encode(
+            ['3 door', '5 door']
+        );
+    }
+
+    protected function _getYears()
+    {
+        $arr = [];
+        $i = 1970;
+        $date = new DateTime();
+
+        while ($i < (int)$date->format('Y') + 1) {
+            $arr[] = $i;
+        }
+        return json_encode(
+            $arr
+        ); 
     }
 
     protected function _getModelsForBrand()
@@ -46,6 +67,8 @@ class GetDataForSelect extends AbstractApp
 
     }
 
-
-
 }
+
+/** @var \Magento\Framework\App\Http $app */
+$app = $bootstrap->createApplication('GetDataForSelectApp');
+$bootstrap->run($app);

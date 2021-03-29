@@ -10,16 +10,31 @@ $categories->addAttributeToSelect('*');
 <script>
 	window.onload = function() {
 		var select = document.getElementById('choose_category');
+		var model_select = document.getElementById('model_select');
+		var version_select = document.getElementById('version_select');
 		select.addEventListener('change', function(event) {
 			var value = select.value;
 			var s = new XMLHttpRequest();
 			s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=models&id_car_brand=${value}`, true);
 			s.onreadystatechange = (event) => {
 				var json_response = JSON.parse(s.response);
-				select.innerHTML = '';
+				model_select.innerHTML = '';
 				for (var i = 0; i < json_response.length; i++) {
-					select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
-
+					model_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+				}
+			}
+			s.send();
+		});
+		model_select.addEventListener('change', (event) => {
+			var value = model_select.value;
+			var make_value = select.value;
+			var s = new XMLHttpRequest();
+			s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${make_value}&id_car_model=${value}`, true);
+			s.onreadystatechange = (event) => {
+				var json_response = JSON.parse(s.response);
+				version_select.innerHTML = '';
+				for (var i = 0; i < json_response.length; i++) {
+					version_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
 				}
 			}
 			s.send();
@@ -45,7 +60,9 @@ $categories->addAttributeToSelect('*');
 						}
 						?>
 						</select>
-					<select name="" id="">
+					<select name="model_cat" id="model_select">
+					</select>
+					<select name="version_cat" id="version_select">
 					</select>
 				</div>
 				<div class="field search">
