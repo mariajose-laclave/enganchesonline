@@ -70,5 +70,5 @@ class GetDataForSelect extends AbstractApp
 }
 
 /** @var \Magento\Framework\App\Http $app */
-$app = $bootstrap->createApplication('GetDataForSelectApp');
+$app = $bootstrap->createApplication('GetDataForSelect');
 $bootstrap->run($app);
