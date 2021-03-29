@@ -6,15 +6,18 @@ $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
 class CreateCategoriesApp extends AbstractApp
 {
 
+    protected $_objectManager;
+
     public function __construct(
+        \Magento\Framework\App\ObjectManager $objectManager
     )
     {
+        $this->_objectManager = $objectManager;
     }
 
     public function run()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $product = $objectManager->create('\Magento\Catalog\Model\Product');
+        $product = $this->_objectManager->create('\Magento\Catalog\Model\Product');
         $product->setSku('my-sku'); // Set your sku here
         $product->setName('Sample Simple Product'); // Name of Product
         $product->setAttributeSetId(4); // Attribute set id
