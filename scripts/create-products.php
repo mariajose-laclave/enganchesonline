@@ -59,6 +59,8 @@ class CreateCategoriesApp extends AbstractApp
 
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
+        $this->createCategories($objectManager);
+
         foreach ($this->product_array as $_product) {
             $product = $objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
@@ -74,14 +76,56 @@ class CreateCategoriesApp extends AbstractApp
                 array(
                     'use_config_manage_stock' => 0,
                     'manage_stock' => 1,
-                    'is_in_stock' => 1,
-                    'qty' => 999999999
+                    'is_in_stock' => 1
                 )
             );
             $url = urlencode($_product['product']->name . $_product['product']->sku);
-            $product ->setUrlKey($url);
+            $product->setUrlKey($url);
             $product->save();
         }
+    }
+
+    protected function createCategories($objectManager)
+    {
+        $car_brands = array();
+        foreach ($this->product_array as $prod) {
+            $models = array();
+            $make = $prod['product']->make;
+            if (!in_array($make, $car_brands)) {
+                $brand_objects = array_filter($this->product_array, function($obj, $make)  {
+                    if ($obj['product']->make == $make) return true;
+                    else return false;
+                });
+                foreach ($brand_objects as $bo) {
+                    if (!in_array($bo['product']->model, $models)) {
+                        $models[] = $bo['product']->model;
+                    }
+                }
+                $car_brands[$make] = $models;
+            }
+        }
+        foreach ($car_brands as $brand => $models) {
+            $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+            $category->setName($brand);
+            $category->setParentId(1);
+            $category->setIsActive(true);
+            $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            $id = $category->getId();
+            foreach ($models as $model) {
+                $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                $category->setName($model);
+                $category->setParentId($id);
+                $category->setIsActive(true);
+                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            }
+        }
+        /*
+        $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+        $category->setName('Computer 3');
+        $category->setParentId(1); // 1: root category.
+        $category->setIsActive(true);
+        $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+*/
     }
 
     /**
@@ -145,7 +189,11 @@ class CreateCategoriesApp extends AbstractApp
                     'sku' => $line_array[0],
                     'price' => (int)str_replace(['EUR', '€'], '', $line_array[9])*100,
                     'type_id' => 'simple',
-                    'attribute_set_id' => 4
+                    'attribute_set_id' => 4,
+                    'make' => $line_array[3],
+                    'model' => $line_array[4],
+                    'variant' => $line_array[6],
+                    'year' => $line_array[8]
 
                 );
                 foreach ($array as $key => $value) {
@@ -192,7 +240,11 @@ class CreateCategoriesApp extends AbstractApp
                     'sku' => $row[5],
                     'price' => $price,
                     'type_id' => 'simple',
-                    'attribute_set_id' => 4
+                    'attribute_set_id' => 4,
+                    'make' => $row[0],
+                    'model' => $row[1],
+                    'variant' => $make_type_year['variant'],
+                    'year' => $make_type_year['year']
                 );
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
