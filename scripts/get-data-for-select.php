@@ -13,13 +13,13 @@ class GetDataForSelect extends AbstractApp
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         switch ($_GET['data_type']) {
             case 'models':
-                return $this->_getModelsForBrand();
+                echo $this->_getModelsForBrand();
                 break;
             case 'versions':
-                return $this->_getVersionsForModel();
+                echo $this->_getVersionsForModel();
                 break;
             case 'years':
-                return $this->_getYears();
+                echo $this->_getYears();
                 break;
         }
     }
