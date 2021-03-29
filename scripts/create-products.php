@@ -90,10 +90,10 @@ class CreateCategoriesApp extends AbstractApp
         $car_brands = array();
         foreach ($this->product_array as $prod) {
             $models = array();
-            $make = $prod['product']->make;
-            if (!in_array($make, $car_brands)) {
-                $brand_objects = array_filter($this->product_array, function($obj, $make)  {
-                    if ($obj['product']->make == $make) return true;
+            $this->make = $prod['product']->make;
+            if (!in_array($this->make, $car_brands)) {
+                $brand_objects = array_filter($this->product_array, function($obj)  {
+                    if ($obj['product']->make == $this->make) return true;
                     else return false;
                 });
                 foreach ($brand_objects as $bo) {
@@ -101,7 +101,7 @@ class CreateCategoriesApp extends AbstractApp
                         $models[] = $bo['product']->model;
                     }
                 }
-                $car_brands[$make] = $models;
+                $car_brands[$this->make] = $models;
             }
         }
         foreach ($car_brands as $brand => $models) {
