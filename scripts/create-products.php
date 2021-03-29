@@ -69,7 +69,7 @@ class CreateCategoriesApp extends AbstractApp
             $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
             $product->setTaxClassId(0); // Tax class id
             $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $product->setPrice($_product['product']->price); // price of product
+            $product->setPrice($_product['product']->price/100); // price of product
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
@@ -78,6 +78,8 @@ class CreateCategoriesApp extends AbstractApp
                     'qty' => 999999999
                 )
             );
+            $url = urlencode($_product['product']->name . $_product['product']->sku);
+            $product ->setUrlKey($url);
             $product->save();
         }
     }
