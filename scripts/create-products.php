@@ -1,21 +1,16 @@
 <?php
+require dirname(__FILE__) . '/../app/bootstrap.php';
+$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
+require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
 
-    protected $_objectManager;
-
-    public function __construct(
-        \Magento\Framework\App\ObjectManager $objectManager
-    )
-    {
-        $this->_objectManager = $objectManager;
-        $this->run();
-    }
-
     public function run()
     {
-        $product = $this->_objectManager->create('\Magento\Catalog\Model\Product');
+        $this->_state->setAreaCode('frontend');
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $product = $objectManager->create('\Magento\Catalog\Model\Product');
         $product->setSku('my-sku'); // Set your sku here
         $product->setName('Sample Simple Product'); // Name of Product
         $product->setAttributeSetId(4); // Attribute set id
@@ -34,6 +29,17 @@ class CreateCategoriesApp extends AbstractApp
             )
         );
         $product->save();
-        
+        /*
+        $this->_objectManager->get('Magento\Framework\Registry')
+            ->register('isSecureArea', true);
+
+        $category = $this->_objectManager->create('\Magento\Catalog\Model\Category');
+        $category = $category->load(343);
+
+        $category->delete();*/
     }
 }
+
+/** @var \Magento\Framework\App\Http $app */
+$app = $bootstrap->createApplication('CreateCategoriesApp');
+$bootstrap->run($app);

@@ -19,6 +19,7 @@ abstract class AbstractApp implements AppInterface
         RequestHttp $request,
         ResponseHttp $response,
         ConfigLoaderInterface $configLoader,
+        State $state,
         Filesystem $filesystem,
         \Magento\Framework\Registry $registry
     ) {
@@ -28,6 +29,7 @@ abstract class AbstractApp implements AppInterface
         $this->_request = $request;
         $this->_response = $response;
         $this->_configLoader = $configLoader;
+        $this->_state = $state;
         $this->_filesystem = $filesystem;
         $this->registry = $registry;
     }
