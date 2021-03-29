@@ -1,8 +1,11 @@
 <?php
 $helper = $this->helper('Magento\Search\Helper\Data');
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-$categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
-$categories = $categoryHelper->getStoreCategories();
+
+// get list of all the categories
+$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+$categories->addAttributeToFilter('parent_id', array('eq' => 1));
+$categories->addAttributeToSelect('*');
 
 foreach ($categories as $category) {
 echo 'Catgeory Id: '.$category->getId();
@@ -16,8 +19,8 @@ echo 'Catgeory Url: '.$category->getUrl();
 			<form class="form minisearch dropdown-menu search-content <?php if($block->enableSearchByCat()){ ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
 				<div class="field-by-cat-search">    
 					<select name="cat" id="choose_category">
-							<option value=""><?php echo __('All Categories'); ?></option>
-						<?php $categories = $block->getCategories(); 
+						<option value=""><?php echo __('All Categories'); ?></option>
+						<?php
 						foreach($categories as $cat)
 						{
 							if(isset($_GET['cat']) && $_GET['cat'] == $cat->getId()){

@@ -1,10 +1,5 @@
 <?php
 $helper = $this->helper('Magento\Search\Helper\Data');
-$_helper = $this->helper('catalog/category');
-$_categories = $_helper->getStoreCategories();
-die(
-	var_dump($_categories)
-);
 ?>
 <div class="search-dropdown">
 	<form class="form minisearch dropdown-menu search-content <?php if($block->enableSearchByCat()){ ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
