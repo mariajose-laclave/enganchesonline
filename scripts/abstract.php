@@ -30,6 +30,7 @@ abstract class AbstractApp implements AppInterface
         $this->_response = $response;
         $this->_configLoader = $configLoader;
         $this->_state = $state;
+        $this->_state->setAreaCode(\Magento\Framework\App\Area::AREA_FRONTEND);
         $this->_filesystem = $filesystem;
         $this->registry = $registry;
     }
