@@ -11,6 +11,7 @@ class GetDataForSelect extends AbstractApp
     {
         $this->_state->setAreaCode('frontend');
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        echo 'd';
         switch ($_GET['data_type']) {
             case 'models':
                 echo $this->_getModelsForBrand();
