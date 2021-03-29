@@ -21,5 +21,6 @@
 		<css src="css/themes.css" />
 		<css src="css/themes3.css" />
 		<link src="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,500,600,700&amp;amp;amp;display=swap" rel='stylesheet' type='text/css' src_type="url" />
+		<script src="js/jquery.autocomplete.min.js"/>
     </head>
 </page>
