@@ -15,8 +15,8 @@
 		<move element="product.info.stock.sku" destination="product.info.price" after="product.info.overview"/> 
 		<referenceContainer name="content">
 			<container name="product-view" htmlTag="div" htmlClass="product-view row" before="-">
-				<container name="product-view-left" htmlTag="div" htmlClass="col-sm-6 col-xs-12" before="-"/>
-				<container name="product-view-right" htmlTag="div" htmlClass="col-sm-6 col-xs-12" after="product-view-right"/>
+				<container name="product-view-left" htmlTag="div" htmlClass="col-sm-3 col-xs-12" before="-"/>
+				<container name="product-view-right" htmlTag="div" htmlClass="col-sm-9 col-xs-12" after="product-view-right"/>
 			</container>
 		</referenceContainer> 
     </body>
