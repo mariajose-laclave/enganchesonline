@@ -7,7 +7,7 @@ $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category
 $categories->addAttributeToFilter('parent_id', array('eq' => 1));
 $categories->addAttributeToSelect('*');
 ?>
-<script>
+<script>/*
 	window.onload = function() {
 		var select = document.getElementById('choose_category');
 		var model_select = document.getElementById('model_select');
@@ -39,7 +39,7 @@ $categories->addAttributeToSelect('*');
 			}
 			s.send();
 		});
-	}
+	}*/
 </script>
 <div class="block block-search">
 	<div class="block block-content">
