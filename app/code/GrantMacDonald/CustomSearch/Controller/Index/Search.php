@@ -52,12 +52,11 @@ class Search extends \Magento\CatalogSearch\Controller\Result\Index {
         unset($getAdditionalRequestParameters[QueryFactory::QUERY_VAR_NAME]);
 
         $handles = null;
-        /*if ($query->getNumResults() == 0) {
+        if ($query->getNumResults() == 0) {
             $this->_view->getPage()->initLayout();
             $handles = $this->_view->getLayout()->getUpdate()->getHandles();
             $handles[] = static::DEFAULT_NO_RESULT_HANDLE;
-        }*/
-        //die(var_dump($handles));
+        }
 
         if (empty($getAdditionalRequestParameters) &&
             $this->_objectManager->get(PopularSearchTerms::class)->isCacheable($queryText, $storeId)
