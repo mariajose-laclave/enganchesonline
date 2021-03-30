@@ -7,11 +7,9 @@
 	<div class="header">
 		<div class="container-max">
 			<div class="for-full-withmenu flex-layout">
-				
 				<div class="col-logo">
 					<?php echo $this->getChildHtml("logo"); ?>	
 				</div>
-				<?php echo $this->getChildHtml("topSearch"); ?>	
 				<div class="header-right">
 					<div class="language-currency">
 						<div class="container-setting-language-currency">
@@ -50,9 +48,12 @@
 		<div class="header-menu">
 			<div class="container-max">
 				<div class="flex-layout">
+					<?php echo $this->getChildHtml("topSearch"); ?>
+					<!--
 					<?php echo $this->getChildHtml("vertical.topnav")?>
 					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
 					<div class="holine hidden-xs hidden-sm"><?php echo $this->getChildHtml("holine-number"); ?></div>
+					-->
 				</div>
 			</div>
 		</div>		
