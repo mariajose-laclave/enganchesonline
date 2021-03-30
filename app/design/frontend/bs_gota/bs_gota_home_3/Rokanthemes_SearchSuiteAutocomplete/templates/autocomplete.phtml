@@ -96,7 +96,19 @@ $categories->addAttributeToSelect('*');
 			'rokanthemes/choose'
 		], function($) {
 			$("#choose_category").chosen().change(() => {
-				console.log($('#choose_category').val());
+				$.ajax({
+					type: 'GET',
+					url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
+					success: (data) => {
+						var html = '';
+						for (var i = 0; i < json_response.length; i++) {
+							html += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+						}
+						$('#model_select').chosen('destroy');
+						$('#model_select').html(html);
+						$('#model_select').chosen();
+					}
+				})
 			});
 			$('#model_select').chosen().change(() => {
 				console.log($('#model_select').val());
