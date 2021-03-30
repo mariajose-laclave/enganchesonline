@@ -66,4 +66,57 @@ class Search extends \Magento\CatalogSearch\Controller\Result\Index {
             $this->getNotCacheableResult($catalogSearchHelper, $query, $handles);
         }
     }
+    /**
+     * Return cacheable result
+     *
+     * @param \Magento\CatalogSearch\Helper\Data $catalogSearchHelper
+     * @param \Magento\Search\Model\Query $query
+     * @param array $handles
+     * @return void
+     */
+    private function getCacheableResult($catalogSearchHelper, $query, $handles)
+    {
+        if (!$catalogSearchHelper->isMinQueryLength()) {
+            $redirect = $query->getRedirect();
+            if ($redirect && $this->_url->getCurrentUrl() !== $redirect) {
+                $this->getResponse()->setRedirect($redirect);
+                return;
+            }
+        }
+
+        $catalogSearchHelper->checkNotes();
+
+        $this->_view->loadLayout($handles);
+        $this->_view->renderLayout();
+    }
+
+    /**
+     * Return not cacheable result
+     *
+     * @param \Magento\CatalogSearch\Helper\Data $catalogSearchHelper
+     * @param \Magento\Search\Model\Query $query
+     * @param array $handles
+     * @return void
+     *
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    private function getNotCacheableResult($catalogSearchHelper, $query, $handles)
+    {
+        if ($catalogSearchHelper->isMinQueryLength()) {
+            $query->setId(0)->setIsActive(1)->setIsProcessed(1);
+        } else {
+            $query->saveIncrementalPopularity();
+            $redirect = $query->getRedirect();
+            if ($redirect && $this->_url->getCurrentUrl() !== $redirect) {
+                $this->getResponse()->setRedirect($redirect);
+                return;
+            }
+        }
+
+        $catalogSearchHelper->checkNotes();
+
+        $this->_view->loadLayout($handles);
+        $this->getResponse()->setNoCacheHeaders();
+        $this->_view->renderLayout();
+    }
 }
