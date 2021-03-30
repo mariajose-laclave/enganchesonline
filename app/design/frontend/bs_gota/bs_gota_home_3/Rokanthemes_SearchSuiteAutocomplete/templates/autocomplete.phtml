@@ -94,11 +94,26 @@ $categories->addAttributeToSelect('*');
 </div>
 <?php if($block->enableSearchByCat()){ ?>
 <script type="text/javascript">
+	var select = document.getElementById('choose_category');
+	var model_select = document.getElementById('model_select');
+	var version_select = document.getElementById('version_select');
     require([
         'jquery',
         'rokanthemes/choose'
     ], function ($) {
-        $("#choose_category").chosen();
+        $("#choose_category").chosen().change(() => {
+			var value = select.value;
+			var s = new XMLHttpRequest();
+			s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=models&id_car_brand=${value}`, true);
+			s.onreadystatechange = (event) => {
+				var json_response = JSON.parse(s.response);
+				model_select.innerHTML = '';
+				for (var i = 0; i < json_response.length; i++) {
+					model_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+				}
+			}
+			s.send();
+		})
     });
 </script>
 <?php } ?>

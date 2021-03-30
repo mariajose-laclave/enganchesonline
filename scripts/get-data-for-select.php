@@ -27,7 +27,7 @@ class GetDataForSelect extends AbstractApp
     protected function _getVersionsForModel()
     {
         return json_encode(
-            ['3 door', '5 door']
+            [['label' => '3 door', 'id' => '3 door'], ['label' => '5 door', 'id' => '5 door']]
         );
     }
 
@@ -38,7 +38,10 @@ class GetDataForSelect extends AbstractApp
         $date = new DateTime();
 
         while ($i < (int)$date->format('Y') + 1) {
-            $arr[] = $i;
+            $arr[] = [
+                'label' => $i,
+                'id' => $i
+            ];
         }
         return json_encode(
             $arr
