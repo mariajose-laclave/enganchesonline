@@ -128,7 +128,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function createProducts($objectManager)
     {
         foreach ($this->product_array as $_product) {
-            $description = file_get_contents(__DIR__ . '/scripts/templates/description-bola-fija.html');
+            $description = file_get_contents(__DIR__ . '/templates/description-bola-fija.html');
             $description = str_replace('{COCHE}', $_product['product']->brand . ' ' . $_product['product']->model . ' ' . $_product['product']->year, $description);
             $product = $objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
