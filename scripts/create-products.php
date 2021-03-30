@@ -99,7 +99,7 @@ class CreateCategoriesApp extends AbstractApp
             try {
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             } catch (Exception $e) {
-                $category->setUrl($category->getUrl() + uniqid());
+                $category->setUrl($category->getUrl() + (string)uniqid());
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             }
             $id = $category->getId();
@@ -112,7 +112,7 @@ class CreateCategoriesApp extends AbstractApp
                 try {
                     $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
                 } catch (Exception $e) {
-                    $category->setUrl($category->getUrl() + uniqid());
+                    $category->setUrl($category->getUrl() + (string)uniqid());
                     $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
                 }
             }
