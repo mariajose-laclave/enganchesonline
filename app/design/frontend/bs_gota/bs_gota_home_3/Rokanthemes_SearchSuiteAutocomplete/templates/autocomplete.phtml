@@ -95,42 +95,12 @@ $categories->addAttributeToSelect('*');
 			'jquery',
 			'rokanthemes/choose'
 		], function($) {
-			var select = document.getElementById('choose_category');
-			var model_select = document.getElementById('model_select');
-			var version_select = document.getElementById('version_select');
-
-			function carBrandChanged() {
-				var value = select.value;
-				var s = new XMLHttpRequest();
-				s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=models&id_car_brand=${value}`, true);
-				s.onreadystatechange = (event) => {
-					$('#model_select').chosen('destroy');
-					var json_response = JSON.parse(s.response);
-					model_select.innerHTML = '';
-					for (var i = 0; i < json_response.length; i++) {
-						model_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
-					}
-					$('#model_select').chosen().change(carModelChanged());
-				}
-				s.send();
-			}
-
-			function carModelChanged() {
-				var value = model_select.value;
-				var make_value = select.value;
-				var s = new XMLHttpRequest();
-				s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${make_value}&id_car_model=${value}`, true);
-				s.onreadystatechange = (event) => {
-					var json_response = JSON.parse(s.response);
-					version_select.innerHTML = '';
-					for (var i = 0; i < json_response.length; i++) {
-						version_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
-					}
-				}
-				s.send();
-			}
-			$("#choose_category").chosen().change(carBrandChanged());
-			$('#model_select').chosen().change(carModelChanged());
+			$("#choose_category").chosen().change(() => {
+				console.log($('#choose_category').val());
+			});
+			$('#model_select').chosen().change(() => {
+				console.log($('#model_select').val());
+			});
 		});
 	</script>
 <?php } ?>
