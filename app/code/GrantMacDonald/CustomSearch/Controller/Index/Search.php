@@ -13,6 +13,26 @@ use Magento\Search\Model\QueryFactory;
 use Magento\Search\Model\PopularSearchTerms;
 
 class Search extends \Magento\CatalogSearch\Controller\Result\Index {
+
+    public function __construct(
+        Context $context,
+        Session $catalogSession,
+        StoreManagerInterface $storeManager,
+        QueryFactory $queryFactory,
+        Resolver $layerResolver)
+    {
+        $this->_storeManager = $storeManager;
+        $this->_catalogSession = $catalogSession;
+        $this->_queryFactory = $queryFactory;
+        $this->layerResolver = $layerResolver;
+        parent::__construct(
+            $context,
+            $catalogSession,
+            $storeManager,
+            $queryFactory,
+            $layerResolver
+        );
+    }
     
     public function execute()
     {
