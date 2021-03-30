@@ -262,12 +262,6 @@ form.minisearch.loading .control input[type="text"] {
     .form.minisearch.dropdown-menu.search-content .field-by-cat-search{
         display: none;
     }
-} 
-.form.minisearch.dropdown-menu.search-content:after,
-.form.minisearch.dropdown-menu.search-content:before{
-    content: '';
-    display: table;
-    clear: both;
 }
 .form.minisearch.dropdown-menu.search-content.loading .actions button:before{
     display: inline-block;

@@ -49,7 +49,7 @@ $categories->addAttributeToSelect('*');
 <div class="block block-search">
 	<div class="block block-content">
 		<div class="dropdown">
-			<form style="space-between: space-around;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+			<form style="justify-content: space-between;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
 				<div class="field-by-cat-search">
 					<select name="cat[]" id="choose_category">
 						<option value=""><?php echo __('All Categories'); ?></option>
