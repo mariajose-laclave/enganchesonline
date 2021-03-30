@@ -129,7 +129,7 @@ class CreateCategoriesApp extends AbstractApp
     {
         foreach ($this->product_array as $_product) {
             $description = file_get_contents(__DIR__ . '/templates/description-bola-fija.html');
-            $description = str_replace('{COCHE}', $_product['product']->brand . ' ' . $_product['product']->model . ' ' . $_product['product']->year, $description);
+            $description = str_replace('{COCHE}', $_product['product']->make . ' ' . $_product['product']->model . ' ' . $_product['product']->year, $description);
             $product = $objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
             $product->setName("Enganche para " . $_product['product']->name); // Name of Product
