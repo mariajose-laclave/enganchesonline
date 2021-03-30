@@ -101,8 +101,8 @@ $categories->addAttributeToSelect('*');
 					url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
 					success: (data) => {
 						var html = '';
-						for (var i = 0; i < json_response.length; i++) {
-							html += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+						for (var i = 0; i < data.length; i++) {
+							html += `<option value="${data[i].id}">${data[i].label}</option>`;
 						}
 						$('#model_select').chosen('destroy');
 						$('#model_select').html(html);
