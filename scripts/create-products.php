@@ -57,6 +57,7 @@ class CreateCategoriesApp extends AbstractApp
         $this->get_lafuente_from_db();
         $this->convert_aragon();
         $this->createCategories();
+        $this->createProducts();
 
     }
 
@@ -87,7 +88,7 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
-    protected function createCategories($objectManager)
+    protected function createCategories()
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $car_brands = array();
