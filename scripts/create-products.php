@@ -113,7 +113,8 @@ class CreateCategoriesApp extends AbstractApp
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
-            $category->setUrlKey($category->getUrlKey() . uniqid());
+            $category->setUrlKey(null);
+            $category->setUrl(null);
             $category->save();
             /*
             $categoryWasCreated = false;
@@ -138,7 +139,8 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategory->setParentId($id);
                 $modelCategory->setIsActive(true);
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
-                $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+                $modelCategory->setUrlKey(null);
+                $modelCategory->setUrl(null);
                 $modelCategory->save();
 
                 /*
