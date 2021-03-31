@@ -213,7 +213,7 @@ class CreateCategoriesApp extends AbstractApp
                     'type_id' => 'simple',
                     'attribute_set_id' => 4,
                     'make' => $row[0],
-                    'model' => $row[1],
+                    'model' => $make_type_year['model'],
                     'variant' => $make_type_year['variant'],
                     'year' => $make_type_year['year']
                 );
