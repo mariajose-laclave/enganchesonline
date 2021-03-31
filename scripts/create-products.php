@@ -83,7 +83,8 @@ class CreateCategoriesApp extends AbstractApp
                     'is_in_stock' => 1
                 )
             );
-            $product->setUrlKey($product->getUrlKey() + time());
+            $url = str_replace(' ', '-', $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $product->setUrlKey($url);
             $product->save();
             $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
