@@ -83,18 +83,12 @@ class CreateCategoriesApp extends AbstractApp
                     'is_in_stock' => 1
                 )
             );
-            $url = urlencode($_product['product']->name . $_product['product']->sku);
-            $product->setUrlKey($url);
             $product->save();
             $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
-            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId]);
-                
-
-            $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
-            $make = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->make)))->getFirstItem();
-            $model = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->model)))->getFirstItem();
-            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$make->getId(), $model->getId()]);
+            $modelId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
     

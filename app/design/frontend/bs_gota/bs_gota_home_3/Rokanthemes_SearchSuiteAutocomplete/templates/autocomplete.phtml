@@ -49,7 +49,7 @@ $categories->addAttributeToSelect('*');
 <div class="block block-search">
 	<div class="block block-content">
 		<div class="dropdown">
-			<form style="justify-content: space-between;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+			<div style="justify-content: space-between;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
 				<div class="field-by-cat-search">
 					<select name="cat[]" id="choose_category">
 						<option value=""><?php echo __('All Categories'); ?></option>
@@ -68,32 +68,12 @@ $categories->addAttributeToSelect('*');
 					<select name="cat[]" id="version_select">
 					</select>
 				</div>
-				<!--
-				<div class="field search">
-					<label class="label" for="search" data-role="minisearch-label">
-						<span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
-					</label>
-					<div class="control">
-						<input id="search-input-autocomplate" data-mage-init='{"quickSearch":{
-									"formSelector":"#search_mini_form",
-									"url":"<?php /* @escapeNotVerified */ echo $block->getUrl('search/ajax/suggest'); ?>",
-									"destinationSelector":"#search_autocomplete"}
-							   }' type="text" name="<?php /* @escapeNotVerified */ echo $helper->getQueryParamName() ?>" value="<?php /* @escapeNotVerified */ echo $helper->getEscapedQueryText() ?>" placeholder="<?php /* @escapeNotVerified */ echo __('Search entire store here...'); ?>" class="input-text" maxlength="<?php /* @escapeNotVerified */ echo $helper->getMaxQueryLength(); ?>" role="combobox" aria-haspopup="false" aria-autocomplete="both" aria-expanded="false" autocomplete="off" />
-						<div id="search_autocomplete" class="search-autocomplete"></div>
-						<div data-bind="scope: 'searchsuiteautocomplete_form'">
-							<!-- ko template: getTemplate() -->
-							<!-- /ko -->
-						<!--
-						</div>
-					</div>
-				</div>
-				-->
 				<div class="actions">
-					<button type="submit" title="<?php echo $block->escapeHtml(__('Search')) ?>" class="action search">
+					<button onclick="goToCategory()" title="<?php echo $block->escapeHtml(__('Search')) ?>" class="action search">
 						<span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
 					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -125,6 +105,15 @@ $categories->addAttributeToSelect('*');
 			$('#version_select').chosen().change(() => {
 
 			});
+			function goToCategory() {
+				if ($('#version_select').val() != '') {
+
+				} else if ($('#model_select').val() != '') {
+
+				} else if ($('#choose_category').val() != '') {
+					
+				}
+			}
 		});
 	</script>
 <?php } ?>
