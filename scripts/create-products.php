@@ -5,6 +5,7 @@ require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
+    protected $categoryLinkManagement;
     protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=100000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
     protected $magento_api;
     protected $data_base_client;
@@ -85,7 +86,25 @@ class CreateCategoriesApp extends AbstractApp
             $url = urlencode($_product['product']->name . $_product['product']->sku);
             $product->setUrlKey($url);
             $product->save();
+            $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
+            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId]);
+                
+
+            $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+            $make = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->make)))->getFirstItem();
+            $model = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->model)))->getFirstItem();
+            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$make->getId(), $model->getId()]);
         }
+    }
+    
+    private function getCategoryLinkManagement()
+    {
+        if (null === $this->categoryLinkManagement) {
+            $this->categoryLinkManagement = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get('Magento\Catalog\Api\CategoryLinkManagementInterface');
+        }
+        return $this->categoryLinkManagement;
     }
 
     protected function createCategories()
