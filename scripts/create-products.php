@@ -108,7 +108,6 @@ class CreateCategoriesApp extends AbstractApp
                 $category->setName($model);
                 $category->setParentId($id);
                 $category->setIsActive(true);
-                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
                 try {
                     $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
                 } catch (Exception $e) {
@@ -151,9 +150,9 @@ class CreateCategoriesApp extends AbstractApp
             $product->setUrlKey($url);
             $product->save();
 
-            $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
-            $make = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->make)))->getFirstItem();
-            $model = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->model)))->getFirstItem();
+            // $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+            // $make = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->make)))->getFirstItem();
+            // $model = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->model)))->getFirstItem();
             // $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$make->getId(), $model->getId()]);
 
         }
