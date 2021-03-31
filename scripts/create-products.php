@@ -57,7 +57,7 @@ class CreateCategoriesApp extends AbstractApp
         $this->get_lafuente_from_db();
         // $this->convert_aragon();
         $this->createCategories();
-        $this->createProducts();
+        // $this->createProducts();
 
     }
 
