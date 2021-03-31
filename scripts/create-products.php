@@ -113,24 +113,39 @@ class CreateCategoriesApp extends AbstractApp
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
-            try {
-                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
-            } catch (Exception $e) {
-                $category->setUrlKey($category->getUrl() + uniqid());
-                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            
+            $categoryWasCreated = false;
+            while (!$categoryWasCreated) {
+                $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->load($category->getUrlKey(), 'url_key')->getId();
+                if ($categoryId) {
+                    //if category with this url key exist add some unique part to the name
+                    //I used here time function but you can use something else
+                    $uniquePart = time();
+                    $category->setUrlKey($category->getUrlKey() . $uniquePart);
+                } else {
+                    $category->save();
+                    $categoryWasCreated = true;
+                }
             }
             $id = $category->getId();
             foreach ($models as $model) {
-                $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
-                $category->setName($model);
-                $category->setParentId($id);
-                $category->setIsActive(true);
-                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
-                try {
-                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
-                } catch (Exception $e) {
-                    $category->setUrlKey($category->getUrl() + uniqid());
-                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+                $modelCategory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                $modelCategory->setName($model);
+                $modelCategory->setParentId($id);
+                $modelCategory->setIsActive(true);
+                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
+                $modelCategoryWasCreated = false;
+                while (!$modelCategoryWasCreated) {
+                    $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->load($modelCategory->getUrlKey(), 'url_key')->getId();
+                    if ($modelCategoryId) {
+                        //if category with this url key exist add some unique part to the name
+                        //I used here time function but you can use something else
+                        $uniquePart = time();
+                        $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
+                    } else {
+                        $modelCategory->save();
+                        $modelCategoryWasCreated = true;
+                    }
                 }
             }
         }
