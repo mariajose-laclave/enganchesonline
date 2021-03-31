@@ -55,7 +55,7 @@ class CreateCategoriesApp extends AbstractApp
         $this->_state->setAreaCode('frontend');
         
         $this->get_lafuente_from_db();
-        // $this->convert_aragon();
+        //$this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
 
