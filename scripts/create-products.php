@@ -113,10 +113,7 @@ class CreateCategoriesApp extends AbstractApp
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
-            $category->setUrlKey(null);
-            $category->setUrl(null);
-            $category->save();
-            /*
+            
             $categoryWasCreated = false;
             while (!$categoryWasCreated) {
                 $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
@@ -131,19 +128,12 @@ class CreateCategoriesApp extends AbstractApp
                     $categoryWasCreated = true;
                 }
             }
-            */
             $id = $category->getId();
             foreach ($models as $model) {
                 $modelCategory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
                 $modelCategory->setName($model);
                 $modelCategory->setParentId($id);
                 $modelCategory->setIsActive(true);
-                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
-                $modelCategory->setUrlKey(null);
-                $modelCategory->setUrl(null);
-                $modelCategory->save();
-
-                /*
                 $modelCategoryWasCreated = false;
                 while (!$modelCategoryWasCreated) {
                     $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
@@ -158,7 +148,6 @@ class CreateCategoriesApp extends AbstractApp
                         $modelCategoryWasCreated = true;
                     }
                 }
-                */
             }
         }
         
