@@ -116,7 +116,8 @@ class CreateCategoriesApp extends AbstractApp
             
             $categoryWasCreated = false;
             while (!$categoryWasCreated) {
-                $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->load($category->getUrlKey(), 'url_key')->getId();
+                $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                    ->create()->getCollection()->addAttributeToFilter($category->getUrlKey(), 'url_key')->firstItem()->getId();
                 if ($categoryId) {
                     //if category with this url key exist add some unique part to the name
                     //I used here time function but you can use something else
@@ -136,7 +137,8 @@ class CreateCategoriesApp extends AbstractApp
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
                 $modelCategoryWasCreated = false;
                 while (!$modelCategoryWasCreated) {
-                    $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->load($modelCategory->getUrlKey(), 'url_key')->getId();
+                    $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                        ->create()->getCollection()->addAttributeToFilter($category->getUrlKey(), 'url_key')->firstItem()->->getId();
                     if ($modelCategoryId) {
                         //if category with this url key exist add some unique part to the name
                         //I used here time function but you can use something else
