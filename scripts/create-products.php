@@ -117,8 +117,7 @@ class CreateCategoriesApp extends AbstractApp
             $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
             if ($categoryId) {
-                $uniquePart = time();
-                $category->setUrlKey($category->getUrlKey() . $uniquePart);
+                $category->setUrlKey($category->getUrlKey() . uniqid());
             }
             $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
@@ -130,8 +129,7 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                     ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
                 if ($modelCategoryId) {
-                    $uniquePart = time();
-                    $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
+                    $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
                 }
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
