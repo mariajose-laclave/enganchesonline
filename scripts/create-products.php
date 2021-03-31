@@ -114,19 +114,13 @@ class CreateCategoriesApp extends AbstractApp
             $category->setParentId(1);
             $category->setIsActive(true);
             
-            $categoryWasCreated = false;
-            while (!$categoryWasCreated) {
-                $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
-                if ($categoryId) {
-                    //if category with this url key exist add some unique part to the name
-                    //I used here time function but you can use something else
-                    $uniquePart = time();
-                    $category->setUrlKey($category->getUrlKey() . $uniquePart);
-                } else {
-                    $category->save();
-                    $categoryWasCreated = true;
-                }
+            $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+            if ($categoryId) {
+                $uniquePart = time();
+                $category->setUrlKey($category->getUrlKey() . $uniquePart);
+            } else {
+                $category->save();
             }
             $id = $category->getId();
             foreach ($models as $model) {
@@ -134,20 +128,13 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategory->setName($model);
                 $modelCategory->setParentId($id);
                 $modelCategory->setIsActive(true);
-
-                $modelCategoryWasCreated = false;
-                while (!$modelCategoryWasCreated) {
-                    $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                        ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
-                    if ($modelCategoryId) {
-                        //if category with this url key exist add some unique part to the name
-                        //I used here time function but you can use something else
-                        $uniquePart = time();
-                        $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
-                    } else {
-                        $modelCategory->save();
-                        $modelCategoryWasCreated = true;
-                    }
+                $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                if ($modelCategoryId) {
+                    $uniquePart = time();
+                    $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
+                } else {
+                    $modelCategory->save();
                 }
             }
         }
