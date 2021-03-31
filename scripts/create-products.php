@@ -104,15 +104,15 @@ class CreateCategoriesApp extends AbstractApp
             }
             $id = $category->getId();
             foreach ($models as $model) {
-                $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
-                $category->setName($model);
-                $category->setParentId($id);
-                $category->setIsActive(true);
+                $model_category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                $model_category->setName($model);
+                $model_category->setParentId($id);
+                $model_category->setIsActive(true);
                 try {
-                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($model_category);
                 } catch (Exception $e) {
-                    $category->setUrlKey(uniqid());
-                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+                    $model_category->setUrlKey(uniqid());
+                    $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($model_category);
                 }
             }
         }
