@@ -119,9 +119,8 @@ class CreateCategoriesApp extends AbstractApp
             if ($categoryId) {
                 $uniquePart = time();
                 $category->setUrlKey($category->getUrlKey() . $uniquePart);
-            } else {
-                $category->save();
             }
+            $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
             foreach ($models as $model) {
                 $modelCategory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
@@ -133,9 +132,8 @@ class CreateCategoriesApp extends AbstractApp
                 if ($modelCategoryId) {
                     $uniquePart = time();
                     $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
-                } else {
-                    $modelCategory->save();
                 }
+                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
         }
         
