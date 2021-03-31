@@ -56,11 +56,13 @@ class CreateCategoriesApp extends AbstractApp
         
         $this->get_lafuente_from_db();
         $this->convert_aragon();
+        $this->createCategories();
 
+    }
+
+    protected function createProducts()
+    {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-
-        $this->createCategories($objectManager);
-
         foreach ($this->product_array as $_product) {
             $product = $objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
@@ -87,6 +89,7 @@ class CreateCategoriesApp extends AbstractApp
 
     protected function createCategories($objectManager)
     {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $car_brands = array();
         foreach ($this->product_array as $prod) {
             $models = array();
@@ -112,7 +115,7 @@ class CreateCategoriesApp extends AbstractApp
             try {
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             } catch (Exception $e) {
-                $category->setUrl($category->getUrl() + uniqid());
+                $category->setUrlKey($category->getUrl() + uniqid());
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             }
             $id = $category->getId();
@@ -125,58 +128,14 @@ class CreateCategoriesApp extends AbstractApp
                 try {
                     $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
                 } catch (Exception $e) {
-                    $category->setUrl($category->getUrl() + uniqid());
+                    $category->setUrlKey($category->getUrl() + uniqid());
                     $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
                 }
             }
         }
-        /*
-        $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
-        $category->setName('Computer 3');
-        $category->setParentId(1); // 1: root category.
-        $category->setIsActive(true);
-        $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
-*/
+        
     }
 
-    /**
-     * Function to import the tow bars from LaFuente from CSV.
-     * CSV file must be placed in the same folder and have the name indicated.
-     */
-    /*
-    protected function convert_la_fuente()
-    {
-        $array = array();
-        $difficult_file = file_get_contents('./listado_precios_enganches.csv');
-        $lines = explode(';', $difficult_file);
-        foreach ($lines as $line)
-        {
-            $line_array = explode(',', $line);
-            if (!is_array($line_array) || $line_array[0] == 'Marca' || $line_array[0] == '')
-            {
-                continue;
-            } else {
-                $make_type_year = $this->get_make_type_year($line_array[1]);
-                if ( is_null($make_type_year['model']) ){
-                    continue;
-                } else {
-                    $array = array(
-                        'car_brand' => $line_array[0],
-                        'car_model' => $make_type_year['model'],
-                        'model_type' => $make_type_year['variant'],
-                        'year' => $make_type_year['year'],
-                        'sku' => $line_array[3],
-                        'price' => "$line_array[4],$line_array[5]"
-                    );
-                    foreach ($array as $key => $value) {
-                        $array[$key] = str_replace('"', '', $value);
-                    }
-                    $this->data_base_client->insert($array);
-                }
-            }
-        }
-    }
-    */
     /**
      * Function to import the tow bars from Enganches Aragón.
      * CSV file must be placed in the same folder and have the name indicated.
@@ -226,7 +185,7 @@ class CreateCategoriesApp extends AbstractApp
      */
     protected function get_lafuente_from_db() {
         
-        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=10000000&sEcho=10000000&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=100000000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=500&sEcho=500&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=500&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
         @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
