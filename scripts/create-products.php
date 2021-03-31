@@ -154,7 +154,7 @@ class CreateCategoriesApp extends AbstractApp
             $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
             $make = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->make)))->getFirstItem();
             $model = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->model)))->getFirstItem();
-            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$make->getId(), $model->getId()]);
+            // $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$make->getId(), $model->getId()]);
 
         }
     }
