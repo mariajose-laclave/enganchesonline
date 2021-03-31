@@ -138,7 +138,7 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategoryWasCreated = false;
                 while (!$modelCategoryWasCreated) {
                     $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                        ->create()->getCollection()->addAttributeToFilter($category->getUrlKey(), 'url_key')->firstItem()->->getId();
+                        ->create()->getCollection()->addAttributeToFilter($category->getUrlKey(), 'url_key')->firstItem()->getId();
                     if ($modelCategoryId) {
                         //if category with this url key exist add some unique part to the name
                         //I used here time function but you can use something else
