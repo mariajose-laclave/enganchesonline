@@ -115,6 +115,7 @@ class CreateCategoriesApp extends AbstractApp
             $category->setIsActive(true);
             
             $category->setUrlKey(null);
+            $category->setUrl(null);
             $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             /*
             $categoryWasCreated = false;
@@ -139,6 +140,7 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategory->setParentId($id);
                 $modelCategory->setIsActive(true);
                 $modelCategory->setUrlKey(null);
+                $modelCategory->setUrl(null);
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
 
                 /*
