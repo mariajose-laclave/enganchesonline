@@ -116,7 +116,8 @@ class CreateCategoriesApp extends AbstractApp
             $categoryWasCreated = false;
             while (!$categoryWasCreated) {
                 $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())
+                    ->addAttributeToSelect('*')->getFirstItem()->getId();
                 if ($categoryId) {
                     $uniquePart = time();
                     $category->setUrlKey($category->getUrlKey() . $uniquePart);
@@ -134,7 +135,8 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategoryWasCreated = false;
                 while (!$modelCategoryWasCreated) {
                     $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                        ->create()->getCollection()->addAttributeToFilter('url_key', $modelCategory->getUrlKey())->getFirstItem()->getId();
+                        ->create()->getCollection()->addAttributeToFilter('url_key', $modelCategory->getUrlKey())
+                        ->addAttributeToSelect('*')->getFirstItem()->getId();
                     if ($modelCategoryId) {
                         $uniquePart = time();
                         $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
