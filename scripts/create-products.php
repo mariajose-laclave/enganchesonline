@@ -113,14 +113,11 @@ class CreateCategoriesApp extends AbstractApp
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
-            
             $categoryWasCreated = false;
             while (!$categoryWasCreated) {
                 $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                     ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
                 if ($categoryId) {
-                    //if category with this url key exist add some unique part to the name
-                    //I used here time function but you can use something else
                     $uniquePart = time();
                     $category->setUrlKey($category->getUrlKey() . $uniquePart);
                 } else {
@@ -137,10 +134,8 @@ class CreateCategoriesApp extends AbstractApp
                 $modelCategoryWasCreated = false;
                 while (!$modelCategoryWasCreated) {
                     $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                        ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                        ->create()->getCollection()->addAttributeToFilter('url_key', $modelCategory->getUrlKey())->getFirstItem()->getId();
                     if ($modelCategoryId) {
-                        //if category with this url key exist add some unique part to the name
-                        //I used here time function but you can use something else
                         $uniquePart = time();
                         $modelCategory->setUrlKey($modelCategory->getUrlKey() . $uniquePart);
                     } else {
