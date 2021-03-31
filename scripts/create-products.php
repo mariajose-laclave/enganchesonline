@@ -79,20 +79,17 @@ class CreateCategoriesApp extends AbstractApp
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
-                    'manage_stock' => 1,
+                    'manage_stock' => 0,
                     'is_in_stock' => 1
                 )
             );
+            $product->setUrlKey($product->getUrlKey() + time());
             $product->save();
             $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
-            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId]);
-                
-
-            $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
-            $make = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->make)))->getFirstItem();
-            $model = $categories->addAttributeToFilter('name', array('eq' => strtolower($_product['product']->model)))->getFirstItem();
-            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$make->getId(), $model->getId()]);
+            $modelId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
     
