@@ -23,26 +23,16 @@ $plain_value = $model->getPlainValue();
 						</div>
 					</div>
 					<div class="header-top-setting hidden-xs hidden-sm">
-						<a href="#" class="actions-top"><span class="icon-more-horizontal"></span></a>
-						<div class="setting-container">
-							<div class="wishlist visible-md visible-lg wishlist-custom-button-login">
-								<a href="<?php echo $this->getUrl('wishlist'); ?>"><?php echo __('Wishlist'); ?></a>
-							</div>
-							<div class="compare visible-md visible-lg">
-								<a href="<?php echo $this->getUrl('catalog/product_compare'); ?>"><?php echo __('Compare'); ?></a>
-							</div>
-							<div class="register-login visible-md visible-lg">
-								<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
-									<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo __('Login'); ?></a>
-									<?php echo __('or'); ?>
-									<a href="<?php echo $this->getUrl('customer/account/create'); ?>"> <?php echo __('Sign up'); ?></a>
-								<?php
-								} else {
-								?>
-									<a href="<?php echo $this->getUrl('customer/account/index'); ?>"><?php echo __('My account'); ?></a>
-									<a href="<?php echo $this->getUrl('customer/account/logout'); ?>"> <?php echo __('or'); ?> <?php echo __('Logout'); ?></a>
-								<?php } ?>
-							</div>
+						<div class="register-login visible-md visible-lg">
+							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
+								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>"><i class="fas fa-user-circle"></i> <?php echo __('Login'); ?></a>
+							<?php
+							} else {
+							?>
+								<a href="<?php echo $this->getUrl('customer/account/index'); ?>"><?php echo __('My account'); ?></a>
+								<a href="<?php echo $this->getUrl('customer/account/logout'); ?>"> <?php echo __('or'); ?> <?php echo __('Logout'); ?></a>
+							<?php } ?>
+							<a href="<?php echo $this->getUlr('/ayuda'); ?>"><i class="fas fa-question-circle"></i> <?php echo __('Ayuda y contacto'); ?></a>
 						</div>
 					</div>
 					<?php echo $this->getChildHtml("minicart"); ?>
