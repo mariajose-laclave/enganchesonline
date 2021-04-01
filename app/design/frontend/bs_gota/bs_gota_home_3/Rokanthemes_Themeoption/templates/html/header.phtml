@@ -2,9 +2,6 @@
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $model = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('whatsapp_number');
 $plain_value = $model->getPlainValue();
-if ($this->getRequest()->getFullActionName() == 'cms_index_index') {
-	die('hello');
-}
 ?>
 <div class="header-container layout3">
 	<div class="topbar hidden-xs hidden-sm text-center">
@@ -131,6 +128,10 @@ if ($this->getRequest()->getFullActionName() == 'cms_index_index') {
 					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hello! I am interested in your product"><span class="icon-phone-call">&nbsp;<?php echo $plain_value; ?></span></a></p></div>
 				</div>
 			</div>
+			<?php
+				// If not homepage, add search bar
+				if (!$this->getRequest()->getFullActionName() == 'cms_index_index') {
+			?>
 			<div class="container-max">
 				<div class="flex-layout">
 					<?php echo $this->getChildHtml("topSearch"); ?>
@@ -141,6 +142,9 @@ if ($this->getRequest()->getFullActionName() == 'cms_index_index') {
 					-->
 				</div>
 			</div>
+			<?php
+				}
+			?>
 		</div>
 	</div>
 </div>
