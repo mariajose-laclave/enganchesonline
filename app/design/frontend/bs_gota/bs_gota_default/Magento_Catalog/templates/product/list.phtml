@@ -21,13 +21,21 @@ use Magento\Framework\App\Action\Action;
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
  
-$categoryId = 1060; // YOUR CATEGORY ID
-$category = $categoryFactory->create([$categoryId]);
+$categoryId = 4; // YOUR CATEGORY ID
+$category = $categoryFactory->create()->load($categoryId);
  
-$_productCollection = $category->getProductCollection()
+$categoryProducts = $category->getProductCollection()
     ->addAttributeToSelect('*');
+ 
+foreach ($categoryProducts as $product) {
+    // get Product data
+    print_r($product->getData());
+ 
+    echo $product->getName();
+}
 
-// $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+
+$_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
 // $_productCollection->addAttributeToFilter('category_id', array('in' => 1060));
 
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
