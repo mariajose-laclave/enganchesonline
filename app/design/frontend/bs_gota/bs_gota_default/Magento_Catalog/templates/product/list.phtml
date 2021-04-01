@@ -20,7 +20,7 @@ use Magento\Framework\App\Action\Action;
 
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
-$_productCollection->addAttributeToFilter('category_id', array('in' => 1060));
+// $_productCollection->addAttributeToFilter('category_id', array('in' => 1060));
 
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
@@ -165,7 +165,7 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
 									<?php echo $block->getReviewsSummaryHtml($_product, $templateType,true); ?>
 								<?php } ?>
 									<?= $block->getProductDetailsHtml($_product) ?>
-								<?= /* @escapeNotVerified */ $block->getProductPrice($_product) ?>			
+								<?= /* @escapeNotVerified */ $_product->getPrice() ?>			
 								<?php if ($block->getMode() == 'grid') { ?>
 								<div class="product-item-inner actions">
 									<div class="product actions product-item-actions action-inner"<?= strpos($pos, $viewMode . '-actions') ? $position : '' ?>>
