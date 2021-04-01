@@ -19,7 +19,15 @@ use Magento\Framework\App\Action\Action;
 //$_productCollection = $block->getLoadedProductCollection();
 
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-$_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
+ 
+$categoryId = 1060; // YOUR CATEGORY ID
+$category = $categoryFactory->create()->load($categoryId);
+ 
+$_productCollection = $category->getProductCollection()
+    ->addAttributeToSelect('*');
+
+// $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
 // $_productCollection->addAttributeToFilter('category_id', array('in' => 1060));
 
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
