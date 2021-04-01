@@ -106,7 +106,7 @@ class Product implements \Rokanthemes\SearchSuiteAutocomplete\Model\SearchInterf
      * @param string $queryText
      * @return mixed
      */
-    /*protected function getProductCollection($queryText)
+    protected function getProductCollection($queryText)
     {
         $productResultNumber = $this->helperData->getProductResultNumber();
 
@@ -123,7 +123,7 @@ class Product implements \Rokanthemes\SearchSuiteAutocomplete\Model\SearchInterf
                                                  ->addSearchFilter($queryText);
 
         return $productCollection;
-    }*/
+    }
 
     /**
      * Retrieve all product data

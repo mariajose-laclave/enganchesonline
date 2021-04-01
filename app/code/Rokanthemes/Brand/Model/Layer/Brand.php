@@ -30,7 +30,7 @@ class Brand extends \Magento\Catalog\Model\Layer
      *
      * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
-    /*public function getProductCollection()
+    public function getProductCollection()
     {
     	$brand = $this->getCurrentBrand();
     	if(isset($this->_productCollections[$brand->getId()])){
@@ -41,7 +41,7 @@ class Brand extends \Magento\Catalog\Model\Layer
             $this->_productCollections[$brand->getId()] = $collection;
     	} 
     	return $collection;
-    }*/
+    }
 
     /**
      * Retrieve current category model
