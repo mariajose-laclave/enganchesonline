@@ -123,11 +123,11 @@ class Brand extends \Magento\Framework\Model\AbstractModel
      *
      * @return \Magento\Framework\Data\Collection\AbstractDb
      */
-    public function getProductCollection()
+    /*public function getProductCollection()
     {
         $collection = $this->_productCollectionFactory->create()->addAttributeToSelect('*')->addAttributeToFilter('product_brand',array('eq'=>$this->getId()));
         return $collection;
-    }
+    }*/
 
     public function getUrl()
     {
