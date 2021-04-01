@@ -165,7 +165,8 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
 									<?php echo $block->getReviewsSummaryHtml($_product, $templateType,true); ?>
 								<?php } ?>
 									<?= $block->getProductDetailsHtml($_product) ?>
-								<?= /* @escapeNotVerified */ $_product->getPrice() ?>			
+								<?= /* @escapeNotVerified */ $_product->getFinalPrice() ?>			
+								<?php echo $_product->getFinalPrice(); ?>
 								<?php if ($block->getMode() == 'grid') { ?>
 								<div class="product-item-inner actions">
 									<div class="product actions product-item-actions action-inner"<?= strpos($pos, $viewMode . '-actions') ? $position : '' ?>>
