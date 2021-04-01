@@ -142,6 +142,7 @@ class View extends \Magento\Framework\View\Element\Template
      */
     public function getProductListHtml()
     {
+        return '<h1>hello</h1>';
     	return $this->getChildHtml('product_list');
     }
 
