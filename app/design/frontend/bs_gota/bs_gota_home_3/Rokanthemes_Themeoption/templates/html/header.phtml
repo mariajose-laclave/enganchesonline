@@ -25,14 +25,26 @@ $plain_value = $model->getPlainValue();
 					<div class="header-top-setting hidden-xs hidden-sm">
 						<div class="register-login visible-md visible-lg">
 							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
-								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>"><i class="fas fa-user-circle"></i> <?php echo __('Login'); ?></a>
+								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>">
+									<span>
+										<i class="fas fa-user-circle"></i> <?php echo __('Login'); ?></a>
+									</span>
 							<?php
 							} else {
 							?>
-								<a href="<?php echo $this->getUrl('customer/account/index'); ?>"><?php echo __('My account'); ?></a>
-								<a href="<?php echo $this->getUrl('customer/account/logout'); ?>"> <?php echo __('or'); ?> <?php echo __('Logout'); ?></a>
+								<a href="<?php echo $this->getUrl('customer/account/index'); ?>">
+									<span>
+										<i class="fas fa-user-circle"></i>
+										<?php echo __('My account'); ?>
+									</span>
+								</a>
+								<!-- <a href="<?php echo $this->getUrl('customer/account/logout'); ?>"> <?php echo __('or'); ?> <?php echo __('Logout'); ?></a> -->
 							<?php } ?>
-							<a href="<?php echo $this->getUlr('/ayuda'); ?>"><i class="fas fa-question-circle"></i> <?php echo __('Ayuda y contacto'); ?></a>
+							<a href="<?php echo $this->getUlr('/ayuda'); ?>">
+								<span>
+									<i class="fas fa-question-circle"></i> <?php echo __('Ayuda y contacto'); ?>
+								</span>
+							</a>
 						</div>
 					</div>
 					<?php echo $this->getChildHtml("minicart"); ?>
@@ -115,7 +127,7 @@ $plain_value = $model->getPlainValue();
 							</div>
 						</div>
 					</div>
-					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hello! I am interested in your product"><span class="icon-phone-call">&nbsp;<?php echo $plain_value; ?></span></a></p></div>
+					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hello! I am interested in your product"><span class=""><i class="fab fa-whatsapp"></i> &nbsp;<?php echo $plain_value; ?></span></a></p></div>
 				</div>
 			</div>
 			<?php
