@@ -16,7 +16,11 @@ use Magento\Framework\App\Action\Action;
  */
 ?>
 <?php
-$_productCollection = $block->getLoadedProductCollection()->load();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+/** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $_productCollection */
+$_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+/** Apply filters here */
+$_productCollection->load();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
 <?php if (count($_productCollection) === 0): ?>
