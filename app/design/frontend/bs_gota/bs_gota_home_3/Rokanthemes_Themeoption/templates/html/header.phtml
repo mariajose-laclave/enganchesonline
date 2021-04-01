@@ -2,6 +2,9 @@
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $model = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('whatsapp_number');
 $plain_value = $model->getPlainValue();
+if ($this->getRequest()->getFullActionName() == 'cms_index_index') {
+	die('hello');
+}
 ?>
 <div class="header-container layout3">
 	<div class="topbar hidden-xs hidden-sm text-center">
@@ -51,7 +54,7 @@ $plain_value = $model->getPlainValue();
 		</div>
 		<div class="header-menu">
 			<div class="container-max">
-				<div class="flex-layout">
+				<div class="flex-layout" style="max-width: 1280px; margin: 0 auto;">
 					<script type="text/javascript">
 						require([
 							'jquery',
@@ -100,17 +103,6 @@ $plain_value = $model->getPlainValue();
 											<a class="logo active" href="https://blueskytechmage.com/gota/en3/" title="" aria-label="store logo">
 												<img src="https://blueskytechmage.com/gota/pub/media/logo/stores/10/logo.png" title="" alt="" width="69" height="28">
 											</a>
-										</li>
-										<li class="ui-menu-item level0 classic menu-item-has-children parent parent-right ">
-											<div class="open-children-toggle">&nbsp;</div>
-											<a class="level-top"> Pages </a>
-											<div class="level0 submenu" style="left: 0px; right: auto; border-radius: 0px 6px 6px;">
-												<ul class="subchildmenu ">
-													<li class="ui-menu-item level1 "><a href="https://blueskytechmage.com/gota/en3/about-us/"> About Us </a></li>
-													<li class="ui-menu-item level1 "><a href="https://blueskytechmage.com/gota/en3/privacy-policy-cookie-restriction-mode/"> Privacy Policy </a></li>
-													<li class="ui-menu-item level1"><a href="https://blueskytechmage.com/gota/en3/contact/">Contact Us</a></li>
-												</ul>
-											</div>
 										</li>
 									</ul>
 								</div>
