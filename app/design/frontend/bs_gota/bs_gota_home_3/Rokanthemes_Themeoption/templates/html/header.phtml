@@ -1,85 +1,251 @@
 <div class="header-container layout3">
 	<div class="topbar hidden-xs hidden-sm text-center">
 		<div class="container-max">
-				<?php echo $this->getChildHtml("topbar_free_delivery"); ?> 
+			<?php echo $this->getChildHtml("topbar_free_delivery"); ?>
 		</div>
 	</div>
 	<div class="header">
 		<div class="container-max">
 			<div class="for-full-withmenu flex-layout">
 				<div class="col-logo">
-					<?php echo $this->getChildHtml("logo"); ?>	
+					<?php echo $this->getChildHtml("logo"); ?>
 				</div>
 				<div class="header-right">
 					<div class="language-currency">
 						<div class="container-setting-language-currency">
 							<?php echo $this->getChildHtml("currency"); ?>
-							<?php echo $this->getChildHtml("store_language"); ?>  
-						</div>		
+							<?php echo $this->getChildHtml("store_language"); ?>
+						</div>
 					</div>
 					<div class="header-top-setting hidden-xs hidden-sm">
 						<a href="#" class="actions-top"><span class="icon-more-horizontal"></span></a>
 						<div class="setting-container">
 							<div class="wishlist visible-md visible-lg wishlist-custom-button-login">
-							<a href="<?php echo $this->getUrl('wishlist');?>"><?php echo __('Wishlist');?></a>
-							</div>		
+								<a href="<?php echo $this->getUrl('wishlist'); ?>"><?php echo __('Wishlist'); ?></a>
+							</div>
 							<div class="compare visible-md visible-lg">
-								<a href="<?php echo $this->getUrl('catalog/product_compare');?>"><?php echo __('Compare');?></a>
-							</div>		
+								<a href="<?php echo $this->getUrl('catalog/product_compare'); ?>"><?php echo __('Compare'); ?></a>
+							</div>
 							<div class="register-login visible-md visible-lg">
-								<?php if(!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()){?>
-									<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login');?>"><?php echo __('Login');?></a>
-									<?php echo __('or');?>
-									<a href="<?php echo $this->getUrl('customer/account/create');?>">  <?php echo __('Sign up');?></a> 
+								<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
+									<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>"><?php echo __('Login'); ?></a>
+									<?php echo __('or'); ?>
+									<a href="<?php echo $this->getUrl('customer/account/create'); ?>"> <?php echo __('Sign up'); ?></a>
 								<?php
-								}
-								else{
+								} else {
 								?>
-								<a href="<?php echo $this->getUrl('customer/account/index');?>"><?php echo __('My account');?></a>
-								<a href="<?php echo $this->getUrl('customer/account/logout');?>"> <?php echo __('or');?> <?php echo __('Logout');?></a>
+									<a href="<?php echo $this->getUrl('customer/account/index'); ?>"><?php echo __('My account'); ?></a>
+									<a href="<?php echo $this->getUrl('customer/account/logout'); ?>"> <?php echo __('or'); ?> <?php echo __('Logout'); ?></a>
 								<?php } ?>
-							</div>		
+							</div>
 						</div>
-					</div>	
-					<?php echo $this->getChildHtml("minicart");?>		
+					</div>
+					<?php echo $this->getChildHtml("minicart"); ?>
 				</div>
 			</div>
 		</div>
 		<div class="header-menu">
 			<div class="container-max">
 				<div class="flex-layout">
-					
+					<script type="text/javascript">
+						require([
+							'jquery',
+							'rokanthemes/verticalmenu'
+						], function($) {
+							$(".verticalmenu").VerticalMenu();
+							$('.cms-index-index .navigation.verticalmenu .togge-menu').hide();
+							$('.title-category-dropdown').click(function(event) {
+								$('.navigation.verticalmenu .togge-menu').slideToggle('slow');
+								$(this).toggleClass('active');
+							});
+							$(document).ready(function() {
+								var lenghtLi = $('.cms-index-index .navigation.verticalmenu .ui-menu-item.level0').length;
+								var limitItemShow = 11;
+								if (lenghtLi > limitItemShow) {
+									$('.navigation.verticalmenu .ui-menu-item.level0').each(function(index) {
+										if (index >= (limitItemShow - 1)) {
+											$(this).addClass('orther-link');
+											$(this).hide();
+										}
+									});
+									$('.navigation.verticalmenu .expand-category-link').show();
+									$('.navigation.verticalmenu .expand-category-link').on("click", function() {
+										$(this).toggleClass('expanding');
+										$('.navigation.verticalmenu .ui-menu-item.level0.orther-link').slideToggle('slow');
+									});
+								}
+							});
+						});
+					</script>
+					<div class="sections nav-sections">
+						<div id="close-menu" class="visible-xs visible-sm"><a href="#"><i class="icon-x"></i></a></div>
+						<div class="section-items nav-sections-items" role="tablist">
+							<div class="section-item-title nav-sections-item-title active" data-role="collapsible" role="tab" data-collapsible="true" aria-controls="custom.topnav" aria-selected="false" aria-expanded="true" tabindex="0">
+								<a class="nav-sections-item-switch" data-toggle="switch" href="#custom.topnav"></a>
+							</div>
+							<div class="section-item-content nav-sections-item-content" id="custom.topnav" data-role="content" role="tabpanel" aria-hidden="false">
+								<div class="navigation custommenu main-nav" role="navigation">
+									<ul>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="https://blueskytechmage.com/gota/en3/">Home</a></li>
+										<li class="ui-menu-item level0 fullwidth menu-item-has-children parent">
+											<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/product.html" class="level-top">Product</a>
+											<div class="level0 submenu" style="background-image: url('https://blueskytechmage.com/gota/pub/media/catalog/category/bg_menunew.jpg')">
+												<div class="row">
+													<ul class="subchildmenu col-sm-12 mega-columns columns5">
+														<li class="ui-menu-item level1 parent ">
+															<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus.html"><span>Newest</span></a>
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus/nectellus.html"><span>Nectellus </span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus/solutmades.html"><span>Solutmades </span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus/american-blue.html"><span>American Blue</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus/style-loft.html"><span>Style Loft</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus/sew-in-style.html"><span>Sew in Style</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/nor-loremirus/the-wardrobe.html"><span>The Wardrobe</span></a></li>
+															</ul>
+														</li>
+														<li class="ui-menu-item level1 parent ">
+															<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano.html"><span>Clothing &amp; Jackets</span></a>
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano/vintage-violet.html"><span>Vintage Violet</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano/classic-curves.html"><span>Classic Curves</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano/polka-dots.html"><span>Polka Dots</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano/lovely-sew.html"><span>Lovely Sew</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano/bella-s-closet.html"><span>Bella's closet</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/comos-de-milano/milan-chica.html"><span>Milan Chica</span></a></li>
+															</ul>
+														</li>
+														<li class="ui-menu-item level1 parent ">
+															<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros.html"><span>Accessories &amp; Equipment</span></a>
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros/shirts.html"><span>Shirts</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros/velona-presto.html"><span>Velona Presto</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros/la-piacenza.html"><span>La Piacenza</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros/elen-picench.html"><span>Elen Picench</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros/eleonora-chic.html"><span>Eleonora Chic</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/product/dincidunteros/eleonora-milana.html"><span>Eleonora Milana</span></a></li>
+															</ul>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class="ui-menu-item level0 staticwidth menu-item-has-children parent">
+											<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/clothing-new.html" class="level-top">Feature</a>
+											<div class="level0 submenu" style="width: 100vw; left: auto; right: 0px; border-radius: 6px 0px 6px 6px;">
+												<div class="row">
+													<ul class="subchildmenu col-sm-12 mega-columns columns3">
+														<li class="ui-menu-item level1 parent " style="background-image: url('https://blueskytechmage.com/gota/pub/media/catalog/category/bg_menu1new.jpg')">
+															<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories.html"><span>Accessories</span></a>
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/bags-backpacks.html"><span>Bags + Backpacks</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/headwear.html"><span>Headwear</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/socks.html"><span>Socks</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/balls.html"><span>Balls</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/phone-cases.html"><span>Phone cases</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/shinguards-straps.html"><span>Shinguards + Straps</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/accessories/watches.html"><span>Watches</span></a></li>
+															</ul>
+														</li>
+														<li class="ui-menu-item level1 parent " style="background-image: url('https://blueskytechmage.com/gota/pub/media/catalog/category/bg_menu2new.jpg')">
+															<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt.html"><span>Clothing</span></a>
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/loungewear.html"><span>Loungewear</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/football-jerseys.html"><span>Football jerseys</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/jackets/t-shirts-tops/leggings/trousers.html"><span>Trousers</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/jackets/t-shirts-tops/leggings.html"><span>Leggings</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/jackets.html"><span>Jackets</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/jackets/t-shirts-tops.html"><span>T-shirts + Tops</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/t-shirt/football-jerseys/sweatshirts-hoodies.html"><span>Sweatshirts + Hoodies</span></a></li>
+															</ul>
+														</li>
+														<li class="ui-menu-item level1 parent " style="background-image: url('https://blueskytechmage.com/gota/pub/media/catalog/category/bg_menu3-new.jpg')">
+															<div class="open-children-toggle"></div><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes.html"><span>Shoes</span></a>
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots/running-shoes/gym-training/rugby-shoes/golf-shoes/basketball-shoes/hiking-outdoor/sliders-flip-flops/weightlifting-shoes.html"><span>Weightlifting shoes</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots/running-shoes/gym-training/rugby-shoes/golf-shoes/basketball-shoes.html"><span>Basketball shoes</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots/running-shoes/gym-training/rugby-shoes.html"><span>Rugby shoes</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots/running-shoes/gym-training.html"><span>Gym + Training</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots/running-shoes.html"><span>Running shoes</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots.html"><span>Football boots</span></a></li>
+																<li class="ui-menu-item level2 "><a href="https://blueskytechmage.com/gota/en3/clothing-new/shoes/trainers/football-boots/running-shoes/gym-training/rugby-shoes/golf-shoes/basketball-shoes/hiking-outdoor/sliders-flip-flops/weightlifting-shoes/tennis-shoes.html"><span>Tennis shoes</span></a></li>
+															</ul>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class="logo"><span data-action="toggle-nav" class="action nav-toggle"><span>Toggle Nav</span></span>
+											<a class="logo active" href="https://blueskytechmage.com/gota/en3/" title="" aria-label="store logo">
+												<img src="https://blueskytechmage.com/gota/pub/media/logo/stores/10/logo.png" title="" alt="" width="69" height="28">
+											</a>
+										</li>
+										<li class="ui-menu-item level0 classic menu-item-has-children parent parent-right ">
+											<div class="open-children-toggle">&nbsp;</div>
+											<a class="level-top"> Pages </a>
+											<div class="level0 submenu" style="left: 0px; right: auto; border-radius: 0px 6px 6px;">
+												<ul class="subchildmenu ">
+													<li class="ui-menu-item level1 "><a href="https://blueskytechmage.com/gota/en3/about-us/"> About Us </a></li>
+													<li class="ui-menu-item level1 "><a href="https://blueskytechmage.com/gota/en3/privacy-policy-cookie-restriction-mode/"> Privacy Policy </a></li>
+													<li class="ui-menu-item level1"><a href="https://blueskytechmage.com/gota/en3/contact/">Contact Us</a></li>
+												</ul>
+											</div>
+										</li>
+										<li class="ui-menu-item level0 classic parent-right "><a class="level-top" href="https://blueskytechmage.com/gota/en3/blog/">Blog</a></li>
+										<li class="ui-menu-item level0 classic parent-right "><a class="level-top" href="https://blueskytechmage.com/gota/en3/store-locator/">Find Store</a></li>
+									</ul>
+								</div>
+								<script type="text/javascript">
+									require([
+										'jquery',
+										'rokanthemes/custommenu'
+									], function($) {
+										$(".custommenu").CustomMenu();
+									});
+								</script>
+							</div>
+						</div>
+						<div class="mobile-action">
+							<div class="register-login visible-xs visible-sm">
+								<a href="https://blueskytechmage.com/gota/en3/customer/account/login/">Log in<i class="icon-users"></i></a>
+							</div>
+							<div class="wishlist visible-xs visible-xs">
+								<a href="https://blueskytechmage.com/gota/en3/wishlist">Wishlist<i class="icon-heart"></i></a>
+							</div>
+							<div class="compare  visible-xs visible-xs">
+								<a href="https://blueskytechmage.com/gota/en3/catalog/product_compare/">Compare</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="container-max">
 				<div class="flex-layout">
 					<?php echo $this->getChildHtml("topSearch"); ?>
 					<!--
-					<?php echo $this->getChildHtml("vertical.topnav")?>
+					<?php echo $this->getChildHtml("vertical.topnav") ?>
 					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
 					<div class="holine hidden-xs hidden-sm"><?php echo $this->getChildHtml("holine-number"); ?></div>
 					-->
 				</div>
 			</div>
-		</div>		
+		</div>
 	</div>
 </div>
-<?php if($this->helper('Rokanthemes\Themeoption\Helper\Themeconfig')->isEnableStickyHeader()){ ?>
-<script type="text/javascript">
-    require(['jquery'],function($){
-        $(document).ready(function($){
-			$(window).scroll(function() {
-				var num = $('.header-container').outerHeight();
-				var screenWidth = $(window).width();
-				
-				if ($(this).scrollTop() > num && screenWidth >= 768 ){  
-					$(".header").addClass("sticky");
-				}
-				else{
-					$(".header").removeClass("sticky");
-				}
+<?php if ($this->helper('Rokanthemes\Themeoption\Helper\Themeconfig')->isEnableStickyHeader()) { ?>
+	<script type="text/javascript">
+		require(['jquery'], function($) {
+			$(document).ready(function($) {
+				$(window).scroll(function() {
+					var num = $('.header-container').outerHeight();
+					var screenWidth = $(window).width();
+
+					if ($(this).scrollTop() > num && screenWidth >= 768) {
+						$(".header").addClass("sticky");
+					} else {
+						$(".header").removeClass("sticky");
+					}
+				});
 			});
 		});
-    });
-</script>
+	</script>
 <?php } ?>
