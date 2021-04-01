@@ -22,7 +22,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
  
 $categoryId = 1060; // YOUR CATEGORY ID
-$category = $categoryFactory->create($categoryId);
+$category = $categoryFactory->create([$categoryId]);
  
 $_productCollection = $category->getProductCollection()
     ->addAttributeToSelect('*');
