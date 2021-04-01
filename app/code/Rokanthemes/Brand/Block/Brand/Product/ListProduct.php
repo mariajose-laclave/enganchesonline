@@ -98,7 +98,7 @@ class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
         $this->urlHelper = $urlHelper;
         parent::__construct($context,$postDataHelper,$layerResolver,$categoryRepository,$urlHelper);
     }
-
+/*
     protected function _getProductCollection()
     {
         if ($this->_productCollection === null) {
@@ -120,4 +120,5 @@ class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
         }
         return $this->_productCollection;
     }
+*/
 }
