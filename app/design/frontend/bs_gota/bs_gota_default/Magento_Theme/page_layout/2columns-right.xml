@@ -29,12 +29,7 @@
     <referenceContainer name="columns">
 		<container name="col.right.sidebar" label="Col Right Sidebar" htmlTag="div" htmlClass="col-md-3"> 
 			<container name="col.sidebar" label="Col Sidebar" htmlTag="div" htmlClass="col-sidebar">
-				<container name="div.sidebar.main" htmlTag="div" htmlClass="sidebar sidebar-main" after="main">
-					<container name="sidebar.main" as="sidebar_main" label="Sidebar Main"/>
-				</container>
-				<container name="div.sidebar.additional" htmlTag="div" htmlClass="sidebar sidebar-additional hidden-sm hidden-xs" after="div.sidebar.main">
-					<container name="sidebar.additional" as="sidebar_additional" label="Sidebar Additional"/>
-				</container>
+                
 			</container>
 		</container>
     </referenceContainer>
