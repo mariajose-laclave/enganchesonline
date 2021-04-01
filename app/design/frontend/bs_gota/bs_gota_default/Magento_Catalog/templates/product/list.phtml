@@ -16,7 +16,7 @@ use Magento\Framework\App\Action\Action;
  */
 ?>
 <?php
-$_productCollection = $block->getProductCollection();
+$_productCollection = $block->getLoadedProductCollection()->load();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
 <?php if (!$_productCollection->count()): ?>
