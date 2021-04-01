@@ -130,6 +130,7 @@ $plain_value = $model->getPlainValue();
 			</div>
 			<?php
 				// If not homepage, add search bar
+				echo $this->getRequest()->getFullActionName();
 				if (!$this->getRequest()->getFullActionName() == "cms_index_index") {
 			?>
 			<div class="container-max">
