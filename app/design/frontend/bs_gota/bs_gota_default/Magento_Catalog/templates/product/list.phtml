@@ -16,10 +16,10 @@ use Magento\Framework\App\Action\Action;
  */
 ?>
 <?php
-$_productCollection = $block->getLoadedProductCollection()->load();
+$_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
-<?php if (!$_productCollection->count()): ?>
+<?php if (count($_productCollection) === 0): ?>
     <div class="message info empty"><div><?= /* @escapeNotVerified */ __('We can\'t find products matching the selection.') ?></div></div>
 <?php else: ?>
 	<div class="container-catalog-products-common">
