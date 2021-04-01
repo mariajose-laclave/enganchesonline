@@ -20,7 +20,7 @@
 		<css src="css/styles-m.css" />
 		<css src="css/themes.css" />
 		<css src="css/themes3.css" />
-		<link src="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,500,600,700&amp;amp;amp;display=swap" rel='stylesheet' type='text/css' src_type="url" />
-		<link rel="stylesheet" src="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+		<link src="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,500,600,700&amp;amp;amp;display=swap" reel='styleshet' type='text/css' src_type="url" />
+		<link rel="stylesheet" src="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" src_type="url" />
     </head>
 </page>
