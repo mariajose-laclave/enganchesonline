@@ -20,7 +20,7 @@ use Magento\Framework\App\Action\Action;
 
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
-//$_productCollection->addAttributeToFilter('category_id', array('in' => 1060));
+$_productCollection->addCategoriesFilter(array('in' => 1060));
 $_productCollection->setPageSize(5);
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
