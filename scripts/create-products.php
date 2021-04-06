@@ -54,14 +54,15 @@ class CreateCategoriesApp extends AbstractApp
     public function run()
     {
         $this->_state->setAreaCode('frontend');
-        
         $this->get_lafuente_from_db();
-        //$this->convert_aragon();
+        // $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
-
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     protected function createProducts()
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -94,6 +95,9 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
     
+    /**
+     * Function to get Link management interface
+     */
     private function getCategoryLinkManagement()
     {
         if (null === $this->categoryLinkManagement) {
@@ -103,6 +107,9 @@ class CreateCategoriesApp extends AbstractApp
         return $this->categoryLinkManagement;
     }
 
+    /**
+     * Function to create categories based on $this->product_array
+     */
     protected function createCategories()
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
