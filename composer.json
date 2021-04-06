@@ -11,8 +11,10 @@
         "sort-packages": true
     },
     "require": {
+        "magento/composer-root-update-plugin": "~1.0",
         "magento/product-community-edition": "2.3.6",
-        "magento/composer-root-update-plugin": "~1.0"
+        "mailchimp/mc-magento2": "^102.3",
+        "stripe/stripe-payments": "^2.5"
     },
     "require-dev": {
         "allure-framework/allure-phpunit": "~1.2.0",
