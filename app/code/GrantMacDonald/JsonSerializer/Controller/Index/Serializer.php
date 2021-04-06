@@ -13,7 +13,7 @@ use Magento\Framework\Serialize\SerializerInterface;
  * @api
  * @since 101.0.0
  */
-class Json implements SerializerInterface
+class Serializer implements SerializerInterface
 {
     /**
      * @inheritDoc
