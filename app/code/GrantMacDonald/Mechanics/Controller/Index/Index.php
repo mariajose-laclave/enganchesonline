@@ -41,7 +41,8 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        die( $this->getRequest()->getParam('name') );
+        $post = $this->getRequest()->getPostValue();
+        echo $post;
 
         foreach ($this->postFields as $field) {
             if (isset($_POST[$field])) echo $_POST[$field];
