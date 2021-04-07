@@ -18,7 +18,7 @@ class Booking extends \Magento\Framework\App\Action\Action
 
         if (!empty($post)) {
             // Retrieve your form data
-            
+
             // Doing-something with...
 
             // Display the succes form validation message

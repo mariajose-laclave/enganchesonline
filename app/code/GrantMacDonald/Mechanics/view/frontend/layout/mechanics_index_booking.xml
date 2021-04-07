@@ -6,7 +6,7 @@
     <body>
         <referenceBlock name="navigation.sections" remove="true" />
         <referenceContainer name="content">
-            <block class="GrantMacDonald\Mechanics\Block\Booking" name="grantmacdonaldmechanics.booking" template="GrantMacDonald_Mechanics::booking.phtml"/>
+            <block class="GrantMacDonald\Mechanics\Block\Booking" name="grantmacdonaldmechanics.booking" template="GrantMacDonald_Mechanics::booking.phtml" />
         </referenceContainer>
     </body>
 </page>
