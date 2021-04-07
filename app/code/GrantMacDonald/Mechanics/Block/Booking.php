@@ -11,7 +11,7 @@ class Booking extends \Magento\Framework\View\Element\Template
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template $context,
+        \Magento\Framework\View\Element\Template\Context $context,
         array $data = []
     )
     {
