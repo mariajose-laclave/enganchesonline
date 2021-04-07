@@ -1,6 +1,6 @@
 <?php
 
-namespace Company\Module\Block;
+namespace GrantMacDonald\Mechanics\Block;
 
 class Booking extends \Magento\Framework\View\Element\Template
 {
