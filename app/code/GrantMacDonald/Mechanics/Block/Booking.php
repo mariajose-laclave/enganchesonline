@@ -4,6 +4,7 @@ namespace GrantMacDonald\Mechanics\Block;
 
 class Booking extends \Magento\Framework\View\Element\Template
 {
+	protected $_template = 'GrantMacDonald_Mechanics::booking.phtml';
     /**
      * Construct
      *
