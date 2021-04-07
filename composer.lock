@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52aca34eef9843464dd3d9e731240b93",
+    "content-hash": "6a6e707ce8b06272ff63f290a4283f96",
     "packages": [
         {
             "name": "amzn/amazon-pay-and-login-magento-2-module",
@@ -13771,6 +13771,94 @@
             "time": "2020-05-19T23:25:07+00:00"
         },
         {
+            "name": "mageplaza/module-core",
+            "version": "1.4.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mageplaza/module-core.git",
+                "reference": "d050c9f35b04197e97b6747d7dbf1f164b1f26fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mageplaza/module-core/zipball/d050c9f35b04197e97b6747d7dbf1f164b1f26fe",
+                "reference": "d050c9f35b04197e97b6747d7dbf1f164b1f26fe",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Mageplaza\\Core\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Mageplaza",
+                    "email": "support@mageplaza.com",
+                    "homepage": "https://www.mageplaza.com",
+                    "role": "Technical Support"
+                }
+            ],
+            "description": "Mageplaza Core for Magento 2",
+            "time": "2020-12-07T08:10:17+00:00"
+        },
+        {
+            "name": "mageplaza/module-smtp",
+            "version": "4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mageplaza/magento-2-smtp.git",
+                "reference": "6adf1574b6a2640d6ceffd898494181487ab6159"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mageplaza/magento-2-smtp/zipball/6adf1574b6a2640d6ceffd898494181487ab6159",
+                "reference": "6adf1574b6a2640d6ceffd898494181487ab6159",
+                "shasum": ""
+            },
+            "require": {
+                "mageplaza/module-core": "^1.4.5"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Mageplaza\\Smtp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Mageplaza",
+                    "email": "support@mageplaza.com",
+                    "homepage": "https://www.mageplaza.com",
+                    "role": "Technical Support"
+                }
+            ],
+            "description": "SMTP Extension for Magento 2 helps the owner of store simply install SMTP (Simple Mail Transfer Protocol) server which transmits the messages into codes or numbers",
+            "keywords": [
+                "email settings",
+                "gmail smtp",
+                "magento 2",
+                "magento 2 smtp",
+                "magento smtp",
+                "mageplaza",
+                "smtp"
+            ],
+            "time": "2021-03-01T04:04:07+00:00"
+        },
+        {
             "name": "mailchimp/mc-magento2",
             "version": "102.3.42",
             "dist": {
@@ -14912,6 +15000,113 @@
                 "phar"
             ],
             "time": "2020-07-07T18:42:57+00:00"
+        },
+        {
+            "name": "smile/module-custom-entity",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Smile-SA/magento2-module-custom-entity.git",
+                "reference": "e62c48398985fd83ebee7a1d3ef86ed195695385"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Smile-SA/magento2-module-custom-entity/zipball/e62c48398985fd83ebee7a1d3ef86ed195695385",
+                "reference": "e62c48398985fd83ebee7a1d3ef86ed195695385",
+                "shasum": ""
+            },
+            "require": {
+                "smile/module-scoped-eav": "~1.2.0"
+            },
+            "require-dev": {
+                "edgedesign/phpqa": "^1.18",
+                "jakub-onderka/php-parallel-lint": "^0.9.2",
+                "smile/magento2-smilelab-quality-suite": "^1.0.5"
+            },
+            "suggest": {
+                "smile/module-custom-entity-import-export": "Possibility to import custom entities",
+                "smile/module-custom-entity-product-link": "Possibility to add product attribute for link product to custom entities"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Smile\\CustomEntity\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aurélien FOUCRET",
+                    "email": "aurelien.foucret@smile.fr"
+                },
+                {
+                    "name": "Maxime LECLERCQ",
+                    "email": "maxime.leclercq@smile.fr"
+                }
+            ],
+            "description": "Smile - Custom Entity Module",
+            "keywords": [
+                "custom",
+                "entity",
+                "magento2"
+            ],
+            "time": "2020-09-23T14:26:18+00:00"
+        },
+        {
+            "name": "smile/module-scoped-eav",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Smile-SA/magento2-module-scoped-eav.git",
+                "reference": "4f31a9f2569121e8c0cf270a4d1233f2693833e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Smile-SA/magento2-module-scoped-eav/zipball/4f31a9f2569121e8c0cf270a4d1233f2693833e7",
+                "reference": "4f31a9f2569121e8c0cf270a4d1233f2693833e7",
+                "shasum": ""
+            },
+            "require": {
+                "magento/framework": "*",
+                "magento/magento-composer-installer": "*",
+                "magento/module-catalog": ">=103.0.4"
+            },
+            "require-dev": {
+                "edgedesign/phpqa": "^1.18",
+                "jakub-onderka/php-parallel-lint": "^0.9.2",
+                "smile/magento2-smilelab-quality-suite": "^1.0.5"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Smile\\ScopedEav\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aurélien FOUCRET",
+                    "email": "aurelien.foucret@smile.fr"
+                }
+            ],
+            "description": "Smile - Scoped EAV utils.",
+            "keywords": [
+                "elasticsuite",
+                "magento2"
+            ],
+            "time": "2020-09-23T14:04:38+00:00"
         },
         {
             "name": "spomky-labs/otphp",
