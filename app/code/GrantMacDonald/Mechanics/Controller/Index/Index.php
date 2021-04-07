@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace GrantMacDonald\Mechanics\Controller\Index;
@@ -6,6 +7,17 @@ namespace GrantMacDonald\Mechanics\Controller\Index;
 class Index extends \Magento\Framework\App\Action\Action
 {
 
+    protected $postFields = [
+        'name',
+        'direccion',
+        'cif',
+        'telefono',
+        'email',
+        'persona_de_contacto',
+        'precio_hora',
+        'marca_enganches',
+        'enganches_montados_por_ano'
+    ];
     protected $resultPageFactory;
 
     /**
@@ -29,7 +41,10 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
+
+        foreach ($this->postFields as $field) {
+            if (isset($_POST[$field])) echo $_POST[$field];
+        }
         return $this->resultPageFactory->create();
     }
 }
-
