@@ -14,13 +14,12 @@ use Magento\Framework\App\Action\Action;
  *
  * @var $block \Magento\Catalog\Block\Product\ListProduct
  */
-?>
-<?php
-//$_productCollection = $block->getLoadedProductCollection();
 
-$category_id = $this->request->getParams();
-echo var_dump($category_id);
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$url = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+$url_array = explode('/', $url);
+$category_id = $url_array[count($url_array) - 1] != '' ? $url_array[count($url_array) - 1] : $url_array[count($url_array) - 2];
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
 $_productCollection->addCategoriesFilter(array('in' => $category_id));
 $_productCollection->setPageSize(5);
