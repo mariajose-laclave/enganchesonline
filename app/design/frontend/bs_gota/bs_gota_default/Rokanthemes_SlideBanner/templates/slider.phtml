@@ -6,12 +6,17 @@
  */
 
 // @codingStandardsIgnoreFile
-?>
 
+$helper = $this->helper('Magento\Search\Helper\Data');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// get list of all the categories
+$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+$categories->addAttributeToFilter('parent_id', array('eq' => 1));
+$categories->addAttributeToSelect('*');
+?>
 <script type="text/javascript">
 	require([
-		'jquery',
-		'rokanthemes/choose'
 	], function($) {
 		$("#choose_category").chosen().change(() => {
 			$.ajax({
@@ -39,7 +44,9 @@
 		function goToCategory() {
 			if ($('#version_select').val() != '') {
 
-			} else if ($('#model_select').val() != '') {
+			} else if ($('#model_select').val() != '') {		'jquery',
+		'rokanthemes/choose'
+
 
 			} else if ($('#choose_category').val() != '') {
 
