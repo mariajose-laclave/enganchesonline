@@ -39,6 +39,11 @@ $categories->addAttributeToSelect('*');
 		});
 		$('#version_select').on("change", () => {
 		});
+		goToCategory = () => {
+			var current_id = $('#choose_category').val();
+			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
+			window.location.href = `/catalog/category/view//id/${current_id}`;
+		}
 	});
 </script>
 <style>
@@ -141,7 +146,7 @@ $categories->addAttributeToSelect('*');
 							<select name="cat[]" id="version_select">
 							</select>
 						</span>
-						<div class="search">
+						<div class="search" onclick="goToCategory()">
 							<i class="fas fa-search"></i>
 						</div>
 					</div>
