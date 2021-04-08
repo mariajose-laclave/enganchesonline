@@ -62,11 +62,11 @@ $categories->addAttributeToSelect('*');
 		border: none;
 	}
 
-	.field-by-cat-search label {
+	.field-by-cat-search ._label {
 		position: relative;
 	}
 
-	.field-by-cat-search label span {
+	.field-by-cat-search ._label span {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -93,7 +93,7 @@ $categories->addAttributeToSelect('*');
 			<div class="dropdown">
 				<div style="display: flex; width: 100%; justify-content: center;" class="form minisearch search-content" id="search_mini_form" action="" method="get">
 					<div class="field-by-cat-search" style="display: inline-flex; width: 100%; max-width: 1100px; background: #fff; border-radius: 6px; padding: 10px;">
-						<div class='label'>
+						<span class="_label">
 							<span>Marca</span>
 							<select name="cat[]" id="choose_category">
 								<option value="">
@@ -109,17 +109,17 @@ $categories->addAttributeToSelect('*');
 								}
 								?>
 							</select>
-						</div>
-						<div class='label'>
+						</span>
+						<span class="_label">
 							<span>Modelo</span>
 							<select name="cat[]" id="model_select">
 							</select>
-						</div>
-						<div class='label'>
+						</span>
+						<span class="_label">
 							<span>Versión</span>
 							<select name="cat[]" id="version_select">
 							</select>
-						</div>
+						</span>
 						<div class="search">
 							<i class="fas fa-search"></i>
 						</div>
