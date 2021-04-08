@@ -18,9 +18,11 @@ use Magento\Framework\App\Action\Action;
 <?php
 //$_productCollection = $block->getLoadedProductCollection();
 
+$category_id = $this->request->getParam('id');
+
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
-// $_productCollection->addCategoriesFilter(array('in' => 2));
+$_productCollection->addCategoriesFilter(array('in' => $category_id));
 $_productCollection->setPageSize(5);
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>

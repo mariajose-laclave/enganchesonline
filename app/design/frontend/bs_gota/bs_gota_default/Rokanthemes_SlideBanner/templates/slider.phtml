@@ -42,7 +42,7 @@ $categories->addAttributeToSelect('*');
 		goToCategory = () => {
 			var current_id = $('#choose_category').val();
 			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
-			window.location.href = `/catalog/category/view//id/${current_id}`;
+			window.location.href = `/catalog/category/view/id/${current_id}`;
 		}
 	});
 </script>
