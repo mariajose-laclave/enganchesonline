@@ -18,8 +18,8 @@ use Magento\Framework\App\Action\Action;
 <?php
 //$_productCollection = $block->getLoadedProductCollection();
 
-$category_id = $this->request->getParam('id');
-echo $category_id;
+$category_id = $this->request->getParams();
+echo var_dump($category_id);
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
 $_productCollection->addCategoriesFilter(array('in' => $category_id));
