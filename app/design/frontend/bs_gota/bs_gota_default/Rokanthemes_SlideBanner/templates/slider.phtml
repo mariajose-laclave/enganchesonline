@@ -58,16 +58,32 @@ $categories->addAttributeToSelect('*');
 <style>
 	.field-by-cat-search select {
 		margin: 0 5px;
-    	height: 63px;
+		height: 63px;
 		border: none;
 	}
+
+	.field-by-cat-search label {
+		position: relative;
+	}
+
+	.field-by-cat-search label span {
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 12px;
+		color: #2bb9a9;
+		text-transform: uppercase;
+	}
+
 	.field-by-cat-search .search {
 		height: 90%;
-		padding: 15px;
-		font-size: 50px;
+		font-size: 17px;
 		color: #fff;
 		background-color: #2bb9a9;
 		border-radius: 6px;
+		display: flex;
+		align-items: center;
+		padding: 0 19px;
 	}
 </style>
 <div style="position: relative; margin-top: 80px; min-height: 400px; width: 100%; background-image: url(/assets/images/fotos/hero--background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; display: flex; align-items: center;">
@@ -77,27 +93,37 @@ $categories->addAttributeToSelect('*');
 			<div class="dropdown">
 				<div style="display: flex; width: 100%; justify-content: center;" class="form minisearch search-content" id="search_mini_form" action="" method="get">
 					<div class="field-by-cat-search" style="display: inline-flex; width: 100%; max-width: 1100px; background: #fff; border-radius: 6px; padding: 10px;">
-						<select name="cat[]" id="choose_category">
-							<option value="">
-								<?php echo __('All Categories'); ?>
-							</option>
-							<?php
-							foreach ($categories as $cat) {
-								if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
-									echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
-								} else {
-									echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+						<label for="">
+							<span>Marca</span>
+							<select name="cat[]" id="choose_category">
+								<option value="">
+									<?php echo __('All Categories'); ?>
+								</option>
+								<?php
+								foreach ($categories as $cat) {
+									if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
+										echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
+									} else {
+										echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
-						<select name="cat[]" id="model_select">
-						</select>
-						<select name="cat[]" id="version_select">
-						</select>
-						<div class="search">
-							<i class="fas fa-search"></i>
-						</div>
+								?>
+							</select>
+						</label>
+						<label for="">
+							<span>Modelo</span>
+							<select name="cat[]" id="model_select">
+							</select>
+						</label>
+						<label for="">
+							<span>Versión</span>
+							<select name="cat[]" id="version_select">
+							</select>
+						</label>
+						<label for="">
+							<div class="search">
+								<i class="fas fa-search"></i>
+							</div>
 					</div>
 				</div>
 			</div>
