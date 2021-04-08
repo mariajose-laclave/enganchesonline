@@ -16,8 +16,7 @@ $categories->addAttributeToFilter('parent_id', array('eq' => 1));
 $categories->addAttributeToSelect('*');
 ?>
 <script type="text/javascript">
-	require([
-	], function($) {
+	require([], function($) {
 		$("#choose_category").chosen().change(() => {
 			$.ajax({
 				type: 'GET',
@@ -44,24 +43,26 @@ $categories->addAttributeToSelect('*');
 		function goToCategory() {
 			if ($('#version_select').val() != '') {
 
-			} else if ($('#model_select').val() != '') {		'jquery',
-		'rokanthemes/choose'
+			} else if ($('#model_select').val() != '') {
+				'jquery',
+				'rokanthemes/choose'
 
 
-			} else if ($('#choose_category').val() != '') {
+			}
+			else if ($('#choose_category').val() != '') {
 
 			}
 		}
 	});
 </script>
-<div style="position: relative; margin-top: 80px; min-height: 400px; width: 100%; background-image: url(D:/xampp/htdocs/enganches/assets/images/fotos/hero--background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+<div style="position: relative; margin-top: 80px; min-height: 400px; width: 100%; background-image: url(/assets/images/fotos/hero--background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center;">
 	<div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,20,.5); z-index: 1;">
 
-		<div class="block block-search">
+		<div class="block block-search" style="width: 100%; float: none;">
 			<div class="block block-content">
 				<div class="dropdown">
-					<div style="justify-content: space-between;" class="form minisearch dropdown-menu search-content" id="search_mini_form" action="" method="get">
-						<div class="field-by-cat-search">
+					<div style="display: flex; width: 100%; justify-content: center;" class="form minisearch search-content" id="search_mini_form" action="" method="get">
+						<div class="field-by-cat-search" style="display: inline-flex; width: 100%; max-width: 1100px;">
 							<select name="cat[]" id="choose_category">
 								<option value="">
 									<?php echo __('All Categories'); ?>
