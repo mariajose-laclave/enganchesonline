@@ -41,12 +41,15 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $categories = $objectManager->get('\Smile\CustomEntity\Model\ResourceModel\CustomEntity\Collection')->create();
         $post = $this->getRequest()->getParams();
-        echo var_dump($_POST);
         echo var_dump($post);
 
         foreach ($this->postFields as $field) {
-            if (isset($_POST[$field])) echo $_POST[$field];
+            if (isset($post[$field])) {
+
+            }
         }
         return $this->resultPageFactory->create();
     }
