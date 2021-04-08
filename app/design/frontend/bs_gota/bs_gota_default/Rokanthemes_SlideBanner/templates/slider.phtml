@@ -20,7 +20,7 @@ $categories->addAttributeToSelect('*');
 			'jquery',
 			'rokanthemes/choose'
 		], function($) {
-		$("#choose_category").chosen().change(() => {
+		$("#choose_category").on("change", () => {
 			$.ajax({
 				type: 'GET',
 				url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
@@ -30,32 +30,15 @@ $categories->addAttributeToSelect('*');
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
-					$('#model_select').chosen('destroy');
 					$('#model_select').html(html);
-					$('#model_select').chosen();
 				}
 			})
 		});
-		$('#model_select').chosen().change(() => {
+		$('#model_select').on("change", () => {
 			console.log($('#model_select').val());
 		});
-		$('#version_select').chosen().change(() => {
-
+		$('#version_select').on("change", () => {
 		});
-
-		function goToCategory() {
-			if ($('#version_select').val() != '') {
-
-			} else if ($('#model_select').val() != '') {
-				'jquery',
-				'rokanthemes/choose'
-
-
-			}
-			else if ($('#choose_category').val() != '') {
-
-			}
-		}
 	});
 </script>
 <style>
