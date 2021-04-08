@@ -243,7 +243,7 @@ return [
         'Ebizmarts_MailChimp' => 1,
         'GrantMacDonald_CategoryBrowser' => 1,
         'GrantMacDonald_CustomSearch' => 1,
-        'GrantMacDonald_JsonSerializer' => 0,
+        'GrantMacDonald_Mechanics' => 1,
         'Klarna_Core' => 1,
         'Klarna_Ordermanagement' => 1,
         'Klarna_Kp' => 1,
