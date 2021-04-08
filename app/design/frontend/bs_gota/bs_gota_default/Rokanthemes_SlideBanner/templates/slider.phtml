@@ -16,7 +16,10 @@ $categories->addAttributeToFilter('parent_id', array('eq' => 1));
 $categories->addAttributeToSelect('*');
 ?>
 <script type="text/javascript">
-	require([], function($) {
+	require([
+			'jquery',
+			'rokanthemes/choose'
+		], function($) {
 		$("#choose_category").chosen().change(() => {
 			$.ajax({
 				type: 'GET',
