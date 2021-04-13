@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 // the message
 $msg = "First line of text\nSecond line of text";
@@ -7,4 +10,8 @@ $msg = "First line of text\nSecond line of text";
 $msg = wordwrap($msg,70);
 
 // send email
-mail("phisoluciones.es@gmail.com","My subject",$msg);
+
+
+if (!mail("phisoluciones.es@gmail.com","My subject",$msg)) {
+    echo 'Uuups...';   
+}
