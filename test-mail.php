@@ -14,6 +14,7 @@ $mail = new PHPMailer(true);
 
 try {
     
+    $mail->SMTPDebug = 1;
     //Recipients
     $mail->setFrom('from@example.com', 'Mailer');
     $mail->addAddress('phisoluciones.es@gmail.com', 'Joe User');     //Add a recipient
