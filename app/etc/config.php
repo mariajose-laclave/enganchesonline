@@ -251,6 +251,7 @@ return [
         'MSP_TwoFactorAuth' => 1,
         'Mageplaza_Core' => 1,
         'Mageplaza_Smtp' => 1,
+        'RH_HelloWorld' => 1,
         'Rokanthemes_AjaxSuite' => 1,
         'Rokanthemes_BestsellerProduct' => 1,
         'Rokanthemes_Blog' => 1,
