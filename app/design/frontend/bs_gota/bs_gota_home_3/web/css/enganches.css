@@ -20,6 +20,9 @@
     display: -ms-flexbox;
     display: flex;
 }
+.justify-content-center {
+    justify-content: center!important;
+}
 /*
 // SECTIONS - BS_GOTA_3
 */
@@ -59,7 +62,7 @@
 }
 .footer-features--counter {
     position: absolute;
-    top: 0;
+    top: -1.25rem;
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--headingfont);
@@ -113,4 +116,32 @@
     width: calc(100% - 42px);
     flex: 0 0 calc(100% - 42px);
     padding-left: 15px;
+}
+
+.page-footer {
+    background-color: var(--dark-gray);
+}
+.page-footer .footer-static-container .footer-links h2 {
+    text-align: left;
+}
+
+.page-footer .layout3 .footer-menu ul {
+    display: block;
+}
+
+.page-footer .footer-static-container .footer-links ul.social-media {
+    display: block;
+}
+.page-footer .footer-static-container .footer-links ul.social-media li {
+    display: inline-block;
+}
+.page-footer .footer-static-container .footer-links ul.social-media li a {
+    display: inline-block;
+    text-align: center;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+} 
+.page-footer .footer-static-container .footer-links ul.social-media li a:hover {
+    padding-left: 0;
 }
