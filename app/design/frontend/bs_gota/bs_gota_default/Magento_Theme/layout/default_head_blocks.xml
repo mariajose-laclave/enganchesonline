@@ -10,8 +10,6 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 		<script src="js/tweenmax.js"/>
-		<link rel="preconnect" href="https://fonts.gstatic.com" />
-		<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&amp;display=swap" rel="stylesheet" type='text/css' src_type="url" />
 		<css src="css/bootstrap.css" />
 		<css src="css/font-awesome.min.css" />
 		<css src="css/demo.css" />
@@ -22,6 +20,6 @@
 		<css src="css/styles-m.css" />
 		<css src="css/themes.css" />
 		<css src="css/enganches.css" />
-		<script src="https://kit.fontawesome.com/6b89c7397a.js" crossorigin="anonymous" />
+		<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&amp;display=swap" rel="stylesheet" type="text/css" src_type="url" />
     </head>
 </page>
