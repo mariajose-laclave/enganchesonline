@@ -63,9 +63,10 @@
     left: 50%;
     transform: translateX(-50%);
     font-family: var(--headingfont);
-    color: var(--primary-color);
+    color: var(--secondary-color);
     opacity: 0.08;
     font-size: 100px;
+    font-weight: 700;
     letter-spacing: -0.05em;
     line-height: 1;
     z-index: 1;
@@ -73,7 +74,6 @@
 .footer-features--item i,
 .footer-features--item svg {
     font-size: 24px;
-    font-weight: 700;
     color: var(--secondary-color);
     display: inline-block;
     margin: 6px auto;
@@ -90,4 +90,27 @@
     text-transform: uppercase;
     position: relative;
     z-index: 2;
+}
+
+.features-store {
+    flex-wrap: nowrap;
+}
+.features-store--item {
+    width: 50%;
+    flex: 0 0 50%;
+    padding: 1rem;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.features-store--icon {
+    width: 42px;
+    flex: 0 0 42px;
+}
+.features-store--body {
+    width: calc(100% - 42px);
+    flex: 0 0 calc(100% - 42px);
+    padding-left: 15px;
 }
