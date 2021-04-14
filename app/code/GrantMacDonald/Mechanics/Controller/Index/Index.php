@@ -41,8 +41,6 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $categories = $objectManager->get('\Smile\CustomEntity\Model\ResourceModel\CustomEntity\Collection')->create();
         $post = $this->getRequest()->getParams();
         echo var_dump($post);
 
