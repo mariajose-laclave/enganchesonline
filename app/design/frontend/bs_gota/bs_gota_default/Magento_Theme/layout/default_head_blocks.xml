@@ -20,6 +20,6 @@
 		<css src="css/styles-m.css" />
 		<css src="css/themes.css" />
 		<css src="css/enganches.css" />
-		<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;500;600;700&amp;display=swap" rel="stylesheet" type="text/css" src_type="url" />
+		<link src="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,500,600,700&amp;amp;amp;display=swap" rel='stylesheet' type='text/css' src_type="url" />
     </head>
 </page>
