@@ -14,6 +14,7 @@
 		<css src="css/bootstrap.css" />
 		<css src="css/demo.css" />
 		<css src="css/icomoon.css" />
+		<css src="css/fontawesome.min.css" />
 		<css src="css/stylesheet.css" />
 		<css src="css/helper.css" />
 		<css src="css/styles-l.css" />
