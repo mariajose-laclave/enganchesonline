@@ -48,7 +48,7 @@ class Index extends \Magento\Framework\App\Action\Action
 
         foreach ($this->postFields as $field) {
             if (isset($post[$field])) {
-
+                echo $post[$field];
             }
         }
         return $this->resultPageFactory->create();
