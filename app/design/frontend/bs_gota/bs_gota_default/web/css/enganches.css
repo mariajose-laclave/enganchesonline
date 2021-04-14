@@ -20,6 +20,9 @@
     display: -ms-flexbox;
     display: flex;
 }
+/*
+// SECTIONS
+*/
 .padding-regular {
     padding-top: 2rem;
     padding-bottom: 2rem;
