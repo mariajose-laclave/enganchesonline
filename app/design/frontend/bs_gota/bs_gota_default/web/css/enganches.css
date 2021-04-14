@@ -12,12 +12,19 @@
     --headingfont: 'Barlow Semi Condensed', sans-serif;
     --bdf:  'Futura Std', sans-serif;
 }
-
-
+.fa, .fab, .fad, .fal, .far, .fas {
+    vertical-align: middle;
+}
+.d-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
 .padding-regular {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+.bg-gray-light,
 .bg-light-gray {
     background-color: var(--gray-light);
 }
@@ -28,6 +35,7 @@
 .footer-features {
     flex-wrap: nowrap;
 }
+
 .footer-features--item {
     width: 20%;
     flex: 0 0 20%;
@@ -35,20 +43,34 @@
     position: relative;
     text-align: center;
 }
+.footer-features--item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    width: 32px;
+    height: 3px;
+    background-color:var(--secondary-color);
+}
 .footer-features--counter {
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50);
+    transform: translateX(-50%);
     font-family: var(--headingfont);
     color: var(--primary-color);
     opacity: 0.08;
     font-size: 100px;
     letter-spacing: -0.05em;
+    line-height: 1;
     z-index: 1;
 }
 .footer-features--item i,
-.footer-features--item svg{
+.footer-features--item svg {
+    font-size: 24px;
+    font-weight: 700;
     color: var(--secondary-color);
     display: inline-block;
     margin: 6px auto;
@@ -57,6 +79,7 @@
     z-index: 2;
 }
 .footer-features--item h4{
+    color: var(--dark-gray);
     font-family: var(--headingfont);
     font-size:18px;
     font-weight: 600;
