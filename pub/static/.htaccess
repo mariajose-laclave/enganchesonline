@@ -7,12 +7,11 @@ php_flag engine 0
 </IfModule>
 
 # To avoid situation when web server automatically adds extension to path
-Options +FollowSymLinks
+Options -MultiViews
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-	Options +FollowSymLinks
     ## you can put here your pub/static folder path relative to web root
     #RewriteBase /magento/pub/static/
 

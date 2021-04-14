@@ -1,79 +1,170 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$model = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('whatsapp_number');
+$plain_value = $model->getPlainValue();
+?>
 <div class="header-container layout3">
 	<div class="topbar hidden-xs hidden-sm text-center">
 		<div class="container-max">
-				<?php echo $this->getChildHtml("topbar_free_delivery"); ?> 
+			<?php echo $this->getChildHtml("topbar_free_delivery"); ?>
 		</div>
 	</div>
 	<div class="header">
 		<div class="container-max">
 			<div class="for-full-withmenu flex-layout">
-				
 				<div class="col-logo">
-					<?php echo $this->getChildHtml("logo"); ?>	
+					<?php echo $this->getChildHtml("logo"); ?>
 				</div>
-				<?php echo $this->getChildHtml("topSearch"); ?>	
 				<div class="header-right">
 					<div class="language-currency">
 						<div class="container-setting-language-currency">
 							<?php echo $this->getChildHtml("currency"); ?>
-							<?php echo $this->getChildHtml("store_language"); ?>  
-						</div>		
+							<?php echo $this->getChildHtml("store_language"); ?>
+						</div>
 					</div>
 					<div class="header-top-setting hidden-xs hidden-sm">
-						<a href="#" class="actions-top"><span class="icon-more-horizontal"></span></a>
-						<div class="setting-container">
-							<div class="wishlist visible-md visible-lg wishlist-custom-button-login">
-							<a href="<?php echo $this->getUrl('wishlist');?>"><?php echo __('Wishlist');?></a>
-							</div>		
-							<div class="compare visible-md visible-lg">
-								<a href="<?php echo $this->getUrl('catalog/product_compare');?>"><?php echo __('Compare');?></a>
-							</div>		
-							<div class="register-login visible-md visible-lg">
-								<?php if(!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()){?>
-									<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login');?>"><?php echo __('Login');?></a>
-									<?php echo __('or');?>
-									<a href="<?php echo $this->getUrl('customer/account/create');?>">  <?php echo __('Sign up');?></a> 
-								<?php
-								}
-								else{
-								?>
-								<a href="<?php echo $this->getUrl('customer/account/index');?>"><?php echo __('My account');?></a>
-								<a href="<?php echo $this->getUrl('customer/account/logout');?>"> <?php echo __('or');?> <?php echo __('Logout');?></a>
-								<?php } ?>
-							</div>		
+						<div class="register-login visible-md visible-lg">
+							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
+								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>">
+									<span>
+										<i class="fas fa-user-circle"></i> <?php echo __('Login'); ?></a>
+									</span>
+							<?php
+							} else {
+							?>
+								<a href="<?php echo $this->getUrl('customer/account/index'); ?>">
+									<span>
+										<i class="fas fa-user-circle"></i>
+										<?php echo __('My account'); ?>
+									</span>
+								</a>
+								<!-- <a href="<?php echo $this->getUrl('customer/account/logout'); ?>"> <?php echo __('or'); ?> <?php echo __('Logout'); ?></a> -->
+							<?php } ?>
+							<a href="/contact/index/">
+								<span>
+									<i class="fas fa-question-circle"></i> <?php echo __('Ayuda y contacto'); ?>
+								</span>
+							</a>
 						</div>
-					</div>	
-					<?php echo $this->getChildHtml("minicart");?>		
+					</div>
+					<?php echo $this->getChildHtml("minicart"); ?>
 				</div>
 			</div>
 		</div>
 		<div class="header-menu">
 			<div class="container-max">
-				<div class="flex-layout">
-					<?php echo $this->getChildHtml("vertical.topnav")?>
-					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
-					<div class="holine hidden-xs hidden-sm"><?php echo $this->getChildHtml("holine-number"); ?></div>
+				<div class="flex-layout" style="margin: 0 auto;">
+					<script type="text/javascript">
+						require([
+							'jquery',
+							'rokanthemes/verticalmenu'
+						], function($) {
+							$(".verticalmenu").VerticalMenu();
+							$('.cms-index-index .navigation.verticalmenu .togge-menu').hide();
+							$('.title-category-dropdown').click(function(event) {
+								$('.navigation.verticalmenu .togge-menu').slideToggle('slow');
+								$(this).toggleClass('active');
+							});
+							$(document).ready(function() {
+								var lenghtLi = $('.cms-index-index .navigation.verticalmenu .ui-menu-item.level0').length;
+								var limitItemShow = 11;
+								if (lenghtLi > limitItemShow) {
+									$('.navigation.verticalmenu .ui-menu-item.level0').each(function(index) {
+										if (index >= (limitItemShow - 1)) {
+											$(this).addClass('orther-link');
+											$(this).hide();
+										}
+									});
+									$('.navigation.verticalmenu .expand-category-link').show();
+									$('.navigation.verticalmenu .expand-category-link').on("click", function() {
+										$(this).toggleClass('expanding');
+										$('.navigation.verticalmenu .ui-menu-item.level0.orther-link').slideToggle('slow');
+									});
+								}
+							});
+						});
+					</script>
+					<div class="sections nav-sections">
+						<div id="close-menu" class="visible-xs visible-sm"><a href="#"><i class="icon-x"></i></a></div>
+						<div class="section-items nav-sections-items" role="tablist">
+							<div class="section-item-title nav-sections-item-title active" data-role="collapsible" role="tab" data-collapsible="true" aria-controls="custom.topnav" aria-selected="false" aria-expanded="true" tabindex="0">
+								<a class="nav-sections-item-switch" data-toggle="switch" href="#custom.topnav"></a>
+							</div>
+							<div class="section-item-content nav-sections-item-content" id="custom.topnav" data-role="content" role="tabpanel" aria-hidden="false">
+								<div class="navigation custommenu main-nav" role="navigation">
+									<ul>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/">Home</a></li>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/enganches">Enganches</a></li>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/kit-electricos">Kit eléctricos</a></li>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/talleres">Talleres</a></li>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/consejos">Consejos</a></li>
+										<li class="logo"><span data-action="toggle-nav" class="action nav-toggle"><span>Toggle Nav</span></span>
+											<a class="logo active" href="https://blueskytechmage.com/gota/en3/" title="" aria-label="store logo">
+												<img src="https://blueskytechmage.com/gota/pub/media/logo/stores/10/logo.png" title="" alt="" width="69" height="28">
+											</a>
+										</li>
+									</ul>
+								</div>
+								<script type="text/javascript">
+									require([
+										'jquery',
+										'rokanthemes/custommenu'
+									], function($) {
+										$(".custommenu").CustomMenu();
+									});
+								</script>
+							</div>
+						</div>
+						<div class="mobile-action">
+							<div class="register-login visible-xs visible-sm">
+								<a href="https://blueskytechmage.com/gota/en3/customer/account/login/">Log in<i class="icon-users"></i></a>
+							</div>
+							<div class="wishlist visible-xs visible-xs">
+								<a href="https://blueskytechmage.com/gota/en3/wishlist">Wishlist<i class="icon-heart"></i></a>
+							</div>
+							<div class="compare  visible-xs visible-xs">
+								<a href="https://blueskytechmage.com/gota/en3/catalog/product_compare/">Compare</a>
+							</div>
+						</div>
+					</div>
+					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hola, estoy interesado en comprar un enganche en enganches-online.es"><span class=""><i class="fab fa-whatsapp"></i> &nbsp;<?php echo $plain_value; ?></span></a></p></div>
 				</div>
 			</div>
-		</div>		
+			<?php
+				// If not homepage, add search bar
+				if ($this->getRequest()->getFullActionName() != "cms_index_index") {
+			?>
+			<div class="container-max">
+				<div class="flex-layout">
+					<?php echo $this->getChildHtml("topSearch"); ?>
+					<!--
+					<?php echo $this->getChildHtml("vertical.topnav") ?>
+					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
+					<div class="holine hidden-xs hidden-sm"><?php echo $this->getChildHtml("holine-number"); ?></div>
+					-->
+				</div>
+			</div>
+			<?php
+				}
+			?>
+		</div>
 	</div>
 </div>
-<?php if($this->helper('Rokanthemes\Themeoption\Helper\Themeconfig')->isEnableStickyHeader()){ ?>
-<script type="text/javascript">
-    require(['jquery'],function($){
-        $(document).ready(function($){
-			$(window).scroll(function() {
-				var num = $('.header-container').outerHeight();
-				var screenWidth = $(window).width();
-				
-				if ($(this).scrollTop() > num && screenWidth >= 768 ){  
-					$(".header").addClass("sticky");
-				}
-				else{
-					$(".header").removeClass("sticky");
-				}
+<?php if ($this->helper('Rokanthemes\Themeoption\Helper\Themeconfig')->isEnableStickyHeader()) { ?>
+	<script type="text/javascript">
+		require(['jquery'], function($) {
+			$(document).ready(function($) {
+				$(window).scroll(function() {
+					var num = $('.header-container').outerHeight();
+					var screenWidth = $(window).width();
+
+					if ($(this).scrollTop() > num && screenWidth >= 768) {
+						$(".header").addClass("sticky");
+					} else {
+						$(".header").removeClass("sticky");
+					}
+				});
 			});
 		});
-    });
-</script>
+	</script>
 <?php } ?>

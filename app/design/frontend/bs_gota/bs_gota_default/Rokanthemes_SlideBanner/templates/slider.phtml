@@ -1,77 +1,181 @@
 <?php
+
 /**
  * Copyright © 2015 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
 
 // @codingStandardsIgnoreFile
-if($banners = $block->getBannerCollection()):
-	$slider = $block->getSlider();
-	$sliderId = $block->getSliderId(); 
+
+$helper = $this->helper('Magento\Search\Helper\Data');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// get list of all the categories
+$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+$categories->addAttributeToFilter('parent_id', array('eq' => 1));
+$categories->addAttributeToSelect('*');
 ?>
-<div class="wrapper_slider hidden-xs slider_<?php echo $sliderId; ?>">
-	<div class="owl">
-		<?php foreach($banners as $banner){ if($banner->getSlideStatus() == '2'){ continue; }	?>
-			<div class="banner_item">
-				<div class="banner_item_bg">
-					<?php
-					$html = $block->getImageElement($banner->getSlideImage());
-					if($link = $banner->getSlideLink())
-						$html = '<a href="'. $link .'">' . $html . '</a>' ; 
-					echo $html;
-					?>
-				</div>	
-			</div>
-		<?php } ?>
-	</div>
-</div>
-<div class="wrapper_slider visible-xs slider_<?php echo $sliderId; ?>_mobile">
-	<div class="owl">
-		<?php foreach($banners as $banner){  if($banner->getSlideStatus() == '2'){ continue; }	?>
-			<div class="banner_item">
-				<div class="banner_item_bg">
-					<?php
-					$html = $block->getImageElement($banner->getSlideImageMobile());
-					if($link = $banner->getSlideLink())
-						$html = '<a href="'. $link .'">' . $html . '</a>' ; 
-					echo $html;
-					?>
-				</div>	
-			</div>
-		<?php } ?>
-	</div>
-</div>
-<script>
+<script type="text/javascript">
 	require([
-		'jquery',
-		'mage/mage',
-		'rokanthemes/owl'
-	], function ($) {
-		'use strict';
-		jQuery(".slider_<?php echo $sliderId; ?>_mobile .owl").owlCarousel(
-			{
-				lazyLoad:true,
-				<?php foreach($slider->getSliderSetting() as $key=>$value)
-				{
-					if(in_array($key, array('autoPlay', 'navigation', 'stopOnHover', 'pagination', 'scrollPerPage'))){
-						$value == 0 ? $value = 'false': '';
-						$value == 1 ? $value = 'true': '';
+			'jquery',
+			'rokanthemes/choose'
+		], function($) {
+		$("#choose_category").on("change", () => {
+			$.ajax({
+				type: 'GET',
+				url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
+				success: (data) => {
+					data = JSON.parse(data);
+					var html = '';
+					for (var i = 0; i < data.length; i++) {
+						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
-					echo $key . ':' . $value . ',';
-				} ?>}
-		);
-		jQuery(".slider_<?php echo $sliderId; ?> .owl").owlCarousel(
-			{
-				lazyLoad:true,
-				<?php foreach($slider->getSliderSetting() as $key=>$value)
-				{
-					if(in_array($key, array('autoPlay', 'navigation', 'stopOnHover', 'pagination', 'scrollPerPage'))){
-						$value == 0 ? $value = 'false': '';
-						$value == 1 ? $value = 'true': '';
-					}
-					echo $key . ':' . $value . ',';
-				} ?>}
-		);
+					$('#model_select').html(html);
+				}
+			})
+		});
+		$('#model_select').on("change", () => {
+			console.log($('#model_select').val());
+		});
+		$('#version_select').on("change", () => {
+		});
+		goToCategory = () => {
+			var current_id = $('#choose_category').val();
+			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
+			window.location.href = `/catalog/category/view/id/${current_id}`;
+		}
 	});
 </script>
-<?php endif; ?>
+<style>
+	.field-by-cat-search select {
+		height: 63px;
+		border: none;
+		padding: 0;
+	}
+
+	.field-by-cat-search ._label {
+		position: relative;
+		width: 30%;
+		margin: 0 1%;
+	}
+
+	.field-by-cat-search ._label span {
+		position: absolute;
+		top: 0;
+		left: 2px;
+		font-size: 12px;
+		color: #2bb9a9;
+		text-transform: uppercase;
+	}
+
+	.field-by-cat-search .search {
+		height: 90%;
+		font-size: 17px;
+		color: #fff;
+		background-color: #2bb9a9;
+		border-radius: 6px;
+		display: flex;
+		align-items: center;
+		padding: 0 19px;
+		cursor: pointer;
+	}
+
+	.title {
+		width: 100%;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.title h1 {
+		font-size: 40px;
+		color: #fff;
+	}
+
+	.title h1 span {
+		background: linear-gradient(0deg, #2bb9a9 30%, transparent 0%);
+	}
+
+	.title h2 {
+		color: #fff;
+		margin: 10px auto;
+	}
+
+	span.blue {
+		color: #2bb9a9;
+	}
+</style>
+<div style="position: relative; padding: 150px 0; min-height: 400px; width: 100%; background-image: url(/assets/images/fotos/hero--background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; display: flex; align-items: center;">
+	<div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,20,.5); z-index: 1;"></div>
+	<div class="block block-search" style="width: 100%; float: none;">
+		<div class="block block-content">
+			<div class="dropdown">
+				<div class="title">
+					<h1>
+						Venta de enganches con el <span>mejor precio garantizado</span>
+					</h1>
+					<h2>
+						<span class="blue">enganche + kit eléctrico</span> desde 175 € + IVA
+					</h2>
+				</div>
+				<div style="margin-top:20px;display: flex; width: 100%; justify-content: center;" class="form minisearch search-content" id="search_mini_form" action="" method="get">
+					<div class="field-by-cat-search" style="display: inline-flex; width: 100%; max-width: 1200px; background: #fff; border-radius: 6px; padding: 10px;">
+						<span class="_label">
+							<span>Marca</span>
+							<select name="cat[]" id="choose_category">
+								<option value="">
+									<?php echo __('All Categories'); ?>
+								</option>
+								<?php
+								foreach ($categories as $cat) {
+									if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
+										echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
+									} else {
+										echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+									}
+								}
+								?>
+							</select>
+						</span>
+						<span class="_label">
+							<span>Modelo</span>
+							<select name="cat[]" id="model_select">
+							</select>
+						</span>
+						<span class="_label">
+							<span>Versión</span>
+							<select name="cat[]" id="version_select">
+							</select>
+						</span>
+						<div class="search" onclick="goToCategory()">
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+				</div>
+				<div style="margin: 30px auto; width: 100%; max-width: 1200px; display: flex; justify-content: space-between;">
+					<div style="width: 30%; padding: 10px 17px; border: .5px solid #fff; border-radius: 6px; display: flex; align-items: center; ">
+						<div style="width: 75px; height: 50px; font-size: 40px; padding: 5px;color:#fff;"><i class="fas fa-truck"></i></div>
+						<div style="width: calc(100% - 75px);">
+							<div style="color:#2bb9a9;text-transform:uppercase;font-size:17px;font-weight: bold;">envío gratuito</div>
+							<div style="color:#fff;font-size:16px;">Para toda Península y Baleares en 24/48 horas</div>
+						</div>
+					</div>
+					<div style="width: 30%; padding: 10px 17px; border: .5px solid #fff; border-radius: 6px; display: flex; align-items: center; ">
+					<div style="width: 75px; height: 50px; font-size: 40px; padding: 5px;color:#fff;"><i class="fas fa-warehouse"></i></div>
+						<div style="width: calc(100% - 75px);">
+							<div style="color:#2bb9a9;text-transform:uppercase;font-size:17px;font-weight: bold;">talleres homologados</div>
+							<div style="color:#fff;font-size:16px;">Amplia red de instaladores certificados cerca de ti</div>
+						</div>
+					</div>
+					<div style="width: 30%; padding: 10px 17px; border: .5px solid #fff; border-radius: 6px; display: flex; align-items: center; ">
+					<div style="width: 75px; height: 50px; font-size: 40px; padding: 5px;color:#fff;"><i class="fas fa-file-alt"></i></div>
+						<div style="width: calc(100% - 75px);">
+							<div style="color:#2bb9a9;text-transform:uppercase;font-size:17px;font-weight: bold;">documentación gratuita</div>
+							<div style="color:#fff;font-size:16px;">Informe de conformidad y asesoramiento técnico incluido</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

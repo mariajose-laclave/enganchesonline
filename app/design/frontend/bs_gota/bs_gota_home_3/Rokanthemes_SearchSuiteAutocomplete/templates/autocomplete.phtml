@@ -62,6 +62,125 @@ $helper = $this->helper('Magento\Search\Helper\Data');
 <?php } ?>
 <script type="text/x-magento-init">
 {
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// get list of all the categories
+$categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')->create();
+$categories->addAttributeToFilter('parent_id', array('eq' => 1));
+$categories->addAttributeToSelect('*');
+?>
+<script>/*
+	window.onload = function() {
+		var select = document.getElementById('choose_category');
+		var model_select = document.getElementById('model_select');
+		var version_select = document.getElementById('version_select');
+		select.addEventListener('change', function(event) {
+			var value = select.value;
+			var s = new XMLHttpRequest();
+			s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=models&id_car_brand=${value}`, true);
+			s.onreadystatechange = (event) => {
+				var json_response = JSON.parse(s.response);
+				model_select.innerHTML = '';
+				for (var i = 0; i < json_response.length; i++) {
+					model_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+				}
+			}
+			s.send();
+		});
+		model_select.addEventListener('change', (event) => {
+			var value = model_select.value;
+			var make_value = select.value;
+			var s = new XMLHttpRequest();
+			s.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${make_value}&id_car_model=${value}`, true);
+			s.onreadystatechange = (event) => {
+				var json_response = JSON.parse(s.response);
+				version_select.innerHTML = '';
+				for (var i = 0; i < json_response.length; i++) {
+					version_select.innerHTML += `<option value="${json_response[i].id}">${json_response[i].label}</option>`;
+				}
+			}
+			s.send();
+		});
+	}*/
+</script>
+<style>
+.chosen-container {
+	width: 32% !important;
+}
+</style>
+<div class="block block-search">
+	<div class="block block-content">
+		<div class="dropdown">
+			<div style="justify-content: space-between;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+				<div class="field-by-cat-search">
+					<select name="cat[]" id="choose_category">
+						<option value=""><?php echo __('All Categories'); ?></option>
+						<?php
+						foreach ($categories as $cat) {
+							if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
+								echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
+							} else {
+								echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+							}
+						}
+						?>
+					</select>
+					<select name="cat[]" id="model_select">
+					</select>
+					<select name="cat[]" id="version_select">
+					</select>
+				</div>
+				<div class="actions">
+					<button onclick="goToCategory()" title="<?php echo $block->escapeHtml(__('Search')) ?>" class="action search">
+						<span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php if ($block->enableSearchByCat()) { ?>
+	<script type="text/javascript">
+		require([
+			'jquery',
+			'rokanthemes/choose'
+		], function($) {
+			$("#choose_category").chosen().change(() => {
+				$.ajax({
+					type: 'GET',
+					url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
+					success: (data) => {
+						data = JSON.parse(data);
+						var html = '';
+						for (var i = 0; i < data.length; i++) {
+							html += `<option value="${data[i].id}">${data[i].label}</option>`;
+						}
+						$('#model_select').chosen('destroy');
+						$('#model_select').html(html);
+						$('#model_select').chosen();
+					}
+				})
+			});
+			$('#model_select').chosen().change(() => {
+				console.log($('#model_select').val());
+			});
+			$('#version_select').chosen().change(() => {
+
+			});
+			function goToCategory() {
+				if ($('#version_select').val() != '') {
+
+				} else if ($('#model_select').val() != '') {
+
+				} else if ($('#choose_category').val() != '') {
+					
+				}
+			}
+		});
+	</script>
+<?php } ?>
+<script type="text/x-magento-init">
+	{
     "*": {
         "Magento_Ui/js/core/app": {
             "components": {

@@ -1,0 +1,27 @@
+/**
+ * custom theme 2021-03-31 11:30:27 */
+
+#newsletter_pop_up{
+width: 600px;height: 330px;background-color: #F4F4F4;}
+#newsletter_pop_up .newsletter-popup-has-background{ 
+	}
+.blog-custom-wrapper{        
+	}
+.contact-index-index .page-title-wrapper{       
+	}
+.cms-about-us .page-title-wrapper{       
+	} 
+.background-module-product{        
+	}
+@media screen and ( max-width: 991px ){ 
+	.contact-index-index .page-title-wrapper{ 
+		}
+	.blog-custom-wrapper{ 
+			}
+	.background-module-product{
+			}
+	.cms-about-us .page-title-wrapper{   
+			}
+}	
+.block-newsletter-form{       
+	}

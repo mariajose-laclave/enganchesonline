@@ -1379,6 +1379,7 @@
 			border-top: 1px solid @bordercolor;
 			.flex-layout{
 				align-items: center;
+				justify-content: space-around;
 				.side-verticalmenu{
 					flex: 0 0 23%;
 					max-width: 300px;
@@ -1392,7 +1393,7 @@
 						display: none;
 					}
 					span, i{
-						vertical-align: sub;
+						// vertical-align: sub;
 						font-size: 20px;
 					}
 					p{
@@ -5642,6 +5643,8 @@ body{
 	}
 	a{
 		&.action.towishlist, &.action.tocompare, &.mailto{
+			justify-content: space-around;
+			align-items: center;
 			width: 54px;
 			height: 54px;
 			line-height: 54px;
