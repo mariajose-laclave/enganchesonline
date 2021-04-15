@@ -132,6 +132,7 @@
 .field-by-cat-search select {
     height: 62px;
     padding: 12px 24px 12px 0;
+    margin-bottom: -12px;
     border: none;
     background-color: transparent;
     background-image: url(/assets/images/select-arrow.png); 
@@ -156,6 +157,9 @@
     right: -15px;
     top: 0;
     background: #D2D2D7;
+}
+.field-by-cat-search ._label:last-of-type::after {
+    content: none;
 }
 
 .field-by-cat-search ._label span {
@@ -252,6 +256,10 @@
 /*
 // HEADER 
 */
+.header-container .topbar.text-center {
+    display: none;
+    visibility: hidden;
+}
 .header-top-setting .register-login a {
     font-family: var(--headingfont);
     font-style: normal;

@@ -16,6 +16,7 @@ $plain_value = $model->getPlainValue();
 					<?php echo $this->getChildHtml("logo"); ?>
 				</div>
 				<div class="header-right">
+					<span data-action="toggle-nav" class="action nav-toggle nav-toggle--sm"><span>Toggle Nav</span></span>
 					<div class="language-currency">
 						<div class="container-setting-language-currency">
 							<?php echo $this->getChildHtml("currency"); ?>
@@ -25,10 +26,11 @@ $plain_value = $model->getPlainValue();
 					<div class="header-top-setting hidden-xs hidden-sm">
 						<div class="register-login visible-md visible-lg">
 							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
-								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>">
+								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account'); ?>">
 									<span>
-										<i class="fas fa-user-circle"></i> <?php echo __('Login'); ?></a>
+										<i class="fas fa-user-circle"></i> <?php echo __('Login'); ?>
 									</span>
+								</a>
 							<?php
 							} else {
 							?>
