@@ -65,7 +65,7 @@
 */
 .hero.hero--home {
     position: relative; 
-    padding: 150px 0; 
+    padding: 120px 0; 
     min-height: 400px; 
     width: 100%; 
     background-image: url(/assets/images/fotos/hero--background.jpg); 
@@ -114,7 +114,8 @@
 }
 
 .minisearch {
-    margin-top:20px;display: flex; width: 100%; justify-content: center;
+    margin-top:60px;
+    display: flex; width: 100%; justify-content: center;
 }
 .field-by-cat-search {
     display: inline-flex; 
@@ -126,7 +127,7 @@
     width: 100%; 
     background: #efeff1; 
     border-radius: 4px; 
-    padding: 12px 0;
+    padding: 15px 0;
 }
 .field-by-cat-search select {
     height: 62px;
@@ -153,6 +154,7 @@
     width: 1px;
     height: 100%;
     right: -15px;
+    top: 0;
     background: #D2D2D7;
 }
 
@@ -186,10 +188,15 @@
 .field-by-cat-search .search:hover {
     background-color: var(--alert-success);
 }
+.field-by-cat-search .search .txt-sm {
+    display: none;
+    visibility: none;
+}
 
 .home-features {
     margin: 30px auto; 
     width: 100%; 
+    margin-top: 120px;
     
     display: -webkit-box;
     display: -ms-flexbox;
@@ -215,6 +222,9 @@
     flex: 0 0 75px;
     color:#fff;
 }
+.card-home-features .card-icon svg {
+    margin: auto;
+}
 .card-home-features .card-body {
     width: calc(100% - 75px);
     flex: calc(100% - 75px);
@@ -237,6 +247,34 @@
 }
 .card-home-features .card-body p:last-of-type {
     margin-bottom: 0;
+}
+
+/*
+// HEADER 
+*/
+.header-top-setting .register-login a {
+    font-family: var(--headingfont);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--gray);
+    display: inline-block;
+    padding: 12px;
+}
+.header-top-setting .register-login a i {
+    margin-right: 6px;
+}
+@media (min-width: 992px) {
+    .header-container.layout3 .header .col-logo {
+        flex: 0 0 18.5%;
+    }
+}
+@media (min-width: 1400px) {
+    .header-container.layout3 .header-right .header-top-setting {
+        padding: 0 16px 0 45px;
+    }
 }
 
 /*
@@ -321,9 +359,18 @@
     flex: 0 0 calc(100% - 42px);
     padding-left: 15px;
 }
-
+.features-store--body h4 {
+    font-size: 1rem;
+}
 .page-footer {
     background-color: var(--dark-gray);
+}
+
+.page-footer .layout3 .footer-static-container .footer_introduce img {
+    max-width: 146px;
+}
+.page-footer .footer-newsletter {
+    border: none;
 }
 .page-footer .footer-static-container .footer-links h2 {
     text-align: left;
