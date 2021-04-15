@@ -118,15 +118,21 @@ $plain_value = $model->getPlainValue();
 							</div>
 						</div>
 						<div class="mobile-action">
-							<div class="register-login visible-xs visible-sm">
-								<a href="https://blueskytechmage.com/gota/en3/customer/account/login/">Log in<i class="icon-users"></i></a>
-							</div>
-							<div class="wishlist visible-xs visible-xs">
-								<a href="https://blueskytechmage.com/gota/en3/wishlist">Wishlist<i class="icon-heart"></i></a>
-							</div>
-							<div class="compare  visible-xs visible-xs">
-								<a href="https://blueskytechmage.com/gota/en3/catalog/product_compare/">Compare</a>
-							</div>
+
+							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
+								<div class="register-login visible-xs visible-sm">
+									<a href="<?php echo $this->getUrl('customer/account'); ?>"><?php echo __('Login'); ?> <i class="fas fa-user-circle"></i></a>
+								</div>
+							<?php
+							} else {
+							?>
+								<div class="register-login visible-xs visible-sm">
+									<a href="<?php echo $this->getUrl('customer/account/index'); ?>"><?php echo __('My account'); ?> <i class="fas fa-user-circle"></i></a>
+								</div>
+								<div class="register-login visible-xs visible-sm">
+									<a href="<?php echo $this->getUrl('customer/account/logout'); ?>"><?php echo __('Logout'); ?> <i class="fas fa-sign-out-alt"></i></a>
+								</div>
+							<?php } ?>
 						</div>
 					</div>
 					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hola, estoy interesado en comprar un enganche en enganches-online.es"><span class=""><i class="fab fa-whatsapp"></i> &nbsp;<?php echo $plain_value; ?></span></a></p></div>
