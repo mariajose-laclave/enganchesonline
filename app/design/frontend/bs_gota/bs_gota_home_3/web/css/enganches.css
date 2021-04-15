@@ -302,6 +302,24 @@
     }
 }
 
+.sFilter {
+    width: calc(100% + 30px);
+    margin: 0 -15px;
+    padding: 0 15px;
+    background-color: var(--gray-01);
+    display: block;
+    position: relative;
+}
+@media (max-width: 991px) {
+    .header-container.layout3 .header-menu .flex-layout {
+        /* align-items: center; */
+        /* justify-content: space-around; */
+        width: 100%;
+        justify-content: normal;
+    }
+}
+
+
 /*
 // FOOTER
 */
