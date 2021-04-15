@@ -310,14 +310,14 @@ class CreateCategoriesApp extends AbstractApp
 
         if (substr($product->getSku(), 0, 1) == 'X') {
             if (substr($product->getSku(), strlen($product->getSku()) - 2, 1) == 'X') {
-                return $product->price * $discountLaFuenteValue * $profitMarginValue * 1.21;
+                return $product->getPrice() * $discountLaFuenteValue * $profitMarginValue * 1.21;
             }
-            return $product->price * $discountLaFuenteImportsValue * $profitMarginValue * 1.21;
+            return $product->getPrice() * $discountLaFuenteImportsValue * $profitMarginValue * 1.21;
         } else {
             if (substr($product->getSku(), strlen($product->getSku()) - 2, 1) == 'X') {
-                return $product->price * $discountAragonValue * $profitMarginValue * 1.21;
+                return $product->getPrice() * $discountAragonValue * $profitMarginValue * 1.21;
             }
-            return $product->price * $discountAragonImportsValue * $profitMarginValue * 1.21;
+            return $product->getPrice() * $discountAragonImportsValue * $profitMarginValue * 1.21;
         }
     }
 
