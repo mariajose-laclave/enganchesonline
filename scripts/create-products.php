@@ -76,8 +76,8 @@ class CreateCategoriesApp extends AbstractApp
             $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
             $product->setTaxClassId(0); // Tax class id
             $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $specialPrice = $this->getPrice($product);
             $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
+            $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
             $product->setStockData(
                 array(
