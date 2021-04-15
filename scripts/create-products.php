@@ -308,13 +308,13 @@ class CreateCategoriesApp extends AbstractApp
         $discountAragonImports = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_im');
         $discountAragonImportsValue = $discountAragonImports->getPlainValue();
 
-        if (substr($product->sku, 0, 1) == 'X') {
-            if (substr($product->sku, strlen($product->sku) - 2, 1) == 'X') {
+        if (substr($product->getSku(), 0, 1) == 'X') {
+            if (substr($product->getSku(), strlen($product->getSku()) - 2, 1) == 'X') {
                 return $product->price * $discountLaFuenteValue * $profitMarginValue * 1.21;
             }
             return $product->price * $discountLaFuenteImportsValue * $profitMarginValue * 1.21;
         } else {
-            if (substr($product->sku, strlen($product->sku) - 2, 1) == 'X') {
+            if (substr($product->getSku(), strlen($product->getSku()) - 2, 1) == 'X') {
                 return $product->price * $discountAragonValue * $profitMarginValue * 1.21;
             }
             return $product->price * $discountAragonImportsValue * $profitMarginValue * 1.21;
