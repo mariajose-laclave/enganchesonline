@@ -63,15 +63,15 @@ class CreateCategoriesApp extends AbstractApp
         // $this->insertKits();
     }
 
+    /**
+     * 
+     * Function to create all electric kits as products in the store
+     */
     protected function insertKits()
     {
+        $this->product_array = array();
         $this->createAragonKits();
         $this->createLaFuenteKits();
-        
-    }
-
-    protected function createAragonKits()
-    {
         foreach ($this->product_array as $_product) {
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
@@ -103,6 +103,19 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
+
+    /**
+     * 
+     * Import electric kit data from aragon (CSV)
+    */
+    protected function createAragonKits()
+    {
+    }
+
+    /**
+     * 
+     * Import electric kit data from LaFuente
+     */
     protected function createLaFuenteKits()
     {
 
