@@ -288,6 +288,18 @@ class CreateCategoriesApp extends AbstractApp
         );
     }
 
+    /* 
+    * TODO 
+        - Price calculator based on user input values
+        - Stock control
+        - Add description & title maker - Based on type & source
+        - Add proveedor (¿brand?)
+        - Relationships between enganches and kits
+        - 
+    * 
+    */
+
+
 }
 
 /** @var \Magento\Framework\App\Http $app */
