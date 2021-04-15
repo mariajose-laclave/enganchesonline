@@ -76,7 +76,9 @@ class CreateCategoriesApp extends AbstractApp
             $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
             $product->setTaxClassId(0); // Tax class id
             $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $product->setPrice($_product['product']->price/100); // price of product
+            $specialPrice = $this->getPrice($product);
+            $product->setPrice($_product['product']->price*1.21/100); // price of product
+            $product->setSpecialPrice($specialPrice);
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
@@ -131,7 +133,9 @@ class CreateCategoriesApp extends AbstractApp
             }
         }
         foreach ($car_brands as $brand => $models) {
-            $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+            $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->addAttributeToFilter('name', $brand)->getFirstItem();
+            if (!$category->getId()) $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
@@ -286,6 +290,33 @@ class CreateCategoriesApp extends AbstractApp
             'model' => $model,
             'variant' => $variant
         );
+    }
+
+    protected function getPrice($product)
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $profitMargin = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('profit_margin');
+        $profitMarginValue = $profitMargin->getPlainValue();
+        $discountLaFuente = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_es');
+        $discountLaFuenteValue = $discountLaFuente->getPlainValue();
+        $discountLaFuenteImports = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_im');
+        $discountLaFuenteImportsValue = $discountLaFuenteImports->getPlainValue();
+        $discountAragon = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_es');
+        $discountAragonValue = $discountAragon->getPlainValue();
+        $discountAragonImports = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_im');
+        $discountAragonImportsValue = $discountAragonImports->getPlainValue();
+
+        if (substr($product->sku, 0, 1) == 'X') {
+            if (substr($product->sku, strlen($product->sku) - 2, 1) == 'X') {
+                return $product->price * $discountLaFuenteValue * $profitMarginValue * 1.21;
+            }
+            return $product->price * $discountLaFuenteImportsValue * $profitMarginValue * 1.21;
+        } else {
+            if (substr($product->sku, strlen($product->sku) - 2, 1) == 'X') {
+                return $product->price * $discountAragonValue * $profitMarginValue * 1.21;
+            }
+            return $product->price * $discountAragonImportsValue * $profitMarginValue * 1.21;
+        }
     }
 
     /* 
