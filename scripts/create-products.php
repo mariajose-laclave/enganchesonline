@@ -86,7 +86,7 @@ class CreateCategoriesApp extends AbstractApp
                     'is_in_stock' => 1
                 )
             );
-            $url = str_replace(' ', '-', $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
             $product->save();
             $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
@@ -152,6 +152,7 @@ class CreateCategoriesApp extends AbstractApp
             if ($categoryId) {
                 $category->setUrlKey($category->getUrlKey() . uniqid());
             }
+            $category->setUrlKey($category->getUrlKey() . uniqid());
             $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
             foreach ($models as $model) {
