@@ -69,7 +69,7 @@ class CreateCategoriesApp extends AbstractApp
         foreach ($this->product_array as $_product) {
             $product = $objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para ".$_product['product']->name); // Name of Product
+            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
             $product->setAttributeSetId(4); // Attribute set id
             $product->setStatus(1); // Status on product enabled/ disabled 1/0
             // $product->setWeight(10); // weight of product
@@ -77,7 +77,7 @@ class CreateCategoriesApp extends AbstractApp
             $product->setTaxClassId(0); // Tax class id
             $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
             $specialPrice = $this->getPrice($product);
-            $product->setPrice($_product['product']->price*1.21/100); // price of product
+            $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
             $product->setSpecialPrice($specialPrice);
             $product->setStockData(
                 array(
@@ -96,7 +96,7 @@ class CreateCategoriesApp extends AbstractApp
             $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
-    
+
     /**
      * Function to get Link management interface
      */
@@ -120,7 +120,7 @@ class CreateCategoriesApp extends AbstractApp
             $models = array();
             $this->make = $prod['product']->make;
             if (!in_array($this->make, $car_brands)) {
-                $brand_objects = array_filter($this->product_array, function($obj)  {
+                $brand_objects = array_filter($this->product_array, function ($obj) {
                     if ($obj['product']->make == $this->make) return true;
                     else return false;
                 });
@@ -134,14 +134,21 @@ class CreateCategoriesApp extends AbstractApp
         }
         foreach ($car_brands as $brand => $models) {
             $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->addAttributeToFilter('name', $brand)->getFirstItem();
+                ->create()
+                ->getCollection()
+                ->addAttributeToFilter('name', $brand)
+                ->getFirstItem();
             if (!$category->getId()) $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
-            
+
             $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                ->create()
+                ->getCollection()
+                ->addAttributeToFilter('url_key', $category->getUrlKey())
+                ->getFirstItem()
+                ->getId();
             if ($categoryId) {
                 $category->setUrlKey($category->getUrlKey() . uniqid());
             }
@@ -160,7 +167,6 @@ class CreateCategoriesApp extends AbstractApp
                 $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
         }
-        
     }
 
     /**
@@ -174,17 +180,15 @@ class CreateCategoriesApp extends AbstractApp
         $url = 'https://www.enganchesaragon.com/generar-csv.php?tipo=enganches';
         $file = file_get_contents($url);
         $lines = preg_split('/\n/', $file);
-        foreach ($lines as $line)
-        {
+        foreach ($lines as $line) {
             $line_array = explode(';', $line);
-            if (!is_array($line_array) || $line_array[0] == 'Referencia' || $line_array[0] == '')
-            {
+            if (!is_array($line_array) || $line_array[0] == 'Referencia' || $line_array[0] == '') {
                 continue;
             } else {
                 $array = array(
                     'name' => $line_array[3] . ' ' . $line_array[4] . ' ' . $line_array[6] . ' ' . $line_array[8],
                     'sku' => $line_array[0],
-                    'price' => (int)str_replace(['EUR', '€'], '', $line_array[9])*100,
+                    'price' => (int)str_replace(['EUR', '€'], '', $line_array[9]) * 100,
                     'type_id' => 'simple',
                     'attribute_set_id' => 4,
                     'make' => $line_array[3],
@@ -196,7 +200,7 @@ class CreateCategoriesApp extends AbstractApp
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
                 }
-                
+
                 // $this->data_base_client->insert($array);
 
                 $this->product_array[] = [
@@ -210,8 +214,9 @@ class CreateCategoriesApp extends AbstractApp
      * Function to insert tow bar information directly from the database of LaFuente.
      * Rather than converting the PDF to CSV and then importing the CSV
      */
-    protected function get_lafuente_from_db() {
-        
+    protected function get_lafuente_from_db()
+    {
+
         $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=500&sEcho=500&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=500&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
@@ -227,11 +232,11 @@ class CreateCategoriesApp extends AbstractApp
         $parsed_response = json_decode($response);
         foreach ($parsed_response->aaData as $row) {
             $make_type_year = $this->get_make_type_year($row[1]);
-            if ( is_null($make_type_year['model']) ){
+            if (is_null($make_type_year['model'])) {
                 continue;
             } else {
                 $price = strip_tags($row[6]);
-                $price = (int)str_replace(['EUR', '€'], '', $price)*100;
+                $price = (int)str_replace(['EUR', '€'], '', $price) * 100;
                 $array = array(
                     'name' => $row[0] . ' ' . $row[2] . ' ' . $make_type_year['variant'] . ' ' . $make_type_year['year'],
                     'sku' => $row[5],
@@ -264,22 +269,19 @@ class CreateCategoriesApp extends AbstractApp
         $model = null;
         $variant = null;
         $years = array();
-        if ( preg_match($this->date_preg_match, $input_string, $matches) )
-        {
-            if ( count($matches) === 1)
-            {
+        if (preg_match($this->date_preg_match, $input_string, $matches)) {
+            if (count($matches) === 1) {
                 $date_array = explode(' a ', $matches[0]);
-                foreach ($date_array as $date_)
-                {
+                foreach ($date_array as $date_) {
                     $date = explode('-', $date_);
-                    $date[1] = ((int)$date[1] > 50) ? '19'.$date[1] : '20'.$date[1];
+                    $date[1] = ((int)$date[1] > 50) ? '19' . $date[1] : '20' . $date[1];
                     $date_ = implode('/', $date);
-                    $years[] = $date_;         
+                    $years[] = $date_;
                 }
                 $year = implode(' - ', $years);
-    
+
                 $string_without_year = str_replace($matches[0], '', $input_string);
-    
+
                 $model_variant_array = explode(' - ', $string_without_year);
                 $model = $model_variant_array[0];
                 $variant = $model_variant_array[1];
@@ -329,8 +331,6 @@ class CreateCategoriesApp extends AbstractApp
         - 
     * 
     */
-
-
 }
 
 /** @var \Magento\Framework\App\Http $app */
