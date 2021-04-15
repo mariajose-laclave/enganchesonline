@@ -306,7 +306,7 @@
     width: calc(100% + 30px);
     margin: 0 -15px;
     padding: 0 15px;
-    background-color: var(--gray-01);
+    background-color: var(--gray-00);
     display: block;
     position: relative;
 }
