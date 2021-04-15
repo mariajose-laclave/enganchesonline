@@ -5,6 +5,7 @@ require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
+    protected $objectManager;
     protected $categoryLinkManagement;
     protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=100000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
     protected $magento_api;
@@ -53,15 +54,56 @@ class CreateCategoriesApp extends AbstractApp
 
     public function run()
     {
+        $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_state->setAreaCode('frontend');
         $this->get_lafuente_from_db();
         // $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
-        $this->createKits();
+        // $this->insertKits();
     }
 
-    protected function createKits()
+    protected function insertKits()
+    {
+        $this->createAragonKits();
+        $this->createLaFuenteKits();
+        
+    }
+
+    protected function createAragonKits()
+    {
+        foreach ($this->product_array as $_product) {
+            $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
+            $product->setSku($_product['product']->sku); // Set your sku here
+            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
+            $product->setAttributeSetId(4); // Attribute set id
+            $product->setStatus(1); // Status on product enabled/ disabled 1/0
+            // $product->setWeight(10); // weight of product
+            $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
+            $product->setTaxClassId(0); // Tax class id
+            $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
+            $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
+            $specialPrice = $this->getPrice($product);
+            $product->setSpecialPrice($specialPrice);
+            $product->setStockData(
+                array(
+                    'use_config_manage_stock' => 0,
+                    'manage_stock' => 0,
+                    'is_in_stock' => 1
+                )
+            );
+            $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $product->setUrlKey($url);
+            $product->save();
+            $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
+            $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+            $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
+        }
+    }
+
+    protected function createLaFuenteKits()
     {
 
         $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=500&sEcho=500&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=500&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
@@ -111,9 +153,8 @@ class CreateCategoriesApp extends AbstractApp
      */
     protected function createProducts()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         foreach ($this->product_array as $_product) {
-            $product = $objectManager->create('\Magento\Catalog\Model\Product');
+            $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
             $product->setName("Enganche para " . $_product['product']->name); // Name of Product
             $product->setAttributeSetId(4); // Attribute set id
@@ -135,9 +176,9 @@ class CreateCategoriesApp extends AbstractApp
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
             $product->save();
-            $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+            $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
-            $modelId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+            $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
             $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
@@ -160,7 +201,6 @@ class CreateCategoriesApp extends AbstractApp
      */
     protected function createCategories()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $car_brands = array();
         foreach ($this->product_array as $prod) {
             $models = array();
@@ -179,17 +219,17 @@ class CreateCategoriesApp extends AbstractApp
             }
         }
         foreach ($car_brands as $brand => $models) {
-            $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+            $category = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()
                 ->getCollection()
                 ->addAttributeToFilter('name', $brand)
                 ->getFirstItem();
-            if (!$category->getId()) $category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+            if (!$category->getId()) $category = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
             $category->setName($brand);
             $category->setParentId(1);
             $category->setIsActive(true);
 
-            $categoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+            $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()
                 ->getCollection()
                 ->addAttributeToFilter('url_key', $category->getUrlKey())
@@ -199,19 +239,19 @@ class CreateCategoriesApp extends AbstractApp
                 $category->setUrlKey($category->getUrlKey() . uniqid());
             }
             $category->setUrlKey($category->getUrlKey() . uniqid());
-            $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
+            $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
             foreach ($models as $model) {
-                $modelCategory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
                 $modelCategory->setName($model);
                 $modelCategory->setParentId($id);
                 $modelCategory->setIsActive(true);
-                $modelCategoryId = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                     ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
                 if ($modelCategoryId) {
                     $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
                 }
-                $objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
+                $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
         }
     }
@@ -343,16 +383,15 @@ class CreateCategoriesApp extends AbstractApp
 
     protected function getPrice($product)
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $profitMargin = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('profit_margin');
+        $profitMargin = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('profit_margin');
         $profitMarginValue = $profitMargin->getPlainValue();
-        $discountLaFuente = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_es');
+        $discountLaFuente = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_es');
         $discountLaFuenteValue = $discountLaFuente->getPlainValue();
-        $discountLaFuenteImports = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_im');
+        $discountLaFuenteImports = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_im');
         $discountLaFuenteImportsValue = $discountLaFuenteImports->getPlainValue();
-        $discountAragon = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_es');
+        $discountAragon = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_es');
         $discountAragonValue = $discountAragon->getPlainValue();
-        $discountAragonImports = $objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_im');
+        $discountAragonImports = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_im');
         $discountAragonImportsValue = $discountAragonImports->getPlainValue();
 
         if (substr($product->getSku(), 0, 1) == 'X') {
