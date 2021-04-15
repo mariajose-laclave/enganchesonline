@@ -154,6 +154,8 @@
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.08em;
+    margin-bottom: -12px;
+    display: block;
 }
 
 .field-by-cat-search .search {
@@ -177,7 +179,7 @@
 .home-features {
     margin: 30px auto; 
     width: 100%; 
-    max-width: 1200px; 
+    
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex; 
@@ -206,19 +208,21 @@
     width: calc(100% - 75px);
     flex: calc(100% - 75px);
     color:#fff;
-    padding-left: 16px;
+    padding-left: 24px;
 }
-.card-home-features .card-body h3{
+.card-home-features .card-body h3 {
     color: var(--primary-color);
     font-family: var(--headingfont);
     font-weight: 700;
     font-size: 21px;
     letter-spacing: -0.02em;
     text-transform:uppercase;
+    margin-bottom: 0;
 }
 .card-home-features .card-body p {
     color: #fff;
     font-size: 1rem;
+    line-height: 1.5rem;
 }
 .card-home-features .card-body p:last-of-type {
     margin-bottom: 0;
