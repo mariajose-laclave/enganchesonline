@@ -50,6 +50,16 @@
     -ms-transform: translateX(0%);
 }
 
+.box-blog .block-content .post-info .post-tags-info {
+    background-color: var(--primary-color);
+}
+@media (min-width: 1200px) {
+    .box-blog .grid-layout .blog-item:first-child .item-blog .blog-content:after {
+        background: linear-gradient(rgba(43,185,169,0) 0%, var(--primary-color) 100%);
+        opacity: 0.9;
+    }
+}
+
 /*
 // FOOTER
 */
