@@ -58,6 +58,52 @@ class CreateCategoriesApp extends AbstractApp
         // $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
+        $this->createKits();
+    }
+
+    protected function createKits()
+    {
+
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=500&sEcho=500&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=500&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $ch = @curl_init();
+        @curl_setopt($ch, CURLOPT_HTTPGET, true);
+        @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        @curl_setopt($ch, CURLOPT_URL, $endpoint);
+        @curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Referer: https://www.lafuente.eu/lista_precios_enganche',
+            'x-requested-with: XMLHttpRequest'
+        ));
+        @curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response    = @curl_exec($ch);
+        $parsed_response = json_decode($response);
+        foreach ($parsed_response->aaData as $row) {
+            $make_type_year = $this->get_make_type_year($row[1]);
+            if (is_null($make_type_year['model'])) {
+                continue;
+            } else {
+                $price = strip_tags($row[6]);
+                $price = (int)str_replace(['EUR', '€'], '', $price) * 100;
+                $array = array(
+                    'name' => $row[0] . ' ' . $row[2] . ' ' . $make_type_year['variant'] . ' ' . $make_type_year['year'],
+                    'sku' => $row[5],
+                    'price' => $price,
+                    'type_id' => 'simple',
+                    'attribute_set_id' => 4,
+                    'make' => $row[0],
+                    'model' => $make_type_year['model'],
+                    'variant' => $make_type_year['variant'],
+                    'year' => $make_type_year['year']
+                );
+                foreach ($array as $key => $value) {
+                    $array[$key] = str_replace('"', '', $value);
+                }
+
+                $this->product_array[] = [
+                    'product' => (object)$array
+                ];
+            }
+        }
     }
 
     /**
