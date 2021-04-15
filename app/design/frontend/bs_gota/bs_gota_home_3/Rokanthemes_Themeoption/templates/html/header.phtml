@@ -141,28 +141,16 @@ $plain_value = $model->getPlainValue();
 				// If not homepage, add search bar
 				if ($this->getRequest()->getFullActionName() != "cms_index_index") {
 			?>
-				<div class="topSearch">
-					<div class="container-max">
-						<div class="flex-layout">
-							<?php echo $this->getChildHtml("topSearch"); ?>
-						</div>
-					</div>
+			<div class="container-max">
+				<div class="flex-layout">
+					<div class="sFilter"><?php echo $this->getChildHtml("topSearch"); ?></div>
+					<!--
+					<?php echo $this->getChildHtml("vertical.topnav") ?>
+					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
+					<div class="holine hidden-xs hidden-sm"><?php echo $this->getChildHtml("holine-number"); ?></div>
+					-->
 				</div>
-				<div class="verticalTopnav">
-					<div class="container-max">
-						<div class="flex-layout">
-							<?php echo $this->getChildHtml("vertical.topnav"); ?>
-						</div>
-					</div>
-				</div>
-				<div class="verticalTopnav">
-					<div class="container-max">
-						<div class="flex-layout">
-							<?php echo $this->getChildHtml("top.navigation.sections"); ?>
-						</div>
-					</div>
-				</div>
-
+			</div>
 			<?php
 				}
 			?>
