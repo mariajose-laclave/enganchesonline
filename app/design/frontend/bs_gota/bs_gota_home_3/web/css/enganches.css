@@ -142,9 +142,18 @@
 }
 .field-by-cat-search ._label {
     position: relative;
-    width: 30%;
-    flex: 0 0 30%;
+    width: 33.6666%;
+    flex: 0 0 calc(33.6666% - 60px);
     margin: 0 15px;
+}
+.field-by-cat-search ._label::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    right: -15px;
+    background: #D2D2D7;
 }
 
 .field-by-cat-search ._label span {
@@ -171,6 +180,8 @@
     -moz-transition: 250ms background-color ease-in-out;
     -webkit-transition: 250ms background-color ease-in-out;
     transition: 250ms background-color ease-in-out;
+
+    width: 60px;
 }
 .field-by-cat-search .search:hover {
     background-color: var(--alert-success);
