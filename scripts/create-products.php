@@ -57,7 +57,7 @@ class CreateCategoriesApp extends AbstractApp
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_state->setAreaCode('frontend');
         $this->get_lafuente_from_db();
-        // $this->convert_aragon();
+        $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
         // $this->insertKits();
@@ -317,7 +317,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function get_lafuente_from_db()
     {
 
-        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=500&sEcho=500&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=500&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=5000000000&sEcho=5000000000&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=5000000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
         @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
