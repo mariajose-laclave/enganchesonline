@@ -69,7 +69,8 @@ $categories = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category
 $categories->addAttributeToFilter('parent_id', array('eq' => 1));
 $categories->addAttributeToSelect('*');
 ?>
-<script>/*
+<script>
+	/*
 	window.onload = function() {
 		var select = document.getElementById('choose_category');
 		var model_select = document.getElementById('model_select');
@@ -104,9 +105,9 @@ $categories->addAttributeToSelect('*');
 	}*/
 </script>
 <style>
-.chosen-container {
-	width: 32% !important;
-}
+	.chosen-container {
+		width: 32% !important;
+	}
 </style>
 <div class="block block-search">
 	<div class="block block-content">
@@ -167,14 +168,10 @@ $categories->addAttributeToSelect('*');
 			$('#version_select').chosen().change(() => {
 
 			});
-			function goToCategory() {
-				if ($('#version_select').val() != '') {
-
-				} else if ($('#model_select').val() != '') {
-
-				} else if ($('#choose_category').val() != '') {
-					
-				}
+			goToCategory = () => {
+				var current_id = $('#choose_category').val();
+				current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
+				window.location.href = `/catalog/category/view/id/${current_id}`;
 			}
 		});
 	</script>

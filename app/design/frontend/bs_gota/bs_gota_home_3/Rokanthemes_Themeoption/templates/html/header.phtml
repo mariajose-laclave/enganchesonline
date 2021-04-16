@@ -16,6 +16,7 @@ $plain_value = $model->getPlainValue();
 					<?php echo $this->getChildHtml("logo"); ?>
 				</div>
 				<div class="header-right">
+					<span data-action="toggle-nav" class="action nav-toggle nav-toggle--sm"><span>Toggle Nav</span></span>
 					<div class="language-currency">
 						<div class="container-setting-language-currency">
 							<?php echo $this->getChildHtml("currency"); ?>
@@ -25,10 +26,11 @@ $plain_value = $model->getPlainValue();
 					<div class="header-top-setting hidden-xs hidden-sm">
 						<div class="register-login visible-md visible-lg">
 							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
-								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account/login'); ?>">
+								<a class="custom-button-login" href="<?php echo $this->getUrl('customer/account'); ?>">
 									<span>
-										<i class="fas fa-user-circle"></i> <?php echo __('Login'); ?></a>
+										<i class="fas fa-user-circle"></i> <?php echo __('Login'); ?>
 									</span>
+								</a>
 							<?php
 							} else {
 							?>
@@ -116,15 +118,20 @@ $plain_value = $model->getPlainValue();
 							</div>
 						</div>
 						<div class="mobile-action">
-							<div class="register-login visible-xs visible-sm">
-								<a href="https://blueskytechmage.com/gota/en3/customer/account/login/">Log in<i class="icon-users"></i></a>
-							</div>
-							<div class="wishlist visible-xs visible-xs">
-								<a href="https://blueskytechmage.com/gota/en3/wishlist">Wishlist<i class="icon-heart"></i></a>
-							</div>
-							<div class="compare  visible-xs visible-xs">
-								<a href="https://blueskytechmage.com/gota/en3/catalog/product_compare/">Compare</a>
-							</div>
+							<?php if (!$this->helper('Rokanthemes\Themeoption\Helper\Data')->isLoggedIn()) { ?>
+								<div class="register-login visible-xs visible-sm">
+									<a href="<?php echo $this->getUrl('customer/account'); ?>"><?php echo __('Login'); ?> <i class="fas fa-user-circle"></i></a>
+								</div>
+							<?php
+							} else {
+							?>
+								<div class="register-login visible-xs visible-sm">
+									<a href="<?php echo $this->getUrl('customer/account/index'); ?>"><?php echo __('My account'); ?> <i class="fas fa-user-circle"></i></a>
+								</div>
+								<div class="register-login visible-xs visible-sm">
+									<a href="<?php echo $this->getUrl('customer/account/logout'); ?>"><?php echo __('Logout'); ?> <i class="fas fa-sign-out-alt"></i></a>
+								</div>
+							<?php } ?>
 						</div>
 					</div>
 					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hola, estoy interesado en comprar un enganche en enganches-online.es"><span class=""><i class="fab fa-whatsapp"></i> &nbsp;<?php echo $plain_value; ?></span></a></p></div>
@@ -136,7 +143,7 @@ $plain_value = $model->getPlainValue();
 			?>
 			<div class="container-max">
 				<div class="flex-layout">
-					<?php echo $this->getChildHtml("topSearch"); ?>
+					<div class="sFilter"><?php echo $this->getChildHtml("topSearch"); ?></div>
 					<!--
 					<?php echo $this->getChildHtml("vertical.topnav") ?>
 					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	
