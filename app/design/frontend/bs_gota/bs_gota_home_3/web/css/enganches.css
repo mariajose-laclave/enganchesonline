@@ -90,6 +90,10 @@
 .block.block-search {
     width: 100%; float: none;
 }
+.hero--home .block.block-search {
+    position: relative;
+    z-index: 2;
+}
 .hero-title {
     width: 100%;
     text-align: center;
@@ -245,6 +249,7 @@
 }
 .card-home-features .card-icon svg {
     margin: auto;
+    display: block;
 }
 .card-home-features .card-body {
     width: calc(100% - 75px);
@@ -268,6 +273,18 @@
 }
 .card-home-features .card-body p:last-of-type {
     margin-bottom: 0;
+}
+
+@media screen and (max-width: 880px) {
+    .card-home-features {
+        width: 100%;
+        flex: 0 0 100%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .home-features {
+        flex: wrap;
+    }
 }
 
 /*
