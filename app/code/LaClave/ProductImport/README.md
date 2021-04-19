@@ -42,6 +42,9 @@ Import products from suppliers
 
 ## Specifications
 
+ - API Endpoint
+	- POST - LaClave\ProductImport\Api\ImportManagementInterface > LaClave\ProductImport\Model\ImportManagement
+
  - Controller
 	- adminhtml > index/index/index
 
