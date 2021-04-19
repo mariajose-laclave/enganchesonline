@@ -15,9 +15,6 @@ interface ImportManagementInterface
      * @param string $param
      * @return string
      */
-    public function postImport($param)
-    {
-        return 'hello';
-    }
+    public function postImport($param);
 }
 
