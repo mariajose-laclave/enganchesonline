@@ -52,26 +52,35 @@ $categories->addAttributeToSelect('*');
 		<div class="dropdown">
 			<div style="justify-content: space-between;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
 				<div class="field-by-cat-search">
-					<select name="cat[]" id="choose_category">
-						<option value=""><?php echo __('All Categories'); ?></option>
-						<?php
-						foreach ($categories as $cat) {
-							if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
-								echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
-							} else {
-								echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+					<div class="form-group">
+						<label for="choose_category">Marca</label>
+						<select name="cat[]" id="choose_category">
+							<option value=""><?php echo __('All Categories'); ?></option>
+							<?php
+							foreach ($categories as $cat) {
+								if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
+									echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
+								} else {
+									echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+								}
 							}
-						}
-						?>
-					</select>
-					<select name="cat[]" id="model_select">
-					</select>
-					<select name="cat[]" id="version_select">
-					</select>
+							?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="model_select">Modelo</label>
+						<select name="cat[]" id="model_select">
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="model_select">Versión</label>
+						<select name="cat[]" id="version_select">
+						</select>
+					</div>
 				</div>
 				<div class="actions">
 					<button onclick="goToCategory()" title="<?php echo $block->escapeHtml(__('Search')) ?>" class="action search">
-						<span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+						<span><?php /* @escapeNotVerified */ echo __('Search'); ?> <i class="fas fa-search"></i></span>
 					</button>
 				</div>
 			</div>
