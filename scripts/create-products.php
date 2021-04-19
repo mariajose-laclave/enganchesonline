@@ -255,16 +255,27 @@ class CreateCategoriesApp extends AbstractApp
             $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
             foreach ($models as $model) {
-                $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
-                $modelCategory->setName($model);
-                $modelCategory->setParentId($id);
-                $modelCategory->setIsActive(true);
-                $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
-                if ($modelCategoryId) {
-                    $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+
+                $modelExists = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                    ->create()
+                    ->getCollection()
+                    ->addAttributeToFilter('name', $model)
+                    ->addAttributeToFilter('parent_id', $id)
+                    ->getFirstItem()
+                    ->getId();
+
+                if (!$modelExists) {
+                    $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                    $modelCategory->setName($model);
+                    $modelCategory->setParentId($id);
+                    $modelCategory->setIsActive(true);
+                    $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                        ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                    if ($modelCategoryId) {
+                        $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+                    }
+                    $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
                 }
-                $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
         }
     }
@@ -397,15 +408,15 @@ class CreateCategoriesApp extends AbstractApp
     protected function getPrice($product)
     {
         $profitMargin = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('profit_margin');
-        $profitMarginValue = $profitMargin->getPlainValue();
+        $profitMarginValue = (100 + (int)$profitMargin->getPlainValue())/100;
         $discountLaFuente = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_es');
-        $discountLaFuenteValue = $discountLaFuente->getPlainValue();
+        $discountLaFuenteValue = (100 - (int)$discountLaFuente->getPlainValue())/100;
         $discountLaFuenteImports = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_im');
-        $discountLaFuenteImportsValue = $discountLaFuenteImports->getPlainValue();
+        $discountLaFuenteImportsValue = (100 - (int)$discountLaFuenteImports->getPlainValue())/100;
         $discountAragon = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_es');
-        $discountAragonValue = $discountAragon->getPlainValue();
+        $discountAragonValue = (100 - (int)$discountAragon->getPlainValue())/100;
         $discountAragonImports = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_im');
-        $discountAragonImportsValue = $discountAragonImports->getPlainValue();
+        $discountAragonImportsValue = (100 - (int)$discountAragonImports->getPlainValue())/100;
 
         if (substr($product->getSku(), 0, 1) == 'X') {
             if (substr($product->getSku(), strlen($product->getSku()) - 2, 1) == 'X') {
@@ -427,7 +438,6 @@ class CreateCategoriesApp extends AbstractApp
         - Add description & title maker - Based on type & source
         - Add proveedor (¿brand?)
         - Relationships between enganches and kits
-        - 
     * 
     */
 }
