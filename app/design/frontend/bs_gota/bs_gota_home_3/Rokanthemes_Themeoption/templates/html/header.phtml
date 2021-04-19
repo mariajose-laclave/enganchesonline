@@ -141,8 +141,8 @@ $plain_value = $model->getPlainValue();
 				// If not homepage, add search bar
 				if ($this->getRequest()->getFullActionName() != "cms_index_index") {
 			?>
-			<div class="container-max bg-gray-00">
-				<div class="flex-layout">
+			<div class="container-fluid bg-gray-00">
+				<div class="container-max">
 					<div class="sFilter"><?php echo $this->getChildHtml("topSearch"); ?></div>
 					<!--
 					<?php echo $this->getChildHtml("vertical.topnav") ?>
