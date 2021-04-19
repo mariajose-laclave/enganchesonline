@@ -1,6 +1,6 @@
-# Mage2 Module LaClave ProductImport
+# Mage2 Module LaClave ApiTest
 
-    ``laclave/module-productimport``
+    ``laclave/module-apitest``
 
  - [Main Functionalities](#markdown-header-main-functionalities)
  - [Installation](#markdown-header-installation)
@@ -10,7 +10,7 @@
 
 
 ## Main Functionalities
-Import products from suppliers
+Test API
 
 ## Installation
 \* = in production please use the `--keep-generated` option
@@ -18,7 +18,7 @@ Import products from suppliers
 ### Type 1: Zip file
 
  - Unzip the zip file in `app/code/LaClave`
- - Enable the module by running `php bin/magento module:enable LaClave_ProductImport`
+ - Enable the module by running `php bin/magento module:enable LaClave_ApiTest`
  - Apply database updates by running `php bin/magento setup:upgrade`\*
  - Flush the cache by running `php bin/magento cache:flush`
 
@@ -29,8 +29,8 @@ Import products from suppliers
     - public repository `packagist.org`
     - public github repository as vcs
  - Add the composer repository to the configuration by running `composer config repositories.repo.magento.com composer https://repo.magento.com/`
- - Install the module composer by running `composer require laclave/module-productimport`
- - enable the module by running `php bin/magento module:enable LaClave_ProductImport`
+ - Install the module composer by running `composer require laclave/module-apitest`
+ - enable the module by running `php bin/magento module:enable LaClave_ApiTest`
  - apply database updates by running `php bin/magento setup:upgrade`\*
  - Flush the cache by running `php bin/magento cache:flush`
 
@@ -43,10 +43,7 @@ Import products from suppliers
 ## Specifications
 
  - API Endpoint
-	- POST - LaClave\ProductImport\Api\ImportManagementInterface > LaClave\ProductImport\Model\ImportManagement
-
- - Controller
-	- adminhtml > index/index/index
+	- GET - LaClave\ApiTest\Api\TestManagementInterface > LaClave\ApiTest\Model\TestManagement
 
 
 ## Attributes
