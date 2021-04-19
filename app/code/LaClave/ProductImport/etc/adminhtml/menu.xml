@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
 	<menu>
-		<add id="LaClave_ProductImport::index_index" title="index index" module="LaClave_ProductImport" sortOrder="9999" resource="LaClave_ProductImport::index_index" parent="Magento_Backend::content" action="index/index/index"/>
+		<add id="LaClave_ProductImport::index_index" title="Importación de productos" module="LaClave_ProductImport" sortOrder="9999" resource="LaClave_ProductImport::index_index" parent="Magento_Backend::catalog" action="index/index/index"/>
 	</menu>
 </config>
