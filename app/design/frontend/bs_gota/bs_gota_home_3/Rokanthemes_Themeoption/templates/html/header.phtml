@@ -143,7 +143,14 @@ $plain_value = $model->getPlainValue();
 			?>
 			<div class="wrapper-fluid bg-gray-00">
 				<div class="container-max">
-					<div class="sFilter"><?php echo $this->getChildHtml("topSearch"); ?></div>
+					<div class="sFilter">
+						<div class="trigger-filter--header filter--header filter--hidden-sm">
+							<div class="filter-wrapper">
+								<a href="javascript:void(0);">FILTRAR <div class="filter-icon"></div></a> 
+							</div>
+						</div>
+						<?php echo $this->getChildHtml("topSearch"); ?>
+					</div>
 					<!--
 					<?php echo $this->getChildHtml("vertical.topnav") ?>
 					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	

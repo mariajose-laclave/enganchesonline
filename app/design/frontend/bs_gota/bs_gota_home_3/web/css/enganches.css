@@ -378,8 +378,8 @@
 }
 .header-container .header .block-search .block-content .dropdown .field-by-cat-search {
     float: none;
-    width: calc(100% - 100px);
-    flex: 0 0 calc(100% - 100px);
+    width: calc(100% - 60px);
+    flex: 0 0 calc(100% - 60px);
     flex-wrap: nowrap;
     padding: 0;
     background-color: transparent;
@@ -409,7 +409,7 @@
     position: absolute;
     width: 1px;
     height: 100%;
-    right: -15px;
+    right: 3px;
     top: 0;
     background: #D2D2D7;
 }
