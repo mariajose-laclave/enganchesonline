@@ -255,16 +255,27 @@ class CreateCategoriesApp extends AbstractApp
             $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
             foreach ($models as $model) {
-                $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
-                $modelCategory->setName($model);
-                $modelCategory->setParentId($id);
-                $modelCategory->setIsActive(true);
-                $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
-                if ($modelCategoryId) {
-                    $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+
+                $modelExists = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                    ->create()
+                    ->getCollection()
+                    ->addAttributeToFilter('name', $model)
+                    ->addAttributeToFilter('parent_id', $id)
+                    ->getFirstItem()
+                    ->getId();
+
+                if (!$modelExists) {
+                    $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                    $modelCategory->setName($model);
+                    $modelCategory->setParentId($id);
+                    $modelCategory->setIsActive(true);
+                    $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                        ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                    if ($modelCategoryId) {
+                        $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+                    }
+                    $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
                 }
-                $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
         }
     }
