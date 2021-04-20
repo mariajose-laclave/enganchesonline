@@ -48,19 +48,21 @@ class GetDataForSelect extends AbstractApp
 
     protected function _getYears()
     {
-        $arr = [];
-        $i = 1970;
-        $date = new DateTime();
+        $categoryId = (isset($_GET['id_car_brand']) && $_GET['id_car_brand'] != '') ? $_GET['id_car_brand'] : 2;
+        $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 195 ORDER BY `value` DESC";
 
-        while ($i < (int)$date->format('Y') + 1) {
-            $arr[] = [
-                'label' => $i,
-                'id' => $i
-            ];
+        $mysqli = new mysqli('localhost', 'enganches_user', 'Wje5q?24', 'enganches_');
+        $mysqli->set_charset("utf8");
+        $res = $mysqli->query("$query");
+        $select_data = array();
+        while($row = $res->fetch_object()){
+            $select_data[] = array(
+                'label' => $row->value,
+                'id' => $row->value
+            );
         }
-        return json_encode(
-            $arr
-        );
+        
+        return json_encode($select_data);
     }
 
     protected function _getModelsForBrand()
