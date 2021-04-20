@@ -536,10 +536,21 @@ body .product-item .product-photo .product-image-photo, body .product-list-item 
     display: none;
     visibility: hidden;
 }
+.product-item .product-reviews-summary.no-rating {
+    display: none;
+    visibility: hidden;
+}
 /* stripe buttons buy */
 .payment-request-button.action.tocart.StripeElement {
     display: none;
     visibility: hidden;
+}
+.fotorama__stage__shaft {
+    width: 100%!important;
+    max-width: 100%!important;   
+}
+.fotorama__stage {
+    left: 0!important;
 }
 
 /*
