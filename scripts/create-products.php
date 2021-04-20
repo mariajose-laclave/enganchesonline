@@ -5,6 +5,7 @@ require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
+    protected $descriptionArray;
     protected $objectManager;
     protected $categoryLinkManagement;
     protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=100000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
@@ -54,13 +55,27 @@ class CreateCategoriesApp extends AbstractApp
 
     public function run()
     {
+        $this->getDescriptions();
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->_state->setAreaCode('frontend');
         $this->get_lafuente_from_db();
-        $this->convert_aragon();
+        // $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
         // $this->insertKits();
+    }
+
+    protected function getDescriptions()
+    {
+        $this->descriptionArray = array();
+        $tituloBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_cisne');
+        $tituloBojaFijaCisne = $tituloBojaFijaCisne->getPlainValue();
+        $descripcionBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_cisne');
+        $descripcionBojaFijaCisne = $descripcionBojaFijaCisne->getPlainValue();
+        $this->descriptionArray = [
+            'title' => $tituloBojaFijaCisne,
+            'description' => $descripcionBojaFijaCisne
+        ];
     }
 
     /**
@@ -161,6 +176,14 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
+    protected function fillParameters($string, $object)
+    {
+        foreach ($object as $key => $value) {
+            $string = str_replace("{$key}", $value, $string);
+        }
+        return $string;
+    }
+
     /**
      * Function to create products from $this->product_array
      */
@@ -169,7 +192,10 @@ class CreateCategoriesApp extends AbstractApp
         foreach ($this->product_array as $_product) {
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
+            $name = $this->fillParameters($this->descriptionArray['title'], $_product['product']);
+            $product->setName($name); // Name of Product
+            $description = $this->fillParameters($this->descriptionArray['description'], $_product['product']);
+            $product->setDescription($description);
             $product->setAttributeSetId(4); // Attribute set id
             $product->setStatus(1); // Status on product enabled/ disabled 1/0
             // $product->setWeight(10); // weight of product
@@ -188,6 +214,7 @@ class CreateCategoriesApp extends AbstractApp
             );
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
+            $product->addImageToMediaGallery('assets/images/enganche-de-remolque-bola-fija-cuello-cisne.jpg', array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
@@ -329,7 +356,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function get_lafuente_from_db()
     {
 
-        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=5000000000&sEcho=5000000000&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=5000000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=10&sEcho=10&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=10&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
         @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
