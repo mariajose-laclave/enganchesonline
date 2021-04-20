@@ -205,6 +205,7 @@ class CreateCategoriesApp extends AbstractApp
             $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
             $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
+            $product->setWebsiteIds(array(1));
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
@@ -214,7 +215,7 @@ class CreateCategoriesApp extends AbstractApp
                 )
             );
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
-            $product->setUrlKey(null);
+            $product->setUrlKey($url);
             $product->addImageToMediaGallery('/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg', array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
             $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
