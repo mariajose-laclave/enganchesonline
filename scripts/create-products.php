@@ -69,9 +69,9 @@ class CreateCategoriesApp extends AbstractApp
     {
         $this->descriptionArray = array();
         $tituloBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_cisne');
-        $tituloBojaFijaCisne = $tituloBojaFijaCisne->getPlainValue();
+        $tituloBojaFijaCisne = $tituloBojaFijaCisne->getHtmlValue();
         $descripcionBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_cisne');
-        $descripcionBojaFijaCisne = $descripcionBojaFijaCisne->getPlainValue();
+        $descripcionBojaFijaCisne = $descripcionBojaFijaCisne->getHtmlValue();
         $this->descriptionArray = [
             'title' => $tituloBojaFijaCisne,
             'description' => $descripcionBojaFijaCisne
