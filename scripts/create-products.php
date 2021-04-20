@@ -217,6 +217,7 @@ class CreateCategoriesApp extends AbstractApp
             $product->setUrlKey(null);
             $product->addImageToMediaGallery('/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg', array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
+            $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
