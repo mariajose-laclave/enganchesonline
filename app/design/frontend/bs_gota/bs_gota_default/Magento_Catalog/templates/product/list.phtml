@@ -20,8 +20,13 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $url = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
 $url_array = explode('/', $url);
 $category_id = $url_array[count($url_array) - 1] != '' ? $url_array[count($url_array) - 1] : $url_array[count($url_array) - 2];
+if (strpos($category_id, '?')) $with_query = explode('?', $category_id);
+$category_id = $with_query[0];
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
 $_productCollection->addCategoriesFilter(array('in' => $category_id));
+if (isset($_GET['variant']) && $_GET['variant'] != '') {
+	$_productCollection->addAttributeToFilter('variant', $_GET['variant']);
+}
 $_productCollection->setPageSize(5);
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>

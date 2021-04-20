@@ -53,7 +53,8 @@ $categories->addAttributeToSelect('*');
 		goToCategory = () => {
 			var current_id = $('#choose_category').val();
 			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
-			window.location.href = `/catalog/category/view/id/${current_id}`;
+			var variant = $('#version_select').val();
+			window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}`;
 		}
 	});
 </script>
