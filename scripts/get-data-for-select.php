@@ -29,7 +29,7 @@ class GetDataForSelect extends AbstractApp
     protected function _getVersionsForModel()
     {
         
-        $categoryId = (isset($_GET['category_id']) && $_GET['category_id'] != '') ? $_GET['category_id'] : 2;
+        $categoryId = (isset($_GET['id_car_brand']) && $_GET['id_car_brand'] != '') ? $_GET['id_car_brand'] : 2;
         $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 194 ORDER BY `value` DESC";
 
         $mysqli = new mysqli('localhost', 'enganches_user', 'Wje5q?24', 'enganches_');
