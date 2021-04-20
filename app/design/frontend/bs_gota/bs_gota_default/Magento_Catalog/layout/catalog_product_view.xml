@@ -19,17 +19,14 @@
 				<container name="product-view-right" htmlTag="div" htmlClass="col-sm-9 col-xs-12" after="product-view-right"/>
 			</container>
 		</referenceContainer> 
-		<referenceBlock name="product.info.details">                
-			<block class="Magento\Catalog\Block\Product\View\Description" name="informe_de_conformidad.tab" template="Magento_Catalog::product/view/informe-conformidad.phtml" group="detailed_info">
-				<arguments>
-				<argument name="at_code" xsi:type="string">informe_de_conformidad</argument>
-				<argument name="css_class" xsi:type="string">informe</argument>
-				<argument name="at_label" xsi:type="string">informe</argument>
-				<argument name="add_attribute" xsi:type="string">itemprop="informe"</argument>
-				<argument name="title" translate="true" xsi:type="string">Informe de conformidad</argument>
-				</arguments>
-			</block>
-		</referenceBlock>
+		
+		<referenceBlock name="product.info.details">
+          <block class="Magento\Catalog\Block\Product\View" name="informe_de_conformidad.tab" as="informe_de_conformidad" template="product/view/informe-conformidad-block.phtml" group="detailed_info" >
+             <arguments>
+                <argument translate="true" name="title" xsi:type="string">Informe de conformidad</argument>
+             </arguments>
+          </block>
+        </referenceBlock>
     </body>
 </page>
 
