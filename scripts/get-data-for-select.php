@@ -8,7 +8,7 @@ class GetDataForSelect extends AbstractApp
 {
     protected $objectManager;
     protected $resourceConnection;
-    
+
     public function run()
     {
         $this->_state->setAreaCode('frontend');
@@ -31,15 +31,23 @@ class GetDataForSelect extends AbstractApp
         $this->resourceConnection = \Magento\Framework\App\ResourceConnection::getInstance();
         $connection = $this->resourceConnection->getConnection();
         $categoryId = 2;
-        $sql = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 194 ORDER BY `value` DESC";
-        
+        $link = mysql_connect('localhost', 'enganches_user', 'Wje5q?24')
+            or die('No se pudo conectar: ' . mysql_error());
+        echo 'Connected successfully';
+        mysql_select_db('enganches_') or die('No se pudo seleccionar la base de datos');
+
+        // Realizar una consulta MySQL
+        $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 194 ORDER BY `value` DESC";
+        $result = mysql_query($query) or die('Consulta fallida: ' . mysql_error());
+
         $select_data = array();
-        $result = $connection->fetchAll($sql);
-        foreach ($result as $row) {
-            $select_data[] = array(
-                'label' => $row->value,
-                'id' => $row->value
-            );
+        while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            foreach ($line as $col_value) {
+                $select_data[] = array(
+                    'label' => $col_value,
+                    'id' => $col_value
+                );
+            }
         }
         return json_encode($select_data);
     }
@@ -58,7 +66,7 @@ class GetDataForSelect extends AbstractApp
         }
         return json_encode(
             $arr
-        ); 
+        );
     }
 
     protected function _getModelsForBrand()
@@ -81,7 +89,6 @@ class GetDataForSelect extends AbstractApp
     protected function _getYearsForModel()
     {
     }
-
 }
 
 /** @var \Magento\Framework\App\Http $app */
