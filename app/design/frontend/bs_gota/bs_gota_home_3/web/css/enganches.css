@@ -531,6 +531,16 @@
 body .product-item .product-photo .product-image-photo, body .product-list-item .product-photo .product-image-photo {
     height: auto;
 }
+.product-social-links .towishlist,
+.product-social-links .action.tocompare {
+    display: none;
+    visibility: hidden;
+}
+/* stripe buttons buy */
+.payment-request-button.action.tocart.StripeElement {
+    display: none;
+    visibility: hidden;
+}
 
 /*
 // FOOTER
