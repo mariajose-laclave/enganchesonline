@@ -214,7 +214,7 @@ class CreateCategoriesApp extends AbstractApp
             );
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
-            $product->addImageToMediaGallery('assets/images/enganche-de-remolque-bola-fija-cuello-cisne.jpg', array('image', 'small_image', 'thumbnail'), false, false);
+            $product->addImageToMediaGallery('/assets/images/enganche-de-remolque-bola-fija-cuello-cisne.jpg', array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
