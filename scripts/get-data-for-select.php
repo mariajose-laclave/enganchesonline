@@ -3,9 +3,11 @@ require dirname(__FILE__) . '/../app/bootstrap.php';
 $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
 require dirname(__FILE__) . '/abstract.php';
 
+
 class GetDataForSelect extends AbstractApp
 {
     protected $objectManager;
+    protected $resourceConnection;
     
     public function run()
     {
@@ -26,9 +28,20 @@ class GetDataForSelect extends AbstractApp
 
     protected function _getVersionsForModel()
     {
-        return json_encode(
-            [['label' => '3 door', 'id' => '3 door'], ['label' => '5 door', 'id' => '5 door']]
-        );
+        $this->resourceConnection = \Magento\Framework\App\ResourceConnection::getInstance();
+        $connection = $this->resourceConnection->getConnection();
+        $categoryId = 2;
+        $sql = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 194 ORDER BY `value` DESC";
+        
+        $select_data = array();
+        $result = $connection->fetchAll($sql);
+        foreach ($result as $row) {
+            $select_data[] = array(
+                'label' => $row->value,
+                'id' => $row->value
+            );
+        }
+        return json_encode($select_data);
     }
 
     protected function _getYears()
@@ -67,7 +80,6 @@ class GetDataForSelect extends AbstractApp
 
     protected function _getYearsForModel()
     {
-
     }
 
 }
