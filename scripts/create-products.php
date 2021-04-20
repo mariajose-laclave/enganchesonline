@@ -305,7 +305,8 @@ class CreateCategoriesApp extends AbstractApp
                     'make' => $line_array[3],
                     'model' => $line_array[4],
                     'variant' => $line_array[6],
-                    'year' => $line_array[8]
+                    'year' => $line_array[8],
+                    'supplier' => 'Aragón'
 
                 );
                 foreach ($array as $key => $value) {
@@ -357,7 +358,8 @@ class CreateCategoriesApp extends AbstractApp
                     'make' => $row[0],
                     'model' => $make_type_year['model'],
                     'variant' => $make_type_year['variant'],
-                    'year' => $make_type_year['year']
+                    'year' => $make_type_year['year'],
+                    'supplier' => 'LaFuente'
                 );
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
