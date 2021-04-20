@@ -208,8 +208,9 @@ class CreateCategoriesApp extends AbstractApp
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
-                    'manage_stock' => 0,
-                    'is_in_stock' => 1
+                    'manage_stock' => 1,
+                    'is_in_stock' => 1,
+                    'qty' => 999999999
                 )
             );
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
