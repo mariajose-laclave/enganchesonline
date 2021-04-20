@@ -28,8 +28,6 @@ class GetDataForSelect extends AbstractApp
 
     protected function _getVersionsForModel()
     {
-        $this->resourceConnection = \Magento\Framework\App\ResourceConnection::getInstance();
-        $connection = $this->resourceConnection->getConnection();
         $categoryId = 2;
         $link = mysql_connect('localhost', 'enganches_user', 'Wje5q?24')
             or die('No se pudo conectar: ' . mysql_error());
