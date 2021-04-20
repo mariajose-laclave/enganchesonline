@@ -559,7 +559,13 @@ body .product-item .product-photo .product-image-photo, body .product-list-item 
     visibility: hidden;
 }
 .products-grid .add-to-links {
-    display: none;
+    display: none!important;
+    visibility: hidden;
+}
+.catalog-category-view .block-content.filter-content,
+.catalog-category-view .block.block-wishlist,
+.catalog-category-view .block.block-compare {
+    display: none!important;
     visibility: hidden;
 }
 

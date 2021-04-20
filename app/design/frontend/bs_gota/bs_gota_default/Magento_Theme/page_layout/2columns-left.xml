@@ -9,7 +9,4 @@
     <update handle="1column"/>
 	<referenceBlock name="sidebar.main" remove="true"/>
 	<referenceBlock name="sidebar.additional" remove="true"/>
-	<referenceBlock name="catalog.compare.sidebar" remove="true"/> 
-    <referenceBlock name="view.addto.compare" remove="true" /> 
-    <referenceBlock name="view.addto.wishlist" remove="true" />
 </layout>
