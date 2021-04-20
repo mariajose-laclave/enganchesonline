@@ -29,24 +29,19 @@ class GetDataForSelect extends AbstractApp
     protected function _getVersionsForModel()
     {
         $categoryId = 2;
-        $link = mysql_connect('localhost', 'enganches_user', 'Wje5q?24')
-            or die('No se pudo conectar: ' . mysql_error());
-        echo 'Connected successfully';
-        mysql_select_db('enganches_') or die('No se pudo seleccionar la base de datos');
-
-        // Realizar una consulta MySQL
         $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 194 ORDER BY `value` DESC";
-        $result = mysql_query($query) or die('Consulta fallida: ' . mysql_error());
 
+        $mysqli = new mysqli('localhost', 'enganches_user', 'Wje5q?24', 'enganches_');
+        $mysqli->set_charset("utf8");
+        $res = $mysqli->query("$query");
         $select_data = array();
-        while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
-            foreach ($line as $col_value) {
-                $select_data[] = array(
-                    'label' => $col_value,
-                    'id' => $col_value
-                );
-            }
+        while($row = $res->fetch_object()){
+            $select_data[] = array(
+                'label' => $row->value,
+                'id' => $row->value
+            );
         }
+        
         return json_encode($select_data);
     }
 
