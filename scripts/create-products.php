@@ -72,9 +72,52 @@ class CreateCategoriesApp extends AbstractApp
         $tituloBojaFijaCisne = $tituloBojaFijaCisne->getHtmlValue();
         $descripcionBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_cisne');
         $descripcionBojaFijaCisne = $descripcionBojaFijaCisne->getHtmlValue();
+
+        $titulo_bola_desmontable_horizontal = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_desmontable_horizontal');
+        $titulo_bola_desmontable_horizontal = $titulo_bola_desmontable_horizontal->getHtmlValue();
+        $descripcion_bola_desmontable_horizontal = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_desmontable_horizontal');
+        $descripcion_bola_desmontable_horizontal = $descripcion_bola_desmontable_horizontal->getHtmlValue();
+
+        $titulo_bola_desmontable_vertical = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_desmontable_vertical');
+        $titulo_bola_desmontable_vertical = $titulo_bola_desmontable_vertical->getHtmlValue();
+        $descripcion_bola_desmontable_vertical = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_desmontable_vertical');
+        $descripcion_bola_desmontable_vertical = $descripcion_bola_desmontable_vertical->getHtmlValue();
+        
+        $titulo_bola_fija_mixta = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_mixta');
+        $titulo_bola_fija_mixta = $titulo_bola_fija_mixta->getHtmlValue();
+        $descripcion_bola_fija_mixta = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_mixta');
+        $descripcion_bola_fija_mixta = $descripcion_bola_fija_mixta->getHtmlValue();
+        
+        $titulo_bola_fija_mono_block = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_mono_block');
+        $titulo_bola_fija_mono_block = $titulo_bola_fija_mono_block->getHtmlValue();
+        $descripcion_bola_fija_mono_block = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_mono_block');
+        $descripcion_bola_fija_mono_block = $descripcion_bola_fija_mono_block->getHtmlValue();
         $this->descriptionArray = [
-            'title' => $tituloBojaFijaCisne,
-            'description' => $descripcionBojaFijaCisne
+            'fija_cisne' => [
+                'title' => $tituloBojaFijaCisne,
+                'description' => $descripcionBojaFijaCisne,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg'
+            ],
+            'desmontable_horizontal' => [
+                'title' => $titulo_bola_desmontable_horizontal,
+                'description' => $descripcion_bola_desmontable_horizontal,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-horizontal.jpg'
+            ],
+            'desmontable_vertical' => [
+                'title' => $titulo_bola_desmontable_vertical,
+                'description' => $descripcion_bola_desmontable_vertical,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-vertical.jpg'
+            ],
+            'fija_mixta' => [
+                'title' => $titulo_bola_fija_mixta,
+                'description' => $descripcion_bola_fija_mixta,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mixta.jpg'
+            ],
+            'fija_mono' => [
+                'title' => $titulo_bola_fija_mono_block,
+                'description' => $descripcion_bola_fija_mono_block,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mono-block-placa.jpg'
+            ]
         ];
     }
 
@@ -192,9 +235,9 @@ class CreateCategoriesApp extends AbstractApp
         foreach ($this->product_array as $_product) {
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
-            $name = $this->fillParameters($this->descriptionArray['title'], $_product['product']);
+            $name = $this->fillParameters($this->descriptionArray[$_product['product']->type]['title'], $_product['product']);
             $product->setName($name); // Name of Product
-            $description = $this->fillParameters($this->descriptionArray['description'], $_product['product']);
+            $description = $this->fillParameters($this->descriptionArray[$_product['product']->type]['description'], $_product['product']);
             $product->setDescription($description);
             $product->setAttributeSetId(4); // Attribute set id
             $product->setStatus(1); // Status on product enabled/ disabled 1/0
@@ -216,7 +259,7 @@ class CreateCategoriesApp extends AbstractApp
             );
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
-            $product->addImageToMediaGallery('/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg', array('image', 'small_image', 'thumbnail'), false, false);
+            $product->addImageToMediaGallery($this->descriptionArray[$_product['product']->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
             $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
@@ -377,6 +420,7 @@ class CreateCategoriesApp extends AbstractApp
             if (is_null($make_type_year['model'])) {
                 continue;
             } else {
+                $type = $this->getType($row[4]);
                 $price = strip_tags($row[6]);
                 $price = (int)str_replace(['EUR', '€'], '', $price) * 100;
                 $array = array(
@@ -389,7 +433,8 @@ class CreateCategoriesApp extends AbstractApp
                     'model' => $make_type_year['model'],
                     'variant' => $make_type_year['variant'],
                     'year' => $make_type_year['year'],
-                    'supplier' => 'LaFuente'
+                    'supplier' => 'LaFuente',
+                    'type' => $type
                 );
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
@@ -399,6 +444,36 @@ class CreateCategoriesApp extends AbstractApp
                     'product' => (object)$array
                 ];
             }
+        }
+    }
+
+    protected function getType($string)
+    {
+        if (strpos(strtolower($string), strtolower('fija'))) {
+            // Bola fija
+            if (strpos(strtolower($string), strtolower('cisne'))) {
+                // Fija cisne
+                return 'fija_cisne';
+            } elseif (strpos(strtolower($string), strtolower('mixta'))) {
+                // Fija horizontal
+                return 'fija_mixta';
+            } elseif (strpos(strtolower($string), strtolower('mono'))) {
+                // Fija vertical
+                return 'fija_mono';
+            }
+        } elseif (strpos(strtolower($string), strtolower('desmontable'))) {
+            // desmontable
+            if (strpos(strtolower($string), strtolower('cisne'))) {
+                // desmontable cisne
+                return 'desmontable_cisne';
+            } elseif (strpos(strtolower($string), strtolower('horizontal'))) {
+                // desmontable horizontal
+                return 'desmontable_horizontal';
+            } elseif (strpos(strtolower($string), strtolower('vertical'))) {
+                // desmontable vertical
+                return 'desmontable_vertical';
+            }
+
         }
     }
 
