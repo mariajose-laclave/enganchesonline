@@ -257,6 +257,7 @@ class CreateCategoriesApp extends AbstractApp
                     'qty' => 99999
                 )
             );
+            $product->setVariant($_product['product']->variant);
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
             $product->addImageToMediaGallery($this->descriptionArray[$_product['product']->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
@@ -473,8 +474,8 @@ class CreateCategoriesApp extends AbstractApp
                 // desmontable vertical
                 return 'desmontable_vertical';
             }
-
         }
+        return 'fija_cisne';
     }
 
     /**
