@@ -451,7 +451,6 @@
     display: none;
 }
 .filter-wrapper {
-    display: block;
     color: var(--gray);
     font-family: var(--headingfont);
     text-transform: uppercase;
@@ -466,13 +465,13 @@
     justify-content: flex-end;
 }
 .filter-wrapper a {
-
+    padding: 12px 0;
+    display: none;
 }
 .filter-icon {
 
-    width: 54px;
-    height: 54px;
-    line-height: 54px;
+    width: 36px;
+    height: auto;
     
     color: var(--primary-color);
     
@@ -497,6 +496,14 @@
 }
 .filter-icon:before {
     content: "\e9d0";
+}
+@media (max-width: 880px) {
+    .filter-wrapper a {
+        display: block;
+    }
+    .block-search--header {
+        display: none;
+    }
 }
 @media (min-width: 992px) {
     .header-container.layout3 .header .block-search .form.minisearch {

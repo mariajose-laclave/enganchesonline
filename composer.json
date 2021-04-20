@@ -13,6 +13,7 @@
     "require": {
         "magento/composer-root-update-plugin": "~1.0",
         "magento/product-community-edition": "2.3.6",
+        "mageplaza/magento-2-spanish-language-pack": "dev-master",
         "mageplaza/module-core": "^1.4",
         "mageplaza/module-smtp": "^4.3",
         "mailchimp/mc-magento2": "^102.3",

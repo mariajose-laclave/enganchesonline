@@ -117,6 +117,9 @@ $categories->addAttributeToSelect('*');
 				current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
 				window.location.href = `/catalog/category/view/id/${current_id}`;
 			}
+			$('.trigger-filter--header a').on('click', function() {
+				$('.block-search--header').toggle();
+			});
 		});
 	</script>
 <?php } ?>
