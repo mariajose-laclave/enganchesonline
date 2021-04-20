@@ -55,8 +55,8 @@ class CreateCategoriesApp extends AbstractApp
 
     public function run()
     {
-        $this->getDescriptions();
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->getDescriptions();
         $this->_state->setAreaCode('frontend');
         $this->get_lafuente_from_db();
         // $this->convert_aragon();
