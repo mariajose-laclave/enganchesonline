@@ -553,6 +553,16 @@ body .product-item .product-photo .product-image-photo, body .product-list-item 
     left: 0!important;
 }
 
+.products-grid .product-item:hover .product-photo a.photo:after {
+    content: none;
+    opacity: 0;
+    visibility: hidden;
+}
+.products-grid .add-to-links {
+    display: none;
+    visibility: hidden;
+}
+
 /*
 // FOOTER
 */
