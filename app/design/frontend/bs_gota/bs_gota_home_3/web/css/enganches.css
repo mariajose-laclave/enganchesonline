@@ -149,7 +149,7 @@
 .field-by-cat-search ._label {
     position: relative;
     width: 26.6666%;
-    flex: 0 0 calc(26.6666% - 60px);
+    flex: 0 0 calc(25% - 48px);
     margin: 0 15px;
 }
 .field-by-cat-search ._label::after {
