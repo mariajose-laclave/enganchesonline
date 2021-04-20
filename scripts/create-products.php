@@ -179,7 +179,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function fillParameters($string, $object)
     {
         foreach ($object as $key => $value) {
-            $string = str_replace("{$key}", $value, $string);
+            $string = str_replace("<!-- $key -->", $value, $string);
         }
         return $string;
     }
