@@ -5,6 +5,7 @@ require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
+    protected $descriptionArray;
     protected $objectManager;
     protected $categoryLinkManagement;
     protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=100000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
@@ -55,12 +56,69 @@ class CreateCategoriesApp extends AbstractApp
     public function run()
     {
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->getDescriptions();
         $this->_state->setAreaCode('frontend');
         $this->get_lafuente_from_db();
-        $this->convert_aragon();
+        // $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
         // $this->insertKits();
+    }
+
+    protected function getDescriptions()
+    {
+        $this->descriptionArray = array();
+        $tituloBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_cisne');
+        $tituloBojaFijaCisne = $tituloBojaFijaCisne->getHtmlValue();
+        $descripcionBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_cisne');
+        $descripcionBojaFijaCisne = $descripcionBojaFijaCisne->getHtmlValue();
+
+        $titulo_bola_desmontable_horizontal = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_desmontable_horizontal');
+        $titulo_bola_desmontable_horizontal = $titulo_bola_desmontable_horizontal->getHtmlValue();
+        $descripcion_bola_desmontable_horizontal = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_desmontable_horizontal');
+        $descripcion_bola_desmontable_horizontal = $descripcion_bola_desmontable_horizontal->getHtmlValue();
+
+        $titulo_bola_desmontable_vertical = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_desmontable_vertical');
+        $titulo_bola_desmontable_vertical = $titulo_bola_desmontable_vertical->getHtmlValue();
+        $descripcion_bola_desmontable_vertical = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_desmontable_vertical');
+        $descripcion_bola_desmontable_vertical = $descripcion_bola_desmontable_vertical->getHtmlValue();
+        
+        $titulo_bola_fija_mixta = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_mixta');
+        $titulo_bola_fija_mixta = $titulo_bola_fija_mixta->getHtmlValue();
+        $descripcion_bola_fija_mixta = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_mixta');
+        $descripcion_bola_fija_mixta = $descripcion_bola_fija_mixta->getHtmlValue();
+        
+        $titulo_bola_fija_mono_block = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_mono_block');
+        $titulo_bola_fija_mono_block = $titulo_bola_fija_mono_block->getHtmlValue();
+        $descripcion_bola_fija_mono_block = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_mono_block');
+        $descripcion_bola_fija_mono_block = $descripcion_bola_fija_mono_block->getHtmlValue();
+        $this->descriptionArray = [
+            'fija_cisne' => [
+                'title' => $tituloBojaFijaCisne,
+                'description' => $descripcionBojaFijaCisne,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg'
+            ],
+            'desmontable_horizontal' => [
+                'title' => $titulo_bola_desmontable_horizontal,
+                'description' => $descripcion_bola_desmontable_horizontal,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-horizontal.jpg'
+            ],
+            'desmontable_vertical' => [
+                'title' => $titulo_bola_desmontable_vertical,
+                'description' => $descripcion_bola_desmontable_vertical,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-vertical.jpg'
+            ],
+            'fija_mixta' => [
+                'title' => $titulo_bola_fija_mixta,
+                'description' => $descripcion_bola_fija_mixta,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mixta.jpg'
+            ],
+            'fija_mono' => [
+                'title' => $titulo_bola_fija_mono_block,
+                'description' => $descripcion_bola_fija_mono_block,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mono-block-placa.jpg'
+            ]
+        ];
     }
 
     /**
@@ -161,6 +219,14 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
+    protected function fillParameters($string, $object)
+    {
+        foreach ($object as $key => $value) {
+            $string = str_replace("<!-- $key -->", $value, $string);
+        }
+        return $string;
+    }
+
     /**
      * Function to create products from $this->product_array
      */
@@ -169,7 +235,10 @@ class CreateCategoriesApp extends AbstractApp
         foreach ($this->product_array as $_product) {
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
             $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
+            $name = $this->fillParameters($this->descriptionArray[$_product['product']->type]['title'], $_product['product']);
+            $product->setName($name); // Name of Product
+            $description = $this->fillParameters($this->descriptionArray[$_product['product']->type]['description'], $_product['product']);
+            $product->setDescription($description);
             $product->setAttributeSetId(4); // Attribute set id
             $product->setStatus(1); // Status on product enabled/ disabled 1/0
             // $product->setWeight(10); // weight of product
@@ -179,16 +248,20 @@ class CreateCategoriesApp extends AbstractApp
             $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
             $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
+            $product->setWebsiteIds(array(1));
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
-                    'manage_stock' => 0,
-                    'is_in_stock' => 1
+                    'manage_stock' => 1,
+                    'is_in_stock' => 1,
+                    'qty' => 99999
                 )
             );
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
+            $product->addImageToMediaGallery($this->descriptionArray[$_product['product']->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
+            $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
@@ -305,7 +378,8 @@ class CreateCategoriesApp extends AbstractApp
                     'make' => $line_array[3],
                     'model' => $line_array[4],
                     'variant' => $line_array[6],
-                    'year' => $line_array[8]
+                    'year' => $line_array[8],
+                    'supplier' => 'Aragón'
 
                 );
                 foreach ($array as $key => $value) {
@@ -328,7 +402,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function get_lafuente_from_db()
     {
 
-        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=5000000000&sEcho=5000000000&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=5000000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=100000&sEcho=100000&iColumns=16&sColumns&iDisplayStart=0&iDisplayLength=100000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
         @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -346,6 +420,7 @@ class CreateCategoriesApp extends AbstractApp
             if (is_null($make_type_year['model'])) {
                 continue;
             } else {
+                $type = $this->getType($row[4]);
                 $price = strip_tags($row[6]);
                 $price = (int)str_replace(['EUR', '€'], '', $price) * 100;
                 $array = array(
@@ -357,7 +432,9 @@ class CreateCategoriesApp extends AbstractApp
                     'make' => $row[0],
                     'model' => $make_type_year['model'],
                     'variant' => $make_type_year['variant'],
-                    'year' => $make_type_year['year']
+                    'year' => $make_type_year['year'],
+                    'supplier' => 'LaFuente',
+                    'type' => $type
                 );
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
@@ -367,6 +444,36 @@ class CreateCategoriesApp extends AbstractApp
                     'product' => (object)$array
                 ];
             }
+        }
+    }
+
+    protected function getType($string)
+    {
+        if (strpos(strtolower($string), strtolower('fija'))) {
+            // Bola fija
+            if (strpos(strtolower($string), strtolower('cisne'))) {
+                // Fija cisne
+                return 'fija_cisne';
+            } elseif (strpos(strtolower($string), strtolower('mixta'))) {
+                // Fija horizontal
+                return 'fija_mixta';
+            } elseif (strpos(strtolower($string), strtolower('mono'))) {
+                // Fija vertical
+                return 'fija_mono';
+            }
+        } elseif (strpos(strtolower($string), strtolower('desmontable'))) {
+            // desmontable
+            if (strpos(strtolower($string), strtolower('cisne'))) {
+                // desmontable cisne
+                return 'desmontable_cisne';
+            } elseif (strpos(strtolower($string), strtolower('horizontal'))) {
+                // desmontable horizontal
+                return 'desmontable_horizontal';
+            } elseif (strpos(strtolower($string), strtolower('vertical'))) {
+                // desmontable vertical
+                return 'desmontable_vertical';
+            }
+
         }
     }
 
