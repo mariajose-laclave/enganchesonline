@@ -59,12 +59,12 @@ $locations = $block->getStoreViewLocator();
 			<?php if ($time_today['today'] == 0) { ?><?php echo __('Closed') ?><?php } else { ?><?php if ($time_today['time_today']->from->hours < 10) {
 																									echo '0' . $time_today['time_today']->from->hours;
 																								} ?> : <?php if ($time_today['time_today']->from->minutes < 10) {
-																										echo '0' . $time_today['time_today']->from->minutes;
-																									} ?> AM - <?php if ($time_today['time_today']->to->hours < 10) {
-																																																						echo '0' . $time_today['time_today']->to->hours;
-																																																					} ?> : <?php if ($time_today['time_today']->to->minutes < 10) {
-																																																																																		echo '0' . $time_today['time_today']->to->minutes;
-																																																																																	} ?> PM <?php } ?>
+																											echo '0' . $time_today['time_today']->from->minutes;
+																										} ?> AM - <?php if ($time_today['time_today']->to->hours < 10) {
+																													echo '0' . $time_today['time_today']->to->hours;
+																												} ?> : <?php if ($time_today['time_today']->to->minutes < 10) {
+																																																								echo '0' . $time_today['time_today']->to->minutes;
+																																																							} ?> PM <?php } ?>
 		<div class="locator_arrow"></div>
 		</div>
 		<div class="all_today_time" style="display:none;">
@@ -72,25 +72,23 @@ $locations = $block->getStoreViewLocator();
 		</div>
 	</div>
 </div>
-<div onclick="testApi()" class="btn btn-primary">
-Test API
+<div onclick="elegirTaller()" class="btn btn-primary">
+	Elegir taller
 </div>
 <script>
-	require([
-		'jquery',
-		'rokanthemes/choose'
-	], function($) {
-		function testApi() {
-			$.ajax({
-				url: 'https://epic-dhawan.82-223-50-168.plesk.page/rest/V1/laclave-apitest/test?param=s',
-				type: 'get',
-				error: function() {
-					console.log('error');
-				},
-				success: function(data) {
-					console.log(data);
+	function elegirTaller(id = null) {
+		if (id === null) id = 2;
+		var req = new XMLHttpRequest();
+		req.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/rest/V1/laclave-apitest/test?param=${id}`, true);
+		req.onreadystatechange = (aEvt) => {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					alert('Thanks for choosing this taller')
+				} else {
+					dump("Error loading page\n");
 				}
-			});
-		}
-	});
+			}
+		};
+		req.send();
+	}
 </script>
