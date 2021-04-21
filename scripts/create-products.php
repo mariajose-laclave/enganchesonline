@@ -131,16 +131,16 @@ class CreateCategoriesApp extends AbstractApp
         $this->createAragonKits();
         $this->createLaFuenteKits();
         foreach ($this->product_array as $_product) {
+            $productData = $_product['product'];
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
-            $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
-            $product->setAttributeSetId(4); // Attribute set id
-            $product->setStatus(1); // Status on product enabled/ disabled 1/0
-            // $product->setWeight(10); // weight of product
-            $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
-            $product->setTaxClassId(0); // Tax class id
-            $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
+            $product->setSku($productData->sku);
+            $product->setName("Enganche para " . $productData->name);
+            $product->setAttributeSetId(4);
+            $product->setStatus(1);
+            $product->setVisibility(4);
+            $product->setTaxClassId(0);
+            $product->setTypeId('simple');
+            $product->setPrice($productData->price * 1.21 / 100);
             $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
             $product->setStockData(
@@ -150,13 +150,13 @@ class CreateCategoriesApp extends AbstractApp
                     'is_in_stock' => 1
                 )
             );
-            $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $url = str_replace([' ', '/'], ['', ''], $productData->name) . str_replace(' ', '-', $productData->sku);
             $product->setUrlKey($url);
             $product->save();
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->model)->getFirstItem()->getId();
             $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
@@ -233,19 +233,19 @@ class CreateCategoriesApp extends AbstractApp
     protected function createProducts()
     {
         foreach ($this->product_array as $_product) {
+            $productData = $_product['product'];
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
-            $product->setSku($_product['product']->sku); // Set your sku here
-            $name = $this->fillParameters($this->descriptionArray[$_product['product']->type]['title'], $_product['product']);
-            $product->setName($name); // Name of Product
-            $description = $this->fillParameters($this->descriptionArray[$_product['product']->type]['description'], $_product['product']);
-            $product->setDescription($description);
-            $product->setAttributeSetId(4); // Attribute set id
-            $product->setStatus(1); // Status on product enabled/ disabled 1/0
-            // $product->setWeight(10); // weight of product
-            $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
-            $product->setTaxClassId(0); // Tax class id
-            $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
+            $product->setSku($productData->sku);
+            $name = $this->fillParameters($this->descriptionArray[$productData->type]['title'], $productData);
+            $product->setName($name);
+            $description = $this->fillParameters($this->descriptionArray[$productData->type]['description'], $productData);
+            $product->setShortDescription($description);
+            $product->setAttributeSetId(4);
+            $product->setStatus(1);
+            $product->setVisibility(4);
+            $product->setTaxClassId(0);
+            $product->setTypeId('simple');
+            $product->setPrice($productData->price * 1.21 / 100);
             $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
             $product->setWebsiteIds(array(1));
@@ -257,23 +257,22 @@ class CreateCategoriesApp extends AbstractApp
                     'qty' => 99999
                 )
             );
-            $product->setVariant($_product['product']->variant);
-            $product->setDateRange($_product['product']->year);
-            // $product->setType($_product['product']->type);
-            $product->setTiempoDeMontaje($_product['product']->tiempo_de_montaje. " minutos");
-            $product->setMmr($_product['product']->mmr."kg");
-            $product->setValorD($_product['product']->valor_d."kg");
-            $product->setValorSCargaVertical($_product['product']->valor_s_carga_vertical."kg");
-            
-            $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $product->setVariant($productData->variant);
+            $product->setDateRange($productData->year);
+            // $product->setType($productData->type);
+            $product->setTiempoDeMontaje($productData->tiempo_de_montaje. " minutos");
+            $product->setMmr($productData->mmr."kg");
+            $product->setValorD($productData->valor_d."kg");
+            $product->setValorSCargaVertical($productData->valor_s_carga_vertical."kg");  
+            $url = str_replace([' ', '/'], ['', ''], $productData->name) . str_replace(' ', '-', $productData->sku);
             $product->setUrlKey($url);
-            $product->addImageToMediaGallery($this->descriptionArray[$_product['product']->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
+            $product->addImageToMediaGallery($this->descriptionArray[$productData->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
             $product->save();
             $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->model)->getFirstItem()->getId();
             $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
