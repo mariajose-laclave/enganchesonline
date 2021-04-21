@@ -36,8 +36,10 @@ $i = 1;
 						<div><?php echo __('Address') ?>: <?php echo $this->escapeHtml($location->getAddress()); ?></div>
 					<?php }?> 
 					
-					<div class="view-detail" style="margin-right: 8px;"><a href="<?php echo $this->getUrl('store-locator/store/view/key/'.$location->getId()) ?>"><?php echo __('View Detail') ?></a></div>
-					<div class="view-detail"><a href="javascript:elegirTaller(<?php echo $location->getId(); ?>)"><?php echo __('Elegir taller') ?></a></div>
+					<div class="view-detail" style="margin-right: 8px;">
+						<a style="margin-right: 8px;" href="<?php echo $this->getUrl('store-locator/store/view/key/'.$location->getId()) ?>"><?php echo __('View Detail') ?></a>
+						<a href="javascript:elegirTaller(<?php echo $location->getId(); ?>)"><?php echo __('Elegir taller') ?></a>
+					</div>
 					<div class="card-footer">
 						<?php $time_today = $block->getTimeStoreLocator($location->getStoreId()) ?>
 						<div class="today_time">
