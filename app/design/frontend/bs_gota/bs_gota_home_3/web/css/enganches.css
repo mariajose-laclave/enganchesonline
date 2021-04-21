@@ -571,6 +571,31 @@ body .product-item .product-photo .product-image-photo, body .product-list-item 
     visibility: hidden;
 }
 
+
+/*
+// TALLERES
+*/
+.card-store {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.card-store .image {
+    width: 33%;
+    flex:0 0 33%;
+}
+.card-store .image img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+.card-store .location-information {
+    padding-left: 15px;
+    width: 66%;
+    flex:0 0 66%;
+}
+
 /*
 // FOOTER
 */
