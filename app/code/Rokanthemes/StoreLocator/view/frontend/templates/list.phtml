@@ -36,7 +36,10 @@ $i = 1;
 						<div><?php echo __('Address') ?>: <?php echo $this->escapeHtml($location->getAddress()); ?></div>
 					<?php }?> 
 					
-					<div class="view-detail"><a href="<?php echo $this->getUrl('store-locator/store/view/key/'.$location->getId()) ?>"><?php echo __('View Detail') ?></a></div>
+					<div class="view-detail" style="margin-right: 8px;">
+						<a style="margin-right: 8px;" href="<?php echo $this->getUrl('store-locator/store/view/key/'.$location->getId()) ?>"><?php echo __('View Detail') ?></a>
+						<a href="javascript:elegirTaller(<?php echo $location->getId(); ?>)"><?php echo __('Elegir taller') ?></a>
+					</div>
 					<div class="card-footer">
 						<?php $time_today = $block->getTimeStoreLocator($location->getStoreId()) ?>
 						<div class="today_time">
@@ -55,3 +58,20 @@ $i = 1;
         <?php $i++ ?>
     <?php endforeach; ?>
 </div>
+<script>
+	function elegirTaller(id = null) {
+		if (id === null) id = 2;
+		var req = new XMLHttpRequest();
+		req.open('GET', `https://epic-dhawan.82-223-50-168.plesk.page/rest/V1/laclave-apitest/test?param=${id}`, true);
+		req.onreadystatechange = (aEvt) => {
+			if (req.readyState == 4) {
+				if (req.status == 200) {
+					alert('Thanks for choosing this taller')
+				} else {
+					dump("Error loading page\n");
+				}
+			}
+		};
+		req.send();
+	}
+</script>
