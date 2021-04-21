@@ -259,7 +259,7 @@ class CreateCategoriesApp extends AbstractApp
             );
             $product->setVariant($_product['product']->variant);
             $product->setDateRange($_product['product']->year);
-            $product->setType($_product['product']->type);
+            // $product->setType($_product['product']->type);
             $product->setTiempoDeMontaje($_product['product']->tiempo_de_montaje);
             $product->setMmr($_product['product']->mmr);
             $product->setValorD($_product['product']->valor_d);
