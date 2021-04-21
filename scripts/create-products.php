@@ -260,10 +260,10 @@ class CreateCategoriesApp extends AbstractApp
             $product->setVariant($_product['product']->variant);
             $product->setDateRange($_product['product']->year);
             // $product->setType($_product['product']->type);
-            $product->setTiempoDeMontaje($_product['product']->tiempo_de_montaje);
-            $product->setMmr($_product['product']->mmr);
-            $product->setValorD($_product['product']->valor_d);
-            $product->setValorSCargaVertical($_product['product']->valor_s_carga_vertical);
+            $product->setTiempoDeMontaje($_product['product']->tiempo_de_montaje. " minutos");
+            $product->setMmr($_product['product']->mmr."kg");
+            $product->setValorD($_product['product']->valor_d."kg");
+            $product->setValorSCargaVertical($_product['product']->valor_s_carga_vertical."kg");
             
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
