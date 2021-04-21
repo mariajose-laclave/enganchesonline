@@ -260,6 +260,10 @@ class CreateCategoriesApp extends AbstractApp
             $product->setVariant($_product['product']->variant);
             $product->setDateRange($_product['product']->year);
             $product->setType($_product['product']->type);
+            $product->setTiempoDeMontaje($_product['product']->tiempo_de_montaje);
+            $product->setMmr($_product['product']->mmr);
+            $product->setValorD($_product['product']->valor_d);
+            $product->setValorSCargaVertical($_product['product']->valor_s_carga_vertical);
             
             $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
             $product->setUrlKey($url);
@@ -438,7 +442,11 @@ class CreateCategoriesApp extends AbstractApp
                     'variant' => $make_type_year['variant'],
                     'year' => $make_type_year['year'],
                     'supplier' => 'LaFuente',
-                    'type' => $type
+                    'type' => $type,
+                    'tiempo_de_montaje' => $row[7],
+                    'mmr' => $row[9],
+                    'valor_d' => $row[11],
+                    'valor_s_carga_vertical' => $row[10]
                 );
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
