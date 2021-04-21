@@ -524,7 +524,9 @@
 .bg-gray-00 {
     background-color: var(--gray-00);
 }
-
+body .wave {
+    background: var(--gray-00);
+}
 /*
 // PRODUCTS
 */
