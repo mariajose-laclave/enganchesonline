@@ -26,11 +26,12 @@ class TestManagement implements \LaClave\ApiTest\Api\TestManagementInterface
      */
     public function getTest($param)
     {
-        if ($this->getLoggedinCustomerId()) {
-            $customer = $this->_customerFactory->load(1);
+        $customerId = $this->getLoggedinCustomerId();
+        if ($customerId) {
+            $customer = $this->_customerFactory->load($customerId);
             return $customer->getName();
         }
-        return 'hello api GET return the $param ' . $param;
+        return false;
     }
 
     
