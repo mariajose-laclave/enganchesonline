@@ -26,7 +26,7 @@ $categories->addAttributeToSelect('*');
 				url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
 				success: (data) => {
 					data = JSON.parse(data);
-					var html = '';
+					var html = '<option>Por favor, selecciona un modelo</option>';
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
@@ -40,7 +40,7 @@ $categories->addAttributeToSelect('*');
 				url: `/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${$('#model_select').val()}`,
 				success: (data) => {
 					data = JSON.parse(data);
-					var html = '';
+					var html = '<option>Por favor, selecciona una versión</option>';
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
@@ -55,7 +55,7 @@ $categories->addAttributeToSelect('*');
 				success: (data) => {
 					data = JSON.parse(data);
 					console.log(data);
-					var html = '';
+					var html = '<option>Por favor, selecciona un año</option>';
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
