@@ -571,6 +571,9 @@ body .product-item .product-photo .product-image-photo, body .product-list-item 
     visibility: hidden;
 }
 
+.checkout-index-index .page-title-wrapper h1 span, .page-title-wrapper h1 span {
+    font-size: 36px;
+}
 
 /*
 // TALLERES
@@ -594,6 +597,17 @@ body .product-item .product-photo .product-image-photo, body .product-list-item 
     padding-left: 15px;
     width: 66%;
     flex:0 0 66%;
+}
+.storelocator-index-index #locator_filter .column_left .center #store_list .list .today_time {
+    background: transparent;
+    color: var(--gray);
+    border: 1px solid var(--gray-01);
+    border-radius: 3px;
+}
+#locator_filter .column_left .center #store_list .list .location-information .view-detail a {
+    border: none;
+    border-radius: 3px;
+    font-weight: 600;
 }
 
 /*
