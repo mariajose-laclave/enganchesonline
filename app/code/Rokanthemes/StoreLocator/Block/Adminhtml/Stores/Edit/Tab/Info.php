@@ -62,7 +62,7 @@ class Info extends Generic
 
         $fieldset = $form->addFieldset(
             'base_fieldset',
-            ['legend' => __('Informations')]
+            ['legend' => __('Información')]
         );
 
         if ($model->getId()) {
@@ -82,6 +82,67 @@ class Info extends Generic
                 'required' => true
             ]
         );
+
+        $fieldset->addField(
+            'public_name',
+            'text',
+            [
+                'name' => 'public_name',
+                'label' => 'Nombre público',
+                'required' => false
+            ]
+        );
+
+        $fieldset->addField(
+            'cif',
+            'text',
+            [
+                'name' => 'cif',
+                'label' => 'CIF',
+                'required' => false
+            ]
+        );
+
+        $fieldset->addField(
+            'persona_de_contacto',
+            'text',
+            [
+                'name' => 'persona_de_contacto',
+                'label' => 'Persona de contacto',
+                'required' => true
+            ]
+        );
+
+        $fieldset->addField(
+            'precio_hora',
+            'text',
+            [
+                'name' => 'precio_hora',
+                'label' => 'Precio hora',
+                'required' => true
+            ]
+        );
+
+        $fieldset->addField(
+            'marca_enganches',
+            'text',
+            [
+                'name' => 'marca_enganches',
+                'label' => 'Marca enganches',
+                'required' => false
+            ]
+        );
+
+        $fieldset->addField(
+            'enganches_montados_por_ano',
+            'text',
+            [
+                'name' => 'enganches_montados_por_ano',
+                'label' => 'Enganches montados por año',
+                'required' => false
+            ]
+        );
+
 		$fieldset->addField(
             'des',
             'textarea',

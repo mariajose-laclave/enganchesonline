@@ -36,6 +36,36 @@ class InstallSchema implements InstallSchemaInterface
             100,
             ['nullable' => false, 'default' => null]
         )->addColumn(
+            'public_name',
+            Table::TYPE_TEXT,
+            312,
+            ['nullable' => true, 'default' => null]
+        )->addColumn(
+            'cif',
+            Table::TYPE_TEXT,
+            312,
+            ['nullable' => true, 'default' => null]
+        )->addColumn(
+            'persona_de_contacto',
+            Table::TYPE_TEXT,
+            312,
+            ['nullable' => true, 'default' => null]
+        )->addColumn(
+            'precio_hora',
+            Table::TYPE_TEXT,
+            312,
+            ['nullable' => true, 'default' => null]
+        )->addColumn(
+            'marca_enganches',
+            Table::TYPE_TEXT,
+            312,
+            ['nullable' => true, 'default' => null]
+        )->addColumn(
+            'enganches_montados_por_ano',
+            Table::TYPE_TEXT,
+            312,
+            ['nullable' => true, 'default' => null]
+        )->addColumn(
             'address',
             Table::TYPE_TEXT,
             312,
