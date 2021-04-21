@@ -32,7 +32,7 @@ $categories->addAttributeToSelect('*');
 					}
 					$('#model_select').html(html);
 				}
-			})
+			});
 		});
 		$('#model_select').on("change", () => {
 			$.ajax({
@@ -46,7 +46,7 @@ $categories->addAttributeToSelect('*');
 					}
 					$('#version_select').html(html);
 				}
-			})
+			});
 		});
 		$('#version_select').on("change", () => {
 			$.ajax({
@@ -54,13 +54,14 @@ $categories->addAttributeToSelect('*');
 				url: `/scripts/get-data-for-select.php?data_type=years&id_car_brand=${$('#model_select').val()}`,
 				success: (data) => {
 					data = JSON.parse(data);
+					console.log(data);
 					var html = '';
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
 					$('#year_select').html(html);
 				}
-			})
+			});
 		});
 		goToCategory = () => {
 			var current_id = $('#choose_category').val();
