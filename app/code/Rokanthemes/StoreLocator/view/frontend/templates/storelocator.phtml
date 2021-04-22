@@ -1,5 +1,5 @@
 <div id="locator_filter" class="block" style="display: flex;">
-    <div class="column_left" style="width: 33%">
+    <div class="column_left" style="width: 100%">
         <div class="block-content">
             <div id="current-address" class="bstlocator_input">
                 <div class="input-box">
@@ -23,9 +23,6 @@
 		<div class="center"> 
 			<div class="store_list"><?= $block->getChildHtml('store_list') ?></div>
 		</div>
-    </div>
-	<div class="column_right" style="width: 67%;height: 80vh; max-height: 800px;padding-left: 15px;">
-		 <div id="bst-map-load" style="height: 100%"></div>
     </div>
 </div>
 <script language="javascript" type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $block->getApiKey() ?>&libraries=places"></script>

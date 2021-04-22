@@ -35,14 +35,11 @@ $i = 1;
 					<?php if (trim($location->getAddress())) { ?>
 						<div><?php echo __('Address') ?>: <?php echo $this->escapeHtml($location->getAddress()); ?></div>
 					<?php }?> 
-					
-					<div class="view-detail" style="margin-right: 8px;">
-						<a style="margin-right: 8px;" href="<?php echo $this->getUrl('store-locator/store/view/key/'.$location->getId()) ?>"><?php echo __('View Detail') ?></a>
-						<a href="javascript:elegirTaller(<?php echo $location->getId(); ?>)"><?php echo __('Elegir taller') ?></a>
-					</div>
+
 					<div class="card-footer">
 						<?php $time_today = $block->getTimeStoreLocator($location->getStoreId()) ?>
 						<div class="today_time">
+							<i class="far fa-clock"></i>
 							<?= __('Opening Hours:')?> 
 							<?php if($time_today['today'] == 0){?><?php echo __('Closed') ?><?php }else{ ?><?php if($time_today['time_today']->from->hours < 10){echo '0'.$time_today['time_today']->from->hours;} ?> : <?php if($time_today['time_today']->from->minutes < 10){echo '0'.$time_today['time_today']->from->minutes;} ?> AM - <?php if($time_today['time_today']->to->hours < 10){echo '0'.$time_today['time_today']->to->hours;} ?> : <?php if($time_today['time_today']->to->minutes < 10){echo '0'.$time_today['time_today']->to->minutes;} ?> PM <?php }?>
 							<div class="locator_arrow"></div>
@@ -50,6 +47,10 @@ $i = 1;
 						<div class="all_today_time" style="display:none;">
 							<?php echo $block->getAllTimeStoreLocator($location->getStoreId()); ?>
 						</div>
+					</div>
+					<div class="view-detail" style="margin-right: 8px;">
+						<a style="margin-right: 8px;" href="<?php echo $this->getUrl('store-locator/store/view/key/'.$location->getId()) ?>"><?php echo __('View Detail') ?></a>
+						<a href="javascript:elegirTaller(<?php echo $location->getId(); ?>)"><?php echo __('Elegir taller') ?></a>
 					</div>
 				</div>
 			</div>
