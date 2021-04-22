@@ -670,10 +670,15 @@ body .product-item .product-photo .add-to-links, body .product-list-item .produc
     font-family: var(--headingfont);
     font-weight: 600;
     margin: 0;
+    background-color: var(--gray);
 }
 #locator_filter-store .column_left #store_list_view .location-information .btn.btn-primary {
     margin-top: 24px;
     margin-bottom: 24px;
+}
+.storelocator-index-index #locator_filter .column_left .center {
+    height: auto;
+    max-height: 100%;
 }
 
 .btn.btn-primary {

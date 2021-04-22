@@ -54,7 +54,7 @@ $locations = $block->getStoreViewLocator();
 
 				<div class="card-footer">
 					<div class="map-directions">
-						<a href="https://www.google.com/maps/@<?php echo $locations->getLat(); ?>,<?php echo $locations->getLng(); ?>,15z" target="_blank"><i class="fa fa-map-o"></i><?php echo __('Get Directions') ?></a>
+						<a href="https://www.google.com/maps/@<?php echo $locations->getLat(); ?>,<?php echo $locations->getLng(); ?>,15z" target="_blank"><i class="fas fa-map-marker-alt"></i>&nbsp;<?php echo __('Get Directions') ?></a>
 					</div>
 					<?php $time_today = $block->getTimeStoreLocator($locations->getStoreId()) ?>
 					<div class="today_time">
