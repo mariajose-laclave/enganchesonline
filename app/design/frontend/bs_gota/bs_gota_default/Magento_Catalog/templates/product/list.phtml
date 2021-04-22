@@ -154,7 +154,7 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
 											foreach($categories as $key=>$category){
 												$cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category); 
 											?> 
-												<a href="<?php echo $cat->getUrl() ?>"><?php  echo $cat->getName(); ?></a>
+												<a href="/catalog/category/view/id/<?php echo $cat->getId() ?>"><?php  echo $cat->getName(); ?></a>
 												<?php if($key < 1){ echo ' , '; }?>
 												<?php if($key == 1){ break; }?>
 											<?php	} ?>
