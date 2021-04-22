@@ -7,6 +7,9 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJ242PL"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
 		<attribute name="class" value="outstock-page-preloader"/>
 		<container name="header-wrapper" label="Page Header" as="header-wrapper" htmlTag="div" htmlClass="header content">
                 <block class="Magento\Theme\Block\Html\Header\Logo" name="logo">

@@ -26,99 +26,68 @@ $categories->addAttributeToSelect('*');
 				url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
 				success: (data) => {
 					data = JSON.parse(data);
-					var html = '';
+					var html = '<option>Por favor, selecciona un modelo</option>';
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
 					$('#model_select').html(html);
+					$('#year_select').html('');
+					$('#version_select').html('');
 				}
-			})
+			});
 		});
 		$('#model_select').on("change", () => {
-			console.log($('#model_select').val());
+			$.ajax({
+				type: 'GET',
+				url: `/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${$('#model_select').val()}`,
+				success: (data) => {
+					data = JSON.parse(data);
+					var html = '<option>Por favor, selecciona una versión</option>';
+					for (var i = 0; i < data.length; i++) {
+						html += `<option value="${data[i].id}">${data[i].label}</option>`;
+					}
+					$('#version_select').html(html);
+					$('#year_select').html('');
+				}
+			});
 		});
 		$('#version_select').on("change", () => {
+			$.ajax({
+				type: 'GET',
+				url: `/scripts/get-data-for-select.php?data_type=years&id_car_brand=${$('#model_select').val()}&variant=${$('#version_select').val()}`,
+				success: (data) => {
+					data = JSON.parse(data);
+					console.log(data);
+					var html = '<option>Por favor, selecciona un año</option>';
+					for (var i = 0; i < data.length; i++) {
+						html += `<option value="${data[i].id}">${data[i].label}</option>`;
+					}
+					$('#year_select').html(html);
+				}
+			});
 		});
 		goToCategory = () => {
 			var current_id = $('#choose_category').val();
 			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
-			window.location.href = `/catalog/category/view/id/${current_id}`;
+			var variant = $('#version_select').val();
+			var year = $('#year_select').val();
+			year = year.replaceAll('/', 'U+2215');
+			window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}&year=${year}`;
 		}
 	});
 </script>
-<style>
-	.field-by-cat-search select {
-		height: 63px;
-		border: none;
-		padding: 0;
-	}
 
-	.field-by-cat-search ._label {
-		position: relative;
-		width: 30%;
-		margin: 0 1%;
-	}
-
-	.field-by-cat-search ._label span {
-		position: absolute;
-		top: 0;
-		left: 2px;
-		font-size: 12px;
-		color: #2bb9a9;
-		text-transform: uppercase;
-	}
-
-	.field-by-cat-search .search {
-		height: 90%;
-		font-size: 17px;
-		color: #fff;
-		background-color: #2bb9a9;
-		border-radius: 6px;
-		display: flex;
-		align-items: center;
-		padding: 0 19px;
-		cursor: pointer;
-	}
-
-	.title {
-		width: 100%;
-		text-align: center;
-		text-transform: uppercase;
-	}
-
-	.title h1 {
-		font-size: 40px;
-		color: #fff;
-	}
-
-	.title h1 span {
-		background: linear-gradient(0deg, #2bb9a9 30%, transparent 0%);
-	}
-
-	.title h2 {
-		color: #fff;
-		margin: 10px auto;
-	}
-
-	span.blue {
-		color: #2bb9a9;
-	}
-</style>
-<div style="position: relative; padding: 150px 0; min-height: 400px; width: 100%; background-image: url(/assets/images/fotos/hero--background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center center; display: flex; align-items: center;">
-	<div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,20,.5); z-index: 1;"></div>
-	<div class="block block-search" style="width: 100%; float: none;">
+<div class="hero hero--home">
+	<div class="hero--overlay"></div>
+	<div class="block block-search">
 		<div class="block block-content">
-			<div class="dropdown">
-				<div class="title">
-					<h1>
-						Venta de enganches con el <span>mejor precio garantizado</span>
-					</h1>
-					<h2>
-						<span class="blue">enganche + kit eléctrico</span> desde 175 € + IVA
-					</h2>
+			<div class="container-max dropdown">
+				<div class="hero-title">
+					<h1>Venta de enganches con el <span>mejor precio garantizado</span></h1>
+					<h2><span class="blue">enganche + kit eléctrico</span> desde 175 € + IVA</h2>
 				</div>
-				<div style="margin-top:20px;display: flex; width: 100%; justify-content: center;" class="form minisearch search-content" id="search_mini_form" action="" method="get">
-					<div class="field-by-cat-search" style="display: inline-flex; width: 100%; max-width: 1200px; background: #fff; border-radius: 6px; padding: 10px;">
+				<div class="form minisearch search-content" id="search_mini_form" action="" method="get">
+					<div class="field-by-cat-search">
 						<span class="_label">
 							<span>Marca</span>
 							<select name="cat[]" id="choose_category">
@@ -146,36 +115,54 @@ $categories->addAttributeToSelect('*');
 							<select name="cat[]" id="version_select">
 							</select>
 						</span>
+						<span class="_label">
+							<span>Año</span>
+							<select name="cat[]" id="year_select">
+							</select>
+						</span>
 						<div class="search" onclick="goToCategory()">
-							<i class="fas fa-search"></i>
+							<span class="txt-sm">Buscar</span> <i class="fas fa-search"></i>
 						</div>
 					</div>
 				</div>
-				<div style="margin: 30px auto; width: 100%; max-width: 1200px; display: flex; justify-content: space-between;">
-					<div style="width: 30%; padding: 10px 17px; border: .5px solid #fff; border-radius: 6px; display: flex; align-items: center; ">
-						<div style="width: 75px; height: 50px; font-size: 40px; padding: 5px;color:#fff;"><i class="fas fa-truck"></i></div>
-						<div style="width: calc(100% - 75px);">
-							<div style="color:#2bb9a9;text-transform:uppercase;font-size:17px;font-weight: bold;">envío gratuito</div>
-							<div style="color:#fff;font-size:16px;">Para toda Península y Baleares en 24/48 horas</div>
+
+				<div class="home-features">
+					<div class="card-home-features">
+						<div class="card-icon">
+							<svg width="56" height="40" viewBox="0 0 56 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M55.3 29.5H53.2V20.6324C53.2 19.2543 52.605 17.9008 51.555 16.9246L44.2137 10.0422C43.1812 9.05781 41.7375 8.5 40.2588 8.5H36.4V4.44766C36.4 2.33945 34.4575 0.625 32.0775 0.625H4.3225C1.9425 0.625 0 2.33945 0 4.44766V28.3023C0 30.4105 1.9425 32.125 4.3225 32.125H5.74C5.64375 32.5516 5.6 32.9863 5.6 33.4375C5.6 37.0633 8.7325 40 12.6 40C16.4675 40 19.6 37.0633 19.6 33.4375C19.6 32.9863 19.5475 32.5516 19.46 32.125H36.54C36.4437 32.5516 36.4 32.9863 36.4 33.4375C36.4 37.0633 39.5325 40 43.4 40C47.2675 40 50.4 37.0633 50.4 33.4375C50.4 32.9863 50.3475 32.5516 50.26 32.125H55.3C55.685 32.125 56 31.8297 56 31.4688V30.1562C56 29.7953 55.685 29.5 55.3 29.5ZM40.2588 11.125C40.9938 11.125 41.72 11.4039 42.2363 11.8961L49.5775 18.7785C49.6475 18.8441 49.6738 18.9344 49.735 19.0082H36.4V11.1332H40.2588V11.125ZM12.6 37.375C10.2812 37.375 8.4 35.6113 8.4 33.4375C8.4 31.2637 10.2812 29.5 12.6 29.5C14.9187 29.5 16.8 31.2637 16.8 33.4375C16.8 35.6113 14.9187 37.375 12.6 37.375ZM18.165 29.5C16.8875 27.9168 14.875 26.875 12.6 26.875C10.325 26.875 8.3125 27.9168 7.035 29.5H4.3225C3.4825 29.5 2.8 28.9668 2.8 28.3023V4.44766C2.8 3.7832 3.4825 3.25 4.3225 3.25H32.0775C32.9175 3.25 33.6 3.7832 33.6 4.44766V29.5H18.165ZM43.4 37.375C41.0812 37.375 39.2 35.6113 39.2 33.4375C39.2 31.2637 41.0812 29.5 43.4 29.5C45.7188 29.5 47.6 31.2637 47.6 33.4375C47.6 35.6113 45.7188 37.375 43.4 37.375ZM43.4 26.875C41.1162 26.875 39.1125 27.9168 37.835 29.5H36.4V21.625H50.4V29.5H48.965C47.6875 27.9168 45.6838 26.875 43.4 26.875Z" fill="white"/>
+							</svg>
+						</div>
+						<div class="card-body">
+ 							<h3>Envío gratuito</h3>
+							<p>Para toda Península y Baleares en 24/48 horas</p>
 						</div>
 					</div>
-					<div style="width: 30%; padding: 10px 17px; border: .5px solid #fff; border-radius: 6px; display: flex; align-items: center; ">
-					<div style="width: 75px; height: 50px; font-size: 40px; padding: 5px;color:#fff;"><i class="fas fa-warehouse"></i></div>
-						<div style="width: calc(100% - 75px);">
-							<div style="color:#2bb9a9;text-transform:uppercase;font-size:17px;font-weight: bold;">talleres homologados</div>
-							<div style="color:#fff;font-size:16px;">Amplia red de instaladores certificados cerca de ti</div>
+					<div class="card-home-features">
+						<div class="card-icon">
+							<svg width="51" height="41" viewBox="0 0 51 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19.125 30.7503C18.8728 30.7503 18.6263 30.8254 18.4167 30.9662C18.207 31.107 18.0436 31.3071 17.9471 31.5412C17.8506 31.7753 17.8253 32.0329 17.8745 32.2815C17.9237 32.53 18.0451 32.7583 18.2234 32.9375C18.4018 33.1167 18.6289 33.2387 18.8763 33.2881C19.1236 33.3376 19.38 33.3122 19.6129 33.2152C19.8459 33.1182 20.045 32.954 20.1851 32.7433C20.3252 32.5326 20.4 32.2849 20.4 32.0315C20.4 31.6917 20.2657 31.3658 20.0266 31.1255C19.7875 30.8852 19.4632 30.7503 19.125 30.7503ZM31.875 30.7503C31.6228 30.7503 31.3763 30.8254 31.1667 30.9662C30.957 31.107 30.7936 31.3071 30.6971 31.5412C30.6006 31.7753 30.5753 32.0329 30.6245 32.2815C30.6737 32.53 30.7951 32.7583 30.9735 32.9375C31.1518 33.1167 31.3789 33.2387 31.6263 33.2881C31.8736 33.3376 32.13 33.3122 32.3629 33.2152C32.5959 33.1182 32.795 32.954 32.9351 32.7433C33.0752 32.5326 33.15 32.2849 33.15 32.0315C33.15 31.6917 33.0157 31.3658 32.7766 31.1255C32.5375 30.8852 32.2132 30.7503 31.875 30.7503ZM48.6564 9.47588L26.9814 0.300526C26.5124 0.102532 26.0087 0.000549316 25.5 0.000549316C24.9913 0.000549316 24.4877 0.102532 24.0186 0.300526L2.34361 9.47588C1.64882 9.76736 1.05547 10.259 0.63839 10.8889C0.221309 11.5188 -0.000823947 12.2587 2.2966e-06 13.0153V40.3596C2.2966e-06 40.5295 0.0671673 40.6925 0.186722 40.8126C0.306276 40.9328 0.468427 41.0003 0.637502 41.0003H1.9125C2.08158 41.0003 2.24373 40.9328 2.36328 40.8126C2.48284 40.6925 2.55 40.5295 2.55 40.3596V13.0153C2.54944 12.7624 2.62337 12.515 2.76248 12.3043C2.90159 12.0935 3.09966 11.9288 3.33174 11.831L25.0067 2.65402C25.1627 2.58706 25.3305 2.55253 25.5 2.55253C25.6696 2.55253 25.8374 2.58706 25.9933 2.65402L47.6683 11.831C47.9009 11.928 48.0995 12.0925 48.2388 12.3034C48.378 12.5144 48.4515 12.7622 48.45 13.0153V40.3596C48.45 40.5295 48.5172 40.6925 48.6367 40.8126C48.7563 40.9328 48.9184 41.0003 49.0875 41.0003H50.3625C50.5316 41.0003 50.6937 40.9328 50.8133 40.8126C50.9329 40.6925 51 40.5295 51 40.3596V13.0153C51.0008 12.2587 50.7787 11.5188 50.3616 10.8889C49.9446 10.259 49.3512 9.76736 48.6564 9.47588ZM40.8 15.3752H10.2C9.5237 15.3752 8.8751 15.6452 8.39688 16.1258C7.91866 16.6063 7.65001 17.2581 7.65001 17.9377V40.3596C7.65001 40.5295 7.71717 40.6925 7.83672 40.8126C7.95628 40.9328 8.11843 41.0003 8.28751 41.0003H9.56251C9.73158 41.0003 9.89373 40.9328 10.0133 40.8126C10.1328 40.6925 10.2 40.5295 10.2 40.3596V17.9377H40.8V40.3596C40.8 40.5295 40.8672 40.6925 40.9867 40.8126C41.1063 40.9328 41.2684 41.0003 41.4375 41.0003H42.7125C42.8816 41.0003 43.0437 40.9328 43.1633 40.8126C43.2829 40.6925 43.35 40.5295 43.35 40.3596V17.9377C43.35 17.2581 43.0814 16.6063 42.6031 16.1258C42.1249 15.6452 41.4763 15.3752 40.8 15.3752ZM35.3749 27.0418L34.6242 24.0189C34.3743 23.0137 33.7971 22.1214 32.9845 21.4839C32.1718 20.8463 31.1704 20.5001 30.1394 20.5002H20.8606C19.829 20.5003 18.827 20.8472 18.0143 21.4858C17.2016 22.1243 16.6248 23.0177 16.3758 24.0237L15.6251 27.045C14.8048 27.2547 14.0771 27.7325 13.5566 28.4032C13.0361 29.074 12.7524 29.8997 12.75 30.7503V34.594C12.75 35.2736 13.0187 35.9254 13.4969 36.406C13.9751 36.8865 14.6237 37.1565 15.3 37.1565V39.719C15.3 40.0588 15.4343 40.3847 15.6734 40.625C15.9126 40.8653 16.2369 41.0003 16.575 41.0003H17.85C18.1882 41.0003 18.5125 40.8653 18.7516 40.625C18.9907 40.3847 19.125 40.0588 19.125 39.719V37.1565H31.875V39.719C31.875 40.0588 32.0093 40.3847 32.2485 40.625C32.4876 40.8653 32.8119 41.0003 33.15 41.0003H34.425C34.7632 41.0003 35.0875 40.8653 35.3266 40.625C35.5657 40.3847 35.7 40.0588 35.7 39.719V37.1565C36.3763 37.1565 37.0249 36.8865 37.5031 36.406C37.9814 35.9254 38.25 35.2736 38.25 34.594V30.7503C38.2484 29.8991 37.9649 29.0727 37.4444 28.4013C36.9238 27.7299 36.1958 27.2516 35.3749 27.0418ZM18.8509 24.6395C18.963 24.1891 19.2217 23.7894 19.5858 23.5037C19.9499 23.218 20.3986 23.0628 20.8606 23.0627H30.1394C30.6014 23.0628 31.0501 23.218 31.4142 23.5037C31.7783 23.7894 32.037 24.1891 32.1491 24.6395L32.7125 26.9065H18.2891L18.8509 24.6395ZM35.7 34.594H15.3V30.7503C15.3 30.4104 15.4343 30.0846 15.6734 29.8443C15.9126 29.604 16.2369 29.469 16.575 29.469H34.425C34.7632 29.469 35.0875 29.604 35.3266 29.8443C35.5657 30.0846 35.7 30.4104 35.7 30.7503V34.594Z" fill="white"/>
+							</svg>
+						</div>
+						<div class="card-body">
+							<h3>Talleres homologados</h3>
+							<p>Amplia red de instaladores certificados cerca de ti</p>
 						</div>
 					</div>
-					<div style="width: 30%; padding: 10px 17px; border: .5px solid #fff; border-radius: 6px; display: flex; align-items: center; ">
-					<div style="width: 75px; height: 50px; font-size: 40px; padding: 5px;color:#fff;"><i class="fas fa-file-alt"></i></div>
-						<div style="width: calc(100% - 75px);">
-							<div style="color:#2bb9a9;text-transform:uppercase;font-size:17px;font-weight: bold;">documentación gratuita</div>
-							<div style="color:#fff;font-size:16px;">Informe de conformidad y asesoramiento técnico incluido</div>
+					<div class="card-home-features">
+						<div class="card-icon">
+							<svg width="32" height="42" viewBox="0 0 32 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M30.3467 8.03422L23.4658 1.15328C22.7274 0.414852 21.7258 5.46063e-06 20.6816 0H3.9375C1.76285 0 0 1.76285 0 3.9375V38.0625C0 40.2371 1.76285 42 3.9375 42H27.5625C29.7371 42 31.5 40.2371 31.5 38.0625V10.8184C31.5 9.77416 31.0851 8.77264 30.3467 8.03422ZM28.4906 9.89043C28.6587 10.0584 28.7777 10.2692 28.8347 10.5H21V2.66528C21.2308 2.72222 21.4416 2.84122 21.6096 3.0094L28.4906 9.89043ZM27.5625 39.375H3.9375C3.21259 39.375 2.625 38.7874 2.625 38.0625V3.9375C2.625 3.21259 3.21259 2.625 3.9375 2.625H18.375V11.1562C18.375 12.2436 19.2564 13.125 20.3438 13.125H28.875V38.0625C28.875 38.7874 28.2874 39.375 27.5625 39.375ZM24.7351 22.0706L13.6781 33.039C13.2925 33.4215 12.6701 33.4198 12.2866 33.0352L6.7611 27.4938C6.37695 27.1085 6.37785 26.4848 6.76307 26.1005L7.46074 25.4049C7.84604 25.0208 8.46981 25.0217 8.85396 25.4069L12.9918 29.5566L22.6536 19.9723C23.0399 19.5891 23.6636 19.5916 24.0469 19.9779L24.7407 20.6774C25.124 21.0637 25.1214 21.6874 24.7351 22.0706Z" fill="white"/>
+							</svg>
+						</div>
+						<div class="card-body">
+							<h3>Documentación gratuita</h3>
+							<p>Informe de conformidad y asesoramiento técnico incluido</p>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
-
 </div>

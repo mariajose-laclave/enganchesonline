@@ -13,7 +13,7 @@ class View extends \Rokanthemes\StoreLocator\Controller\Index
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->set(__('Store Locator'));
+        $resultPage->getConfig()->getTitle()->set(__('Nuestra red de Talleres - Enganches y Recambios'));
 
         return $resultPage;
     }
