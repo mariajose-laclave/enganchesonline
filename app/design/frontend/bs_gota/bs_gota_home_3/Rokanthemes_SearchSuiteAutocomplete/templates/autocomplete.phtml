@@ -216,14 +216,10 @@ $categories->addAttributeToSelect('*');
 			goToCategory = () => {
 				var current_id = $('#choose_category').val();
 				current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
-<<<<<<< HEAD
-				window.location.href = `/catalog/category/view/id/${current_id}`;
-=======
 				var variant = $('#version_select').val();
 				var year = $('#year_select').val();
 				year = year.replaceAll('/', 'U+2215');
 				window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}&year=${year}`;
->>>>>>> 8b05f30ea69fe69dbf8c65298b9b2c3c6470aadd
 			}
 			$('.trigger-filter--header a').on('click', function() {
 				$('.block-search--header').toggle();
