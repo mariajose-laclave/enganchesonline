@@ -28,7 +28,7 @@ $_productCollection->addCategoriesFilter(array('in' => $category_id));
 if (isset($_GET['variant']) && $_GET['variant'] != '') {
 	$_productCollection->addAttributeToFilter('variant', $_GET['variant']);
 }
-$_productCollection->setPageSize(5);
+$_productCollection->setPageSize(5)->addAttributeToSelect('*')->load();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
 <?php if (!$_productCollection->count()): ?>
