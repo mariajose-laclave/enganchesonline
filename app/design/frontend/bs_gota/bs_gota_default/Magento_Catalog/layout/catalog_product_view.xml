@@ -14,11 +14,12 @@
 		<move element="product.info.overview" destination="product.info.price" before="product.info.stock.sku"/>
 		<move element="product.info.stock.sku" destination="product.info.price" after="product.info.overview"/> 
 		<referenceContainer name="content">
+			<block before="product.info.media" class="Magento\Catalog\Block\Product\View" name="mejor_precio" template="product/view/mejor-precio.phtml"/>        
 			<container name="product-view" htmlTag="div" htmlClass="product-view row" before="-">
 				<container name="product-view-left" htmlTag="div" htmlClass="col-sm-3 col-xs-12" before="-"/>
 				<container name="product-view-right" htmlTag="div" htmlClass="col-sm-9 col-xs-12" after="product-view-right"/>
 			</container>
-		</referenceContainer> 
+		</referenceContainer>
 		
 		<referenceBlock name="product.info.details">
           <block class="Magento\Catalog\Block\Product\View" name="informe_de_conformidad.tab" as="informe_de_conformidad" template="product/view/informe-conformidad-block.phtml" group="detailed_info" >
