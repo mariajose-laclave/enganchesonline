@@ -728,6 +728,26 @@ body .product-list-item .product-info .price-box .price,
 .action.submit.primary {
     border-radius: 3px;
 }
+
+/*
+// CONTACT
+*/
+.contact-index-index .static_content .block-static-block .col-content .border-col {
+    padding: 24px;
+}
+.border-col.card-contact {
+    flex-wrap: nowrap;
+}
+.border-col.card-contact .card-body {
+    align-self: center;
+    padding-left: 16px;
+}
+.border-col.card-contact h4 {
+    margin: 0;
+    margin-bottom: 8px;
+}
+
+
 /*
 // FOOTER
 */
