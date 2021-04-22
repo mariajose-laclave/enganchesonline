@@ -586,6 +586,7 @@ body .product-item .product-photo .add-to-links, body .product-list-item .produc
     display: none!important;
     visibility: hidden;
 }
+.product-view .product-info-main .price-box .price-wrapper .price,
 body .product-item .product-info .price-box .price, 
 body .product-list-item .product-info .price-box .price,
 .product-view .product-info-main .price-box .special-price .price-container .price {
