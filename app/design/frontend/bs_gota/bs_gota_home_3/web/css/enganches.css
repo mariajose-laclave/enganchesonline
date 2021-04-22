@@ -594,6 +594,19 @@ body .product-item .product-photo .add-to-links, body .product-list-item .produc
 .catalog-product-view .block.related .field.related .label {
     background-color: var(--alert-success);
 }
+.catalog-product-view .product-view {
+    position: relative;
+}
+.catalog-product-view .product-view .mejor-precio--icon {
+    position: absolute;
+    top: -16px;
+    left: 0;
+    width: 82px;
+}
+.catalog-product-view .product-view .mejor-precio--icon svg {
+    width: 100%;
+}
+
 /*
 // TALLERES
 */
