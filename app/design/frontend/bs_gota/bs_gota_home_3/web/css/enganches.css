@@ -415,6 +415,9 @@
     top: 0;
     background: #D2D2D7;
 }
+.header-container .header .block-search .block-content .dropdown .form-group:nth-child(4):after {
+    content: none;
+}
 .form.minisearch.dropdown-menu.search-content .field-by-cat-search .chosen-container {
     width: 100%!important;
     background-color: transparent;
