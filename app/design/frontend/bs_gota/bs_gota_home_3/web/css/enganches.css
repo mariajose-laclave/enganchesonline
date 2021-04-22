@@ -586,7 +586,11 @@ body .product-item .product-photo .add-to-links, body .product-list-item .produc
     display: none!important;
     visibility: hidden;
 }
-
+body .product-item .product-info .price-box .price, 
+body .product-list-item .product-info .price-box .price,
+.product-view .product-info-main .price-box .special-price .price-container .price {
+    color: var(--alert-success);
+}
 .products-grid .product-item:hover .product-photo a.product-thumb-link:after, .owl-wrapper-outer .product-item:hover .product-photo a.product-thumb-link:after, .products-grid .product-item:hover .product-photo a.photo:after, .owl-wrapper-outer .product-item:hover .product-photo a.photo:after {
     opacity: 0;
     visibility: hidden;
@@ -610,6 +614,9 @@ body .product-item .product-photo .add-to-links, body .product-list-item .produc
     -moz-animation: rotate-animation 10s infinite linear;
     -webkit-animation: rotate-animation 10s infinite linear;
     animation: rotate-animation 10s infinite linear;
+    -moz-transform-origin: center center;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
 }
 @-moz-keyframes rotate-animation{0%{-moz-transform:rotate(0)}50%{-moz-transform:rotate(180deg)}100%{-moz-transform:rotate(360deg)}}@-webkit-keyframes rotate-animation{0%{-webkit-transform:rotate(0)}50%{-webkit-transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes rotate-animation{0%{transform:rotate(0)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
 /*
