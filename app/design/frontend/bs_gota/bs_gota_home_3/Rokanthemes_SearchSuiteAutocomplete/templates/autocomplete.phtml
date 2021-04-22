@@ -105,6 +105,10 @@ $categories->addAttributeToSelect('*');
 						for (var i = 0; i < data.length; i++) {
 							html += `<option value="${data[i].id}">${data[i].label}</option>`;
 						}
+						$('#version_select').chosen('destroy');
+						$('#year_select').chosen('destroy');
+						$('#year_select').html('');
+						$('#version_select').html('');
 						$('#model_select').chosen('destroy');
 						$('#model_select').html(html);
 						$('#model_select').chosen();
@@ -121,6 +125,8 @@ $categories->addAttributeToSelect('*');
 						for (var i = 0; i < data.length; i++) {
 							html += `<option value="${data[i].id}">${data[i].label}</option>`;
 						}
+						$('#year_select').chosen('destroy');
+						$('#year_select').html('');
 						$('#version_select').chosen('destroy');
 						$('#version_select').html(html);
 						$('#version_select').chosen();

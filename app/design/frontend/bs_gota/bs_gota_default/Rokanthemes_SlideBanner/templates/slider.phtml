@@ -31,6 +31,8 @@ $categories->addAttributeToSelect('*');
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
 					$('#model_select').html(html);
+					$('#year_select').html('');
+					$('#version_select').html('');
 				}
 			});
 		});
@@ -45,6 +47,7 @@ $categories->addAttributeToSelect('*');
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
 					$('#version_select').html(html);
+					$('#year_select').html('');
 				}
 			});
 		});
