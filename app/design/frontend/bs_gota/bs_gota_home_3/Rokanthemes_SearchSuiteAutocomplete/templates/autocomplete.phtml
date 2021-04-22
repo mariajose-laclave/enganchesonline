@@ -149,6 +149,7 @@ $categories->addAttributeToSelect('*');
 				current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
 				var variant = $('#version_select').val();
 				var year = $('#year_select').val();
+				year = year.replaceAll('/', 'U+2215');
 				window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}&year=${year}`;
 			}
 			$('.trigger-filter--header a').on('click', function() {
