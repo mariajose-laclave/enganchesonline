@@ -594,19 +594,24 @@ body .product-item .product-photo .add-to-links, body .product-list-item .produc
 .catalog-product-view .block.related .field.related .label {
     background-color: var(--alert-success);
 }
-.catalog-product-view .product-view {
+.catalog-product-view .columns .column.main {
     position: relative;
 }
-.catalog-product-view .product-view .mejor-precio--icon {
+.catalog-product-view .columns .column.main .mejor-precio--icon {
     position: absolute;
     top: -16px;
     left: 0;
     width: 82px;
 }
-.catalog-product-view .product-view .mejor-precio--icon svg {
+.catalog-product-view .columns .column.main .mejor-precio--icon svg {
     width: 100%;
 }
-
+.catalog-product-view .columns .column.main .mejor-precio--icon svg #circle{
+    -moz-animation: rotate-animation 10s infinite linear;
+    -webkit-animation: rotate-animation 10s infinite linear;
+    animation: rotate-animation 10s infinite linear;
+}
+@-moz-keyframes rotate-animation{0%{-moz-transform:rotate(0)}50%{-moz-transform:rotate(180deg)}100%{-moz-transform:rotate(360deg)}}@-webkit-keyframes rotate-animation{0%{-webkit-transform:rotate(0)}50%{-webkit-transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes rotate-animation{0%{transform:rotate(0)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
 /*
 // TALLERES
 */
