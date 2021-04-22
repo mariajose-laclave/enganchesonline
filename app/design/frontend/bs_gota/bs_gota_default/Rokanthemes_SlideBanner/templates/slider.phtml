@@ -51,7 +51,7 @@ $categories->addAttributeToSelect('*');
 		$('#version_select').on("change", () => {
 			$.ajax({
 				type: 'GET',
-				url: `/scripts/get-data-for-select.php?data_type=years&id_car_brand=${$('#model_select').val()}`,
+				url: `/scripts/get-data-for-select.php?data_type=years&id_car_brand=${$('#model_select').val()}&variant=${$('#version_select').val()}`,
 				success: (data) => {
 					data = JSON.parse(data);
 					console.log(data);
@@ -67,7 +67,8 @@ $categories->addAttributeToSelect('*');
 			var current_id = $('#choose_category').val();
 			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
 			var variant = $('#version_select').val();
-			window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}`;
+			var year = $('#year_select').val();
+			window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}&year=${year}`;
 		}
 	});
 </script>
