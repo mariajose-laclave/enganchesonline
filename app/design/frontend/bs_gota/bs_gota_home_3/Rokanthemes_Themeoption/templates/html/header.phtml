@@ -99,7 +99,7 @@ $plain_value = $model->getPlainValue();
 										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/enganches">Enganches</a></li>
 										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/kit-electricos">Kit eléctricos</a></li>
 										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/talleres">Talleres</a></li>
-										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/consejos">Consejos</a></li>
+										<li class="ui-menu-item level0 classic "><a class="level-top active" href="/blog">Consejos</a></li>
 										<li class="logo"><span data-action="toggle-nav" class="action nav-toggle"><span>Toggle Nav</span></span>
 											<a class="logo active" href="https://blueskytechmage.com/gota/en3/" title="" aria-label="store logo">
 												<img src="https://blueskytechmage.com/gota/pub/media/logo/stores/10/logo.png" title="" alt="" width="69" height="28">
@@ -134,16 +134,23 @@ $plain_value = $model->getPlainValue();
 							<?php } ?>
 						</div>
 					</div>
-					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hola, estoy interesado en comprar un enganche en enganches-online.es"><span class=""><i class="fab fa-whatsapp"></i> &nbsp;<?php echo $plain_value; ?></span></a></p></div>
+					<div class="holine hidden-xs hidden-sm"><p><a href="https://web.whatsapp.com/send?phone=<?php echo $plain_value; ?>&text=Hola, estoy interesado en comprar un enganche en enganches-online.es"><span class=""><i class="fab fa-whatsapp"></i> &nbsp;<?php /*echo $plain_value;*/ ?>+34 628 980 480</span></a></p></div>
 				</div>
 			</div>
 			<?php
 				// If not homepage, add search bar
 				if ($this->getRequest()->getFullActionName() != "cms_index_index") {
 			?>
-			<div class="container-max">
-				<div class="flex-layout">
-					<div class="sFilter"><?php echo $this->getChildHtml("topSearch"); ?></div>
+			<div class="wrapper-fluid bg-gray-00">
+				<div class="container-max">
+					<div class="sFilter">
+						<div class="trigger-filter--header filter--header filter--hidden-sm">
+							<div class="filter-wrapper">
+								<a href="javascript:void(0);">FILTRAR <div class="filter-icon"></div></a> 
+							</div>
+						</div>
+						<?php echo $this->getChildHtml("topSearch"); ?>
+					</div>
 					<!--
 					<?php echo $this->getChildHtml("vertical.topnav") ?>
 					<?php echo $this->getChildHtml("top.navigation.sections"); ?>	

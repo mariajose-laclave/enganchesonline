@@ -5,6 +5,7 @@ require dirname(__FILE__) . '/abstract.php';
 
 class CreateCategoriesApp extends AbstractApp
 {
+    protected $descriptionArray;
     protected $objectManager;
     protected $categoryLinkManagement;
     protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=100000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
@@ -55,12 +56,69 @@ class CreateCategoriesApp extends AbstractApp
     public function run()
     {
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->getDescriptions();
         $this->_state->setAreaCode('frontend');
         $this->get_lafuente_from_db();
         // $this->convert_aragon();
         $this->createCategories();
         $this->createProducts();
         // $this->insertKits();
+    }
+
+    protected function getDescriptions()
+    {
+        $this->descriptionArray = array();
+        $tituloBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_cisne');
+        $tituloBojaFijaCisne = $tituloBojaFijaCisne->getHtmlValue();
+        $descripcionBojaFijaCisne = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_cisne');
+        $descripcionBojaFijaCisne = $descripcionBojaFijaCisne->getHtmlValue();
+
+        $titulo_bola_desmontable_horizontal = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_desmontable_horizontal');
+        $titulo_bola_desmontable_horizontal = $titulo_bola_desmontable_horizontal->getHtmlValue();
+        $descripcion_bola_desmontable_horizontal = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_desmontable_horizontal');
+        $descripcion_bola_desmontable_horizontal = $descripcion_bola_desmontable_horizontal->getHtmlValue();
+
+        $titulo_bola_desmontable_vertical = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_desmontable_vertical');
+        $titulo_bola_desmontable_vertical = $titulo_bola_desmontable_vertical->getHtmlValue();
+        $descripcion_bola_desmontable_vertical = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_desmontable_vertical');
+        $descripcion_bola_desmontable_vertical = $descripcion_bola_desmontable_vertical->getHtmlValue();
+        
+        $titulo_bola_fija_mixta = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_mixta');
+        $titulo_bola_fija_mixta = $titulo_bola_fija_mixta->getHtmlValue();
+        $descripcion_bola_fija_mixta = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_mixta');
+        $descripcion_bola_fija_mixta = $descripcion_bola_fija_mixta->getHtmlValue();
+        
+        $titulo_bola_fija_mono_block = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('titulo_bola_fija_mono_block');
+        $titulo_bola_fija_mono_block = $titulo_bola_fija_mono_block->getHtmlValue();
+        $descripcion_bola_fija_mono_block = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descripcion_bola_fija_mono_block');
+        $descripcion_bola_fija_mono_block = $descripcion_bola_fija_mono_block->getHtmlValue();
+        $this->descriptionArray = [
+            'fija_cisne' => [
+                'title' => $tituloBojaFijaCisne,
+                'description' => $descripcionBojaFijaCisne,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg'
+            ],
+            'desmontable_horizontal' => [
+                'title' => $titulo_bola_desmontable_horizontal,
+                'description' => $descripcion_bola_desmontable_horizontal,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-horizontal.jpg'
+            ],
+            'desmontable_vertical' => [
+                'title' => $titulo_bola_desmontable_vertical,
+                'description' => $descripcion_bola_desmontable_vertical,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-vertical.jpg'
+            ],
+            'fija_mixta' => [
+                'title' => $titulo_bola_fija_mixta,
+                'description' => $descripcion_bola_fija_mixta,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mixta.jpg'
+            ],
+            'fija_mono' => [
+                'title' => $titulo_bola_fija_mono_block,
+                'description' => $descripcion_bola_fija_mono_block,
+                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mono-block-placa.jpg'
+            ]
+        ];
     }
 
     /**
@@ -73,16 +131,16 @@ class CreateCategoriesApp extends AbstractApp
         $this->createAragonKits();
         $this->createLaFuenteKits();
         foreach ($this->product_array as $_product) {
+            $productData = $_product['product'];
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
-            $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
-            $product->setAttributeSetId(4); // Attribute set id
-            $product->setStatus(1); // Status on product enabled/ disabled 1/0
-            // $product->setWeight(10); // weight of product
-            $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
-            $product->setTaxClassId(0); // Tax class id
-            $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
+            $product->setSku($productData->sku);
+            $product->setName("Enganche para " . $productData->name);
+            $product->setAttributeSetId(4);
+            $product->setStatus(1);
+            $product->setVisibility(4);
+            $product->setTaxClassId(0);
+            $product->setTypeId('simple');
+            $product->setPrice($productData->price * 1.21 / 100);
             $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
             $product->setStockData(
@@ -92,13 +150,13 @@ class CreateCategoriesApp extends AbstractApp
                     'is_in_stock' => 1
                 )
             );
-            $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $url = str_replace([' ', '/'], ['', ''], $productData->name) . str_replace(' ', '-', $productData->sku);
             $product->setUrlKey($url);
             $product->save();
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->model)->getFirstItem()->getId();
             $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
@@ -161,38 +219,62 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
+    protected function fillParameters($string, $object)
+    {
+        foreach ($object as $key => $value) {
+            $string = str_replace("<!-- $key -->", $value, $string);
+        }
+        return $string;
+    }
+
     /**
      * Function to create products from $this->product_array
      */
     protected function createProducts()
     {
         foreach ($this->product_array as $_product) {
+            $productData = $_product['product'];
             $product = $this->objectManager->create('\Magento\Catalog\Model\Product');
-            $product->setSku($_product['product']->sku); // Set your sku here
-            $product->setName("Enganche para " . $_product['product']->name); // Name of Product
-            $product->setAttributeSetId(4); // Attribute set id
-            $product->setStatus(1); // Status on product enabled/ disabled 1/0
-            // $product->setWeight(10); // weight of product
-            $product->setVisibility(4); // visibilty of product (catalog / search / catalog, search / Not visible individually)
-            $product->setTaxClassId(0); // Tax class id
-            $product->setTypeId('simple'); // type of product (simple/virtual/downloadable/configurable)
-            $product->setPrice($_product['product']->price * 1.21 / 100); // price of product
+            $product->setSku($productData->sku);
+            $name = $this->fillParameters($this->descriptionArray[$productData->type]['title'], $productData);
+            $product->setName($name);
+            $description = $this->fillParameters($this->descriptionArray[$productData->type]['description'], $productData);
+            $product->setShortDescription($description);
+            $product->setAttributeSetId(4);
+            $product->setStatus(1);
+            $product->setVisibility(4);
+            $product->setTaxClassId(0);
+            $product->setTypeId('simple');
+            $product->setPrice($productData->price * 1.21 / 100);
             $specialPrice = $this->getPrice($product);
             $product->setSpecialPrice($specialPrice);
+            $product->setWebsiteIds(array(1));
             $product->setStockData(
                 array(
                     'use_config_manage_stock' => 0,
-                    'manage_stock' => 0,
-                    'is_in_stock' => 1
+                    'manage_stock' => 1,
+                    'is_in_stock' => 1,
+                    'qty' => 99999
                 )
             );
-            $url = str_replace([' ', '/'], ['', ''], $_product['product']->name) . str_replace(' ', '-', $_product['product']->sku);
+            $product->setVariant($productData->variant);
+            $product->setDateRange($productData->year);
+            // $product->setType($productData->type);
+            $product->setTiempoDeMontaje($productData->tiempo_de_montaje. " minutos");
+            $product->setMmr($productData->mmr."kg");
+            $product->setValorD($productData->valor_d."kg");
+            $product->setValorSCargaVertical($productData->valor_s_carga_vertical."kg");  
+            $url = str_replace([' ', '/'], ['-', '-'], $name) . $productData->sku;
             $product->setUrlKey($url);
+            $product->addImageToMediaGallery($this->descriptionArray[$productData->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
+            $product->setMetaTitle($name);
+            $product->setMetaDescription($description);
             $product->save();
+            $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->make)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                ->create()->getCollection()->addAttributeToFilter('name', $_product['product']->model)->getFirstItem()->getId();
+                ->create()->getCollection()->addAttributeToFilter('name', $productData->model)->getFirstItem()->getId();
             $this->getCategoryLinkManagement()->assignProductToCategories($product->getSku(), [$categoryId, $modelId]);
         }
     }
@@ -255,16 +337,27 @@ class CreateCategoriesApp extends AbstractApp
             $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
             $id = $category->getId();
             foreach ($models as $model) {
-                $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
-                $modelCategory->setName($model);
-                $modelCategory->setParentId($id);
-                $modelCategory->setIsActive(true);
-                $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
-                    ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
-                if ($modelCategoryId) {
-                    $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+
+                $modelExists = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                    ->create()
+                    ->getCollection()
+                    ->addAttributeToFilter('name', $model)
+                    ->addAttributeToFilter('parent_id', $id)
+                    ->getFirstItem()
+                    ->getId();
+
+                if (!$modelExists) {
+                    $modelCategory = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+                    $modelCategory->setName($model);
+                    $modelCategory->setParentId($id);
+                    $modelCategory->setIsActive(true);
+                    $modelCategoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
+                        ->create()->getCollection()->addAttributeToFilter('url_key', $category->getUrlKey())->getFirstItem()->getId();
+                    if ($modelCategoryId) {
+                        $modelCategory->setUrlKey($modelCategory->getUrlKey() . uniqid());
+                    }
+                    $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
                 }
-                $this->objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($modelCategory);
             }
         }
     }
@@ -294,7 +387,8 @@ class CreateCategoriesApp extends AbstractApp
                     'make' => $line_array[3],
                     'model' => $line_array[4],
                     'variant' => $line_array[6],
-                    'year' => $line_array[8]
+                    'year' => $line_array[8],
+                    'supplier' => 'Aragón'
 
                 );
                 foreach ($array as $key => $value) {
@@ -317,7 +411,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function get_lafuente_from_db()
     {
 
-        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=500&sEcho=500&iColumns=16&sColumns&iDisplayStart=10&iDisplayLength=500&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=1000&sEcho=1000&iColumns=16&sColumns&iDisplayStart=0&iDisplayLength=1000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
         @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -335,6 +429,7 @@ class CreateCategoriesApp extends AbstractApp
             if (is_null($make_type_year['model'])) {
                 continue;
             } else {
+                $type = $this->getType($row[4]);
                 $price = strip_tags($row[6]);
                 $price = (int)str_replace(['EUR', '€'], '', $price) * 100;
                 $array = array(
@@ -346,7 +441,13 @@ class CreateCategoriesApp extends AbstractApp
                     'make' => $row[0],
                     'model' => $make_type_year['model'],
                     'variant' => $make_type_year['variant'],
-                    'year' => $make_type_year['year']
+                    'year' => $make_type_year['year'],
+                    'supplier' => 'LaFuente',
+                    'type' => $type,
+                    'tiempo_de_montaje' => $row[7],
+                    'mmr' => $row[9],
+                    'valor_d' => $row[11],
+                    'valor_s_carga_vertical' => $row[10]
                 );
                 foreach ($array as $key => $value) {
                     $array[$key] = str_replace('"', '', $value);
@@ -357,6 +458,36 @@ class CreateCategoriesApp extends AbstractApp
                 ];
             }
         }
+    }
+
+    protected function getType($string)
+    {
+        if (strpos(strtolower($string), strtolower('fija'))) {
+            // Bola fija
+            if (strpos(strtolower($string), strtolower('cisne'))) {
+                // Fija cisne
+                return 'fija_cisne';
+            } elseif (strpos(strtolower($string), strtolower('mixta'))) {
+                // Fija horizontal
+                return 'fija_mixta';
+            } elseif (strpos(strtolower($string), strtolower('mono'))) {
+                // Fija vertical
+                return 'fija_mono';
+            }
+        } elseif (strpos(strtolower($string), strtolower('desmontable'))) {
+            // desmontable
+            if (strpos(strtolower($string), strtolower('cisne'))) {
+                // desmontable cisne
+                return 'desmontable_cisne';
+            } elseif (strpos(strtolower($string), strtolower('horizontal'))) {
+                // desmontable horizontal
+                return 'desmontable_horizontal';
+            } elseif (strpos(strtolower($string), strtolower('vertical'))) {
+                // desmontable vertical
+                return 'desmontable_vertical';
+            }
+        }
+        return 'fija_cisne';
     }
 
     /**
@@ -397,15 +528,15 @@ class CreateCategoriesApp extends AbstractApp
     protected function getPrice($product)
     {
         $profitMargin = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('profit_margin');
-        $profitMarginValue = $profitMargin->getPlainValue();
+        $profitMarginValue = (100 + (int)$profitMargin->getPlainValue())/100;
         $discountLaFuente = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_es');
-        $discountLaFuenteValue = $discountLaFuente->getPlainValue();
+        $discountLaFuenteValue = (100 - (int)$discountLaFuente->getPlainValue())/100;
         $discountLaFuenteImports = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_lafuente_im');
-        $discountLaFuenteImportsValue = $discountLaFuenteImports->getPlainValue();
+        $discountLaFuenteImportsValue = (100 - (int)$discountLaFuenteImports->getPlainValue())/100;
         $discountAragon = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_es');
-        $discountAragonValue = $discountAragon->getPlainValue();
+        $discountAragonValue = (100 - (int)$discountAragon->getPlainValue())/100;
         $discountAragonImports = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('descuento_aragon_im');
-        $discountAragonImportsValue = $discountAragonImports->getPlainValue();
+        $discountAragonImportsValue = (100 - (int)$discountAragonImports->getPlainValue())/100;
 
         if (substr($product->getSku(), 0, 1) == 'X') {
             if (substr($product->getSku(), strlen($product->getSku()) - 2, 1) == 'X') {
@@ -427,7 +558,6 @@ class CreateCategoriesApp extends AbstractApp
         - Add description & title maker - Based on type & source
         - Add proveedor (¿brand?)
         - Relationships between enganches and kits
-        - 
     * 
     */
 }

@@ -20,9 +20,21 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $url = $block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
 $url_array = explode('/', $url);
 $category_id = $url_array[count($url_array) - 1] != '' ? $url_array[count($url_array) - 1] : $url_array[count($url_array) - 2];
+if (strpos($url, '?')) {
+	$category_id = $url_array[count($url_array) - 2];
+}
 $_productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
 $_productCollection->addCategoriesFilter(array('in' => $category_id));
-$_productCollection->setPageSize(5);
+if (isset($_GET['variant']) && $_GET['variant'] != '') {
+	$_productCollection->addAttributeToFilter('variant', $_GET['variant']);
+}
+if (isset($_GET['year']) && $_GET['year'] != '') {
+	$year = $_GET['year'];
+	$year = str_replace('U 2215', '/', $year);
+	$year = str_replace('U+2215', '/', $year);
+	$_productCollection->addAttributeToFilter('date_range', $year);
+}
+$_productCollection->setPageSize(12)->addAttributeToSelect('*')->load();
 $_helper = $this->helper('Magento\Catalog\Helper\Output');
 ?>
 <?php if (!$_productCollection->count()): ?>
@@ -142,7 +154,7 @@ $_helper = $this->helper('Magento\Catalog\Helper\Output');
 											foreach($categories as $key=>$category){
 												$cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category); 
 											?> 
-												<a href="<?php echo $cat->getUrl() ?>"><?php  echo $cat->getName(); ?></a>
+												<a href="/catalog/category/view/id/<?php echo $cat->getId() ?>"><?php  echo $cat->getName(); ?></a>
 												<?php if($key < 1){ echo ' , '; }?>
 												<?php if($key == 1){ break; }?>
 											<?php	} ?>

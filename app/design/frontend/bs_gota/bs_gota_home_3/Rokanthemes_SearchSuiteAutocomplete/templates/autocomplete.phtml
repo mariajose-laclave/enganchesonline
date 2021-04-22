@@ -104,36 +104,47 @@ $categories->addAttributeToSelect('*');
 		});
 	}*/
 </script>
-<style>
-	.chosen-container {
-		width: 32% !important;
-	}
-</style>
-<div class="block block-search">
+
+<div class="block block-search block-search--header">
 	<div class="block block-content">
 		<div class="dropdown">
 			<div style="justify-content: space-between;" class="form minisearch dropdown-menu search-content <?php if ($block->enableSearchByCat()) { ?>cat-search<?php } ?>" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
 				<div class="field-by-cat-search">
-					<select name="cat[]" id="choose_category">
-						<option value=""><?php echo __('All Categories'); ?></option>
-						<?php
-						foreach ($categories as $cat) {
-							if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
-								echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
-							} else {
-								echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+					<div class="form-group">
+						<label for="choose_category">Marca</label>
+						<select name="cat[]" id="choose_category">
+							<option value=""><?php echo __('All Categories'); ?></option>
+							<?php
+							foreach ($categories as $cat) {
+								if (isset($_GET['cat']) && $_GET['cat'] == $cat->getId()) {
+									echo '<option value="' . $cat->getId() . '" selected="selected">' . $cat->getName() . '</option>';
+								} else {
+									echo '<option value="' . $cat->getId() . '">' . $cat->getName() . '</option>';
+								}
 							}
-						}
-						?>
-					</select>
-					<select name="cat[]" id="model_select">
-					</select>
-					<select name="cat[]" id="version_select">
-					</select>
+							?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="model_select">Modelo</label>
+						<select name="cat[]" id="model_select">
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="version_select">Versión</label>
+						<select name="cat[]" id="version_select">
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="year_select">Año</label>
+						<select name="cat[]" id="year_select">
+						</select>
+					</div>
 				</div>
 				<div class="actions">
 					<button onclick="goToCategory()" title="<?php echo $block->escapeHtml(__('Search')) ?>" class="action search">
-						<span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+						<span><?php /* @escapeNotVerified */ echo __('Search'); ?> </span>
+						<i class="fas fa-search"></i>
 					</button>
 				</div>
 			</div>
@@ -152,27 +163,66 @@ $categories->addAttributeToSelect('*');
 					url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
 					success: (data) => {
 						data = JSON.parse(data);
-						var html = '';
+						var html = '<option>Por favor, selecciona un modelo</option>';
 						for (var i = 0; i < data.length; i++) {
 							html += `<option value="${data[i].id}">${data[i].label}</option>`;
 						}
+						$('#version_select').chosen('destroy');
+						$('#year_select').chosen('destroy');
+						$('#year_select').html('');
+						$('#version_select').html('');
 						$('#model_select').chosen('destroy');
 						$('#model_select').html(html);
 						$('#model_select').chosen();
 					}
-				})
+				});
 			});
 			$('#model_select').chosen().change(() => {
-				console.log($('#model_select').val());
+				$.ajax({
+					type: 'GET',
+					url: `/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${$('#model_select').val()}`,
+					success: (data) => {
+						data = JSON.parse(data);
+						var html = '<option>Por favor, selecciona una versión</option>';
+						for (var i = 0; i < data.length; i++) {
+							html += `<option value="${data[i].id}">${data[i].label}</option>`;
+						}
+						$('#year_select').chosen('destroy');
+						$('#year_select').html('');
+						$('#version_select').chosen('destroy');
+						$('#version_select').html(html);
+						$('#version_select').chosen();
+					}
+				});
 			});
 			$('#version_select').chosen().change(() => {
-
+				$.ajax({
+					type: 'GET',
+					url: `/scripts/get-data-for-select.php?data_type=years&id_car_brand=${$('#model_select').val()}&variant=${$('#version_select').val()}`,
+					success: (data) => {
+						data = JSON.parse(data);
+						console.log(data);
+						var html = '<option>Por favor, selecciona un año</option>';
+						for (var i = 0; i < data.length; i++) {
+							html += `<option value="${data[i].id}">${data[i].label}</option>`;
+						}
+						$('#year_select').chosen('destroy');
+						$('#year_select').html(html);
+						$('#year_select').chosen();
+					}
+				});
 			});
 			goToCategory = () => {
 				var current_id = $('#choose_category').val();
 				current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
-				window.location.href = `/catalog/category/view/id/${current_id}`;
+				var variant = $('#version_select').val();
+				var year = $('#year_select').val();
+				year = year.replaceAll('/', 'U+2215');
+				window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}&year=${year}`;
 			}
+			$('.trigger-filter--header a').on('click', function() {
+				$('.block-search--header').toggle();
+			});
 		});
 	</script>
 <?php } ?>

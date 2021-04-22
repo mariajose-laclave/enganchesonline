@@ -26,23 +26,53 @@ $categories->addAttributeToSelect('*');
 				url: `/scripts/get-data-for-select.php?data_type=models&id_car_brand=${$('#choose_category').val()}`,
 				success: (data) => {
 					data = JSON.parse(data);
-					var html = '';
+					var html = '<option>Por favor, selecciona un modelo</option>';
 					for (var i = 0; i < data.length; i++) {
 						html += `<option value="${data[i].id}">${data[i].label}</option>`;
 					}
 					$('#model_select').html(html);
+					$('#year_select').html('');
+					$('#version_select').html('');
 				}
-			})
+			});
 		});
 		$('#model_select').on("change", () => {
-			console.log($('#model_select').val());
+			$.ajax({
+				type: 'GET',
+				url: `/scripts/get-data-for-select.php?data_type=versions&id_car_brand=${$('#model_select').val()}`,
+				success: (data) => {
+					data = JSON.parse(data);
+					var html = '<option>Por favor, selecciona una versión</option>';
+					for (var i = 0; i < data.length; i++) {
+						html += `<option value="${data[i].id}">${data[i].label}</option>`;
+					}
+					$('#version_select').html(html);
+					$('#year_select').html('');
+				}
+			});
 		});
 		$('#version_select').on("change", () => {
+			$.ajax({
+				type: 'GET',
+				url: `/scripts/get-data-for-select.php?data_type=years&id_car_brand=${$('#model_select').val()}&variant=${$('#version_select').val()}`,
+				success: (data) => {
+					data = JSON.parse(data);
+					console.log(data);
+					var html = '<option>Por favor, selecciona un año</option>';
+					for (var i = 0; i < data.length; i++) {
+						html += `<option value="${data[i].id}">${data[i].label}</option>`;
+					}
+					$('#year_select').html(html);
+				}
+			});
 		});
 		goToCategory = () => {
 			var current_id = $('#choose_category').val();
 			current_id = $('#model_select').val() == '' ? current_id : $('#model_select').val();
-			window.location.href = `/catalog/category/view/id/${current_id}`;
+			var variant = $('#version_select').val();
+			var year = $('#year_select').val();
+			year = year.replaceAll('/', 'U+2215');
+			window.location.href = `/catalog/category/view/id/${current_id}?variant=${variant}&year=${year}`;
 		}
 	});
 </script>
@@ -83,6 +113,11 @@ $categories->addAttributeToSelect('*');
 						<span class="_label">
 							<span>Versión</span>
 							<select name="cat[]" id="version_select">
+							</select>
+						</span>
+						<span class="_label">
+							<span>Año</span>
+							<select name="cat[]" id="year_select">
 							</select>
 						</span>
 						<div class="search" onclick="goToCategory()">
