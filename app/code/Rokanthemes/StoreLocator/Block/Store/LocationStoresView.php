@@ -27,7 +27,7 @@ class LocationStoresView extends \Magento\Framework\View\Element\Template
         DataHelper $dataHelper, 
         ConfigHelper $configHelper,
         array $data = [],
-        \Magento\Customer\Model\SessionFactory $customerSession,
+        \Magento\Customer\Model\SessionFactory $customerSession
     ) {
         $this->_customerSession = $customerSession->create();
         $this->storeCollectionFactory = $storeCollectionFactory;
