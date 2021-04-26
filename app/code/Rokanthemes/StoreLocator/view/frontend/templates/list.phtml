@@ -67,7 +67,11 @@ $i = 1;
 		req.onreadystatechange = (aEvt) => {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
-					alert('Thanks for choosing this taller')
+					if (req.response) {
+						alert('Thanks for choosing this taller');
+					} else {
+						alert('User not logged in')
+					}
 				} else {
 					dump("Error loading page\n");
 				}

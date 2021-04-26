@@ -14,6 +14,7 @@ use \Rokanthemes\StoreLocator\Model\Store;
 class LocationStoresList extends \Magento\Framework\View\Element\Template
 {
     
+    protected $_customerSession;
     private $storeCollectionFactory;
     private $dataHelper;
     private $configHelper;
@@ -25,8 +26,10 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
         StoreCollectionFactory $storeCollectionFactory,
         DataHelper $dataHelper,
         ConfigHelper $configHelper,
-        array $data = []
+        array $data = [],
+        \Magento\Customer\Model\SessionFactory $customerSession,
     ) {
+        $this->_customerSession = $customerSession->create();
         $this->storeCollectionFactory = $storeCollectionFactory;
         $this->dataHelper = $dataHelper;
 		$this->_jsonEncoder = $jsonEncoder;
@@ -166,5 +169,14 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
         );
 
         return $this->_jsonEncoder->encode(array("baloon" => $baloon));
+    }
+
+	
+    
+    public function getLoggedinCustomerId() {
+        if ($this->_customerSession->isLoggedIn()) {
+            return $this->_customerSession->getId();
+        }
+        return false;
     }
 }
