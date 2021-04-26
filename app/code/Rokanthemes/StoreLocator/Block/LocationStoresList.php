@@ -29,6 +29,10 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
         array $data = [],
         \Magento\Customer\Model\SessionFactory $customerSession
     ) {
+		if (!$this->getLoggedinCustomerId()) {
+			header("HTTP/1.1 301 Moved Permanently"); 
+			header("Location: https://epic-dhawan.82-223-50-168.plesk.page/");
+		}
         $this->_customerSession = $customerSession->create();
         $this->storeCollectionFactory = $storeCollectionFactory;
         $this->dataHelper = $dataHelper;
