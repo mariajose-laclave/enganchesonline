@@ -198,7 +198,11 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
 				'created_at',
 				'desc'
 			);
-			return count($orders) > 0 ? true : false;
+			$response = false;
+			foreach ($orders as $order) {
+				if ($order->getBaseTotalDue() === 0) $response = true;
+			}
+			return $response;
         }
         return false;
     }
