@@ -14,7 +14,9 @@ use \Rokanthemes\StoreLocator\Model\Store;
 class LocationStoresList extends \Magento\Framework\View\Element\Template
 {
     
-    protected $_customerSession;
+    private $_customerSession;
+	private $_redirect;
+	private $_response;
     private $storeCollectionFactory;
     private $dataHelper;
     private $configHelper;
@@ -27,12 +29,15 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
         DataHelper $dataHelper,
         ConfigHelper $configHelper,
         array $data = [],
-        \Magento\Customer\Model\SessionFactory $customerSession
+        \Magento\Customer\Model\SessionFactory $customerSession,
+		\Magento\Framework\App\Response\Http $response,
+		\Magento\Framework\App\Response\RedirectInterface $redirect
     ) {
+		$this->_redirect = $redirect;
+		$this->_response = $response;
         $this->_customerSession = $customerSession->create();
 		if (!$this->getLoggedinCustomerId()) {
-			header("HTTP/1.1 301 Moved Permanently"); 
-			header("Location: https://epic-dhawan.82-223-50-168.plesk.page/");
+			$this->_redirect->redirect($this->_response, '/');
 		}
         $this->storeCollectionFactory = $storeCollectionFactory;
         $this->dataHelper = $dataHelper;
@@ -174,8 +179,6 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
 
         return $this->_jsonEncoder->encode(array("baloon" => $baloon));
     }
-
-	
     
     public function getLoggedinCustomerId() {
         if ($this->_customerSession->isLoggedIn()) {
