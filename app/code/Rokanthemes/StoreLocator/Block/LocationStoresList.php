@@ -17,6 +17,7 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
     private $_customerSession;
 	private $_redirect;
 	private $_response;
+	private $_orderCollectionFactory;
     private $storeCollectionFactory;
     private $dataHelper;
     private $configHelper;
@@ -31,8 +32,10 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
         array $data = [],
         \Magento\Customer\Model\SessionFactory $customerSession,
 		\Magento\Framework\App\Response\Http $response,
-		\Magento\Framework\App\Response\RedirectInterface $redirect
+		\Magento\Framework\App\Response\RedirectInterface $redirect,
+		\Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
     ) {
+		$this->_orderCollectionFactory = $orderCollectionFactory;
 		$this->_redirect = $redirect;
 		$this->_response = $response;
         $this->_customerSession = $customerSession->create();
@@ -179,10 +182,23 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
 
         return $this->_jsonEncoder->encode(array("baloon" => $baloon));
     }
-    
+
     public function getLoggedinCustomerId() {
         if ($this->_customerSession->isLoggedIn()) {
-            return $this->_customerSession->getId();
+            $customerId = $this->_customerSession->getId();
+			$orders = $this->_orderCollectionFactory->create()->addFieldToSelect(
+				'*'
+			)->addFieldToFilter(
+				'customer_id',
+				$customerId
+			)->addFieldToFilter(
+				'status',
+				'complete'
+			)->setOrder(
+				'created_at',
+				'desc'
+			);
+			return count($orders) > 0 ? true : false;
         }
         return false;
     }
