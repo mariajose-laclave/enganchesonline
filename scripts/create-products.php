@@ -1,4 +1,13 @@
 <?php
+/**
+ * Short description...
+ *
+ * Long description
+ * Broken down into several lines
+ *
+ * License notice...
+ */
+
 require dirname(__FILE__) . '/../app/bootstrap.php';
 $bootstrap = \Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
 require dirname(__FILE__) . '/abstract.php';

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Short description...
+ *
+ * Long description
+ * Broken down into several lines
+ *
+ * License notice...
+ */
 use \Magento\Framework\AppInterface as AppInterface;
 use \Magento\Framework\App\Http as Http;
 
