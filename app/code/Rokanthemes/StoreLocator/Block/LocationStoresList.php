@@ -39,9 +39,7 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
 		$this->_redirect = $redirect;
 		$this->_response = $response;
         $this->_customerSession = $customerSession->create();
-		if (!$this->getLoggedinCustomerId()) {
-			$this->_redirect->redirect($this->_response, '/');
-		}
+		
         $this->storeCollectionFactory = $storeCollectionFactory;
         $this->dataHelper = $dataHelper;
 		$this->_jsonEncoder = $jsonEncoder;

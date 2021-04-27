@@ -5,6 +5,11 @@
 
 $locations = $block->getStoreLocator();
 $i = 1;
+
+$canSeeMechanics = $block->getLoggedinCustomerId();
+
+echo var_dump($canSeeMechanics);
+
 ?>
 <div id="store_list">
     <?php foreach ($locations as $location): ?>
