@@ -1,4 +1,4 @@
-cd /var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs
+cd /var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs
 git stash
 git pull origin develop_
 php bin/magento cache:clean

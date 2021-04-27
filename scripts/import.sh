@@ -1,4 +1,4 @@
-cd /var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs
+cd /var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs
 php ./create-products.php
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile

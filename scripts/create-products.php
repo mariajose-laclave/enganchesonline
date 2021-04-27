@@ -111,27 +111,27 @@ class CreateCategoriesApp extends AbstractApp
             'fija_cisne' => [
                 'title' => $tituloBojaFijaCisne,
                 'description' => $descripcionBojaFijaCisne,
-                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg'
+                'image' => '/var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-de-remolque-bola-fija-cuello-cisne.jpg'
             ],
             'desmontable_horizontal' => [
                 'title' => $titulo_bola_desmontable_horizontal,
                 'description' => $descripcion_bola_desmontable_horizontal,
-                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-horizontal.jpg'
+                'image' => '/var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-horizontal.jpg'
             ],
             'desmontable_vertical' => [
                 'title' => $titulo_bola_desmontable_vertical,
                 'description' => $descripcion_bola_desmontable_vertical,
-                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-vertical.jpg'
+                'image' => '/var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-desmontable-vertical.jpg'
             ],
             'fija_mixta' => [
                 'title' => $titulo_bola_fija_mixta,
                 'description' => $descripcion_bola_fija_mixta,
-                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mixta.jpg'
+                'image' => '/var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mixta.jpg'
             ],
             'fija_mono' => [
                 'title' => $titulo_bola_fija_mono_block,
                 'description' => $descripcion_bola_fija_mono_block,
-                'image' => '/var/www/vhosts/epic-dhawan.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mono-block-placa.jpg'
+                'image' => '/var/www/vhosts/intelligent-dijkstra.82-223-50-168.plesk.page/httpdocs/pub/media/image/enganche-remolque-bola-mono-block-placa.jpg'
             ]
         ];
     }
