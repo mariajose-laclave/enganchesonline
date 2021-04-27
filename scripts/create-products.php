@@ -8,7 +8,7 @@ class CreateCategoriesApp extends AbstractApp
     protected $descriptionArray;
     protected $objectManager;
     protected $categoryLinkManagement;
-    protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=100000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
+    protected $la_fuente_url_kits = 'https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_kits&sEcho=5&iColumns=10&sColumns=&iDisplayStart=0&iDisplayLength=10000000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&marca=&modelo=&tipo_kit=';
     protected $magento_api;
     protected $data_base_client;
     protected $date_preg_match = '/[0-9][0-9]\-[0-9][0-9] a [0-9][0-9]\-[0-9][0-9]/'; // Pattern for dates
@@ -411,7 +411,7 @@ class CreateCategoriesApp extends AbstractApp
     protected function get_lafuente_from_db()
     {
 
-        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=1000&sEcho=1000&iColumns=16&sColumns&iDisplayStart=0&iDisplayLength=1000&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
+        $endpoint = "https://www.lafuente.eu/motor/index.php?app=frontend&exe=portal&op=lista_precios_enganches&iRows=100&sEcho=100&iColumns=16&sColumns&iDisplayStart=0&iDisplayLength=100&mDataProp_0=0&mDataProp_1=1&mDataProp_2=2&mDataProp_3=3&mDataProp_4=4&mDataProp_5=5&mDataProp_6=6&mDataProp_7=7&mDataProp_8=8&mDataProp_9=9&mDataProp_10=10&mDataProp_11=11&mDataProp_12=12&mDataProp_13=13&mDataProp_14=14&mDataProp_15=15&marca&modelo";
         $ch = @curl_init();
         @curl_setopt($ch, CURLOPT_HTTPGET, true);
         @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
