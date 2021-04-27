@@ -288,7 +288,7 @@ class CreateCategoriesApp extends AbstractApp
             $product->setMetaTitle($name);
             $product->setMetaDescription($description);
             $product->save();
-            $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
+            // $this->objectManager->get('\Magento\Catalog\Api\ProductRepositoryInterface')->save($product);
             $categoryId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
                 ->create()->getCollection()->addAttributeToFilter('name', $productData->make)->getFirstItem()->getId();
             $modelId = $this->objectManager->get('\Magento\Catalog\Model\CategoryFactory')
