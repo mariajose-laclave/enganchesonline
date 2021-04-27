@@ -189,9 +189,6 @@ class LocationStoresList extends \Magento\Framework\View\Element\Template
 			)->addFieldToFilter(
 				'customer_id',
 				$customerId
-			)->addFieldToFilter(
-				'status',
-				'processing'
 			)->setOrder(
 				'created_at',
 				'desc'
