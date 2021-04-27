@@ -13812,3 +13812,234 @@ CREATE TABLE `widget_instance_page` (
 
 LOCK TABLES `widget_instance_page` WRITE;
 /*!40000 ALTER TABLE `widget_instance_page` DISABLE KEYS */;
+/*!40000 ALTER TABLE `widget_instance_page` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `widget_instance_page_layout`
+--
+
+DROP TABLE IF EXISTS `widget_instance_page_layout`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `widget_instance_page_layout` (
+  `page_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Page ID',
+  `layout_update_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Layout Update ID',
+  UNIQUE KEY `WIDGET_INSTANCE_PAGE_LAYOUT_LAYOUT_UPDATE_ID_PAGE_ID` (`layout_update_id`,`page_id`),
+  KEY `WIDGET_INSTANCE_PAGE_LAYOUT_PAGE_ID` (`page_id`),
+  CONSTRAINT `WIDGET_INSTANCE_PAGE_LAYOUT_PAGE_ID_WIDGET_INSTANCE_PAGE_PAGE_ID` FOREIGN KEY (`page_id`) REFERENCES `widget_instance_page` (`page_id`) ON DELETE CASCADE,
+  CONSTRAINT `WIDGET_INSTANCE_PAGE_LYT_LYT_UPDATE_ID_LYT_UPDATE_LYT_UPDATE_ID` FOREIGN KEY (`layout_update_id`) REFERENCES `layout_update` (`layout_update_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Layout updates';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `widget_instance_page_layout`
+--
+
+LOCK TABLES `widget_instance_page_layout` WRITE;
+/*!40000 ALTER TABLE `widget_instance_page_layout` DISABLE KEYS */;
+/*!40000 ALTER TABLE `widget_instance_page_layout` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wishlist`
+--
+
+DROP TABLE IF EXISTS `wishlist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wishlist` (
+  `wishlist_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Wishlist ID',
+  `customer_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Customer ID',
+  `shared` smallint(5) unsigned NOT NULL DEFAULT 0 COMMENT 'Sharing flag (0 or 1)',
+  `sharing_code` varchar(32) DEFAULT NULL COMMENT 'Sharing encrypted code',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT 'Last updated date',
+  PRIMARY KEY (`wishlist_id`),
+  UNIQUE KEY `WISHLIST_CUSTOMER_ID` (`customer_id`),
+  KEY `WISHLIST_SHARED` (`shared`),
+  CONSTRAINT `WISHLIST_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID` FOREIGN KEY (`customer_id`) REFERENCES `customer_entity` (`entity_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Wishlist main Table';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+LOCK TABLES `wishlist` WRITE;
+/*!40000 ALTER TABLE `wishlist` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wishlist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wishlist_item`
+--
+
+DROP TABLE IF EXISTS `wishlist_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wishlist_item` (
+  `wishlist_item_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Wishlist item ID',
+  `wishlist_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Wishlist ID',
+  `product_id` int(10) unsigned NOT NULL DEFAULT 0 COMMENT 'Product ID',
+  `store_id` smallint(5) unsigned DEFAULT NULL COMMENT 'Store ID',
+  `added_at` timestamp NULL DEFAULT NULL COMMENT 'Add date and time',
+  `description` text DEFAULT NULL COMMENT 'Short description of wish list item',
+  `qty` decimal(12,4) NOT NULL COMMENT 'Qty',
+  PRIMARY KEY (`wishlist_item_id`),
+  KEY `WISHLIST_ITEM_WISHLIST_ID` (`wishlist_id`),
+  KEY `WISHLIST_ITEM_PRODUCT_ID` (`product_id`),
+  KEY `WISHLIST_ITEM_STORE_ID` (`store_id`),
+  CONSTRAINT `WISHLIST_ITEM_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID` FOREIGN KEY (`product_id`) REFERENCES `catalog_product_entity` (`entity_id`) ON DELETE CASCADE,
+  CONSTRAINT `WISHLIST_ITEM_STORE_ID_STORE_STORE_ID` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`) ON DELETE SET NULL,
+  CONSTRAINT `WISHLIST_ITEM_WISHLIST_ID_WISHLIST_WISHLIST_ID` FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist` (`wishlist_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Wishlist items';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wishlist_item`
+--
+
+LOCK TABLES `wishlist_item` WRITE;
+/*!40000 ALTER TABLE `wishlist_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wishlist_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wishlist_item_option`
+--
+
+DROP TABLE IF EXISTS `wishlist_item_option`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `wishlist_item_option` (
+  `option_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Option ID',
+  `wishlist_item_id` int(10) unsigned NOT NULL COMMENT 'Wishlist Item ID',
+  `product_id` int(10) unsigned NOT NULL COMMENT 'Product ID',
+  `code` varchar(255) NOT NULL COMMENT 'Code',
+  `value` text DEFAULT NULL COMMENT 'Value',
+  PRIMARY KEY (`option_id`),
+  KEY `FK_A014B30B04B72DD0EAB3EECD779728D6` (`wishlist_item_id`),
+  CONSTRAINT `FK_A014B30B04B72DD0EAB3EECD779728D6` FOREIGN KEY (`wishlist_item_id`) REFERENCES `wishlist_item` (`wishlist_item_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Wishlist Item Option Table';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wishlist_item_option`
+--
+
+LOCK TABLES `wishlist_item_option` WRITE;
+/*!40000 ALTER TABLE `wishlist_item_option` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wishlist_item_option` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `yotpo_order_status_history`
+--
+
+DROP TABLE IF EXISTS `yotpo_order_status_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `yotpo_order_status_history` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `order_id` int(10) unsigned DEFAULT NULL COMMENT 'Order Id',
+  `store_id` int(10) unsigned DEFAULT NULL COMMENT 'Store Id',
+  `old_status` varchar(32) DEFAULT NULL COMMENT 'Old Status',
+  `new_status` varchar(32) DEFAULT NULL COMMENT 'New Status',
+  `created_at` datetime DEFAULT NULL COMMENT 'Created At',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='yotpo_order_status_history';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `yotpo_order_status_history`
+--
+
+LOCK TABLES `yotpo_order_status_history` WRITE;
+/*!40000 ALTER TABLE `yotpo_order_status_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `yotpo_order_status_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `yotpo_rich_snippets`
+--
+
+DROP TABLE IF EXISTS `yotpo_rich_snippets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `yotpo_rich_snippets` (
+  `rich_snippet_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `product_id` int(11) NOT NULL COMMENT 'Product Id',
+  `store_id` int(11) NOT NULL COMMENT 'Store Id',
+  `average_score` decimal(10,2) NOT NULL COMMENT 'Average Score',
+  `reviews_count` float(10,0) NOT NULL COMMENT 'Reviews Count',
+  `expiration_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Expiry Time',
+  PRIMARY KEY (`rich_snippet_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='yotpo_rich_snippets';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `yotpo_rich_snippets`
+--
+
+LOCK TABLES `yotpo_rich_snippets` WRITE;
+/*!40000 ALTER TABLE `yotpo_rich_snippets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `yotpo_rich_snippets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `yotpo_sync`
+--
+
+DROP TABLE IF EXISTS `yotpo_sync`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `yotpo_sync` (
+  `sync_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `store_id` int(10) unsigned DEFAULT NULL COMMENT 'Store ID',
+  `entity_type` varchar(50) DEFAULT NULL COMMENT 'Entity Type',
+  `entity_id` int(10) unsigned DEFAULT NULL COMMENT 'Entity ID',
+  `sync_flag` smallint(6) DEFAULT 0 COMMENT 'Sync Flag',
+  `sync_date` datetime NOT NULL COMMENT 'Sync Date',
+  PRIMARY KEY (`sync_id`),
+  UNIQUE KEY `YOTPO_SYNC_STORE_ID_ENTITY_TYPE_ENTITY_ID` (`store_id`,`entity_type`,`entity_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='yotpo_sync';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `yotpo_sync`
+--
+
+LOCK TABLES `yotpo_sync` WRITE;
+/*!40000 ALTER TABLE `yotpo_sync` DISABLE KEYS */;
+/*!40000 ALTER TABLE `yotpo_sync` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Final view structure for view `inventory_stock_1`
+--
+
+/*!50001 DROP TABLE IF EXISTS `inventory_stock_1`*/;
+/*!50001 DROP VIEW IF EXISTS `inventory_stock_1`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`enganches_user`@`%` SQL SECURITY INVOKER */
+/*!50001 VIEW `inventory_stock_1` AS select distinct `legacy_stock_status`.`product_id` AS `product_id`,`legacy_stock_status`.`website_id` AS `website_id`,`legacy_stock_status`.`stock_id` AS `stock_id`,`legacy_stock_status`.`qty` AS `quantity`,`legacy_stock_status`.`stock_status` AS `is_salable`,`product`.`sku` AS `sku` from (`cataloginventory_stock_status` `legacy_stock_status` join `catalog_product_entity` `product` on(`legacy_stock_status`.`product_id` = `product`.`entity_id`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-04-27 11:30:02
