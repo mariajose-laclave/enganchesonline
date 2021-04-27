@@ -30,7 +30,7 @@ class GetDataForSelect extends AbstractApp
     {
         
         $categoryId = (isset($_GET['id_car_brand']) && $_GET['id_car_brand'] != '') ? $_GET['id_car_brand'] : 2;
-        $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 194 ORDER BY `value` DESC";
+        $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 188 ORDER BY `value` DESC";
 
         $mysqli = new mysqli('localhost', 'enganches_user', 'Wje5q?24', 'enganches_');
         $mysqli->set_charset("utf8");
@@ -49,10 +49,10 @@ class GetDataForSelect extends AbstractApp
     protected function _getYears()
     {
         $categoryId = (isset($_GET['id_car_brand']) && $_GET['id_car_brand'] != '') ? $_GET['id_car_brand'] : 2;
-        $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 195 ORDER BY `value` DESC";
+        $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 182 ORDER BY `value` DESC";
         if (isset($_GET['variant']) && $_GET['variant'] != '') {
             $variant = $_GET['variant'];
-            $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 195 AND entity_id IN (SELECT entity_id FROM catalog_product_entity_varchar WHERE attribute_id = 194 AND value = '$variant') ORDER BY RIGHT(`value`, 2) DESC";
+            $query = "SELECT DISTINCT `value` FROM catalog_product_entity_varchar WHERE entity_id IN (SELECT product_id FROM catalog_category_product WHERE category_id = $categoryId) AND attribute_id = 182 AND entity_id IN (SELECT entity_id FROM catalog_product_entity_varchar WHERE attribute_id = 188 AND value = '$variant') ORDER BY RIGHT(`value`, 2) DESC";
         }
 
         $mysqli = new mysqli('localhost', 'enganches_user', 'Wje5q?24', 'enganches_');
