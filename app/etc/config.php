@@ -253,6 +253,7 @@ return [
         'MSP_TwoFactorAuth' => 1,
         'Mageplaza_Core' => 1,
         'Mageplaza_Smtp' => 1,
+        'Redsys_Redsys' => 1,
         'Rokanthemes_AjaxSuite' => 1,
         'Rokanthemes_BestsellerProduct' => 1,
         'Rokanthemes_Blog' => 1,
