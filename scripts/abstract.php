@@ -18,6 +18,9 @@ use Magento\Framework\Filesystem;
 use Magento\Framework\App\AreaList as AreaList;
 use Magento\Framework\App\State as State;
 
+    /**
+     * Function to create products from $this->product_array
+     */
 abstract class AbstractApp implements AppInterface
 {
     public function __construct(
@@ -42,14 +45,23 @@ abstract class AbstractApp implements AppInterface
         $this->registry = $registry;
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     public function launch()
     {
         $this->run();
         return $this->_response;
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     abstract public function run();
 
+    /**
+     * Function to create products from $this->product_array
+     */
     public function catchException(\Magento\Framework\App\Bootstrap $bootstrap, \Exception $exception)
     {
         return false;

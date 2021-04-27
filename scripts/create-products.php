@@ -62,6 +62,9 @@ class CreateCategoriesApp extends AbstractApp
         'price' => 6
     );
 
+    /**
+     * Function to create products from $this->product_array
+     */
     public function run()
     {
         $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -74,6 +77,9 @@ class CreateCategoriesApp extends AbstractApp
         // $this->insertKits();
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     protected function getDescriptions()
     {
         $this->descriptionArray = array();
@@ -228,6 +234,9 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     protected function fillParameters($string, $object)
     {
         foreach ($object as $key => $value) {
@@ -469,6 +478,9 @@ class CreateCategoriesApp extends AbstractApp
         }
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     protected function getType($string)
     {
         if (strpos(strtolower($string), strtolower('fija'))) {
@@ -534,6 +546,9 @@ class CreateCategoriesApp extends AbstractApp
         );
     }
 
+    /**
+     * Function to create products from $this->product_array
+     */
     protected function getPrice($product)
     {
         $profitMargin = $this->objectManager->get('Magento\Variable\Model\Variable')->loadByCode('profit_margin');
