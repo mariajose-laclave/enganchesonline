@@ -275,7 +275,7 @@ class CreateCategoriesApp extends AbstractApp
             $product->setValorSCargaVertical($productData->valor_s_carga_vertical."kg");  
             $url = str_replace([' ', '/'], ['-', '-'], $name) . $productData->sku;
             $product->setUrlKey($url);
-            $product->addImageToMediaGallery($this->descriptionArray[$productData->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);
+            /*$product->addImageToMediaGallery($this->descriptionArray[$productData->type]['image'], array('image', 'small_image', 'thumbnail'), false, false);*/
             $product->setMetaTitle($name);
             $product->setMetaDescription($description);
             $product->save();
